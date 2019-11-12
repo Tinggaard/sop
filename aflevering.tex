@@ -1,0 +1,62 @@
+\documentclass[12pt]{article}
+\usepackage[danish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage[pdftitle={Sorterings algoritmer},pdfauthor={Jens Tinggaard}, hidelinks]{hyperref}
+%\usepackage{minted}
+%\usepackage{amsfonts}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+
+
+\usepackage[tmargin=1in,bmargin=1in,lmargin=1.25in,rmargin=1.25in]{geometry}
+
+
+
+
+\pagestyle{fancy}
+\fancyhf{}% to clear existing header/footer if you don't want it
+
+%Set line on header and footer width
+\renewcommand{\headrulewidth}{2pt}
+\renewcommand{\footrulewidth}{1pt}
+
+%Headers and footers
+\lhead{Jens Tinggaard 3.E\\ Odense Tekniske Gymnasium}
+\rhead{Vejledere: LEER \& SSE\\ \today}
+\lfoot{\leftmark}
+\rfoot{Side \thepage\ af \pageref{LastPage}}
+
+%Navn på indholdsfortegnelse
+\addto\captionsdanish{\renewcommand*\contentsname{Indholdsfortegnelse}}
+
+\date{\today}
+\title{Sorterings algoritmer}
+\author{Jens Tinggaard}
+
+
+
+\begin{document}
+\clearpage\maketitle
+\thispagestyle{empty}
+\maketitle
+\begin{abstract}
+her står hvad det kommer til at handle om...
+\end{abstract}
+
+\newpage
+\tableofcontents
+
+\newpage
+\section{Section eins}
+Her står noget tekst.
+\newpage
+\section{Section duo}
+her er en masse mere tekst...
+bla bla.
+
+
+
+
+
+\end{document}
