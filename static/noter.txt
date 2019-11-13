@@ -1,0 +1,20 @@
+Tag ud på uni og find et par bøger
+YouTube er ok ish som kilde
+Kan godt opbygge størstedelen ud fra en kilde
+
+
+Der må gerne ændres lidt på titlen
+Gerne afsnit eller numre på sektioner i kilde
+
+
+
+
+Opbygning:
+    Intro til RSA
+    Talteori og den anvendelse i RSA (evt blandet sammen)
+
+
+
+
+Indbyrdes primiske:
+De har ingen fælle divisor (fællesnævner) udover 1.
