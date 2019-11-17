@@ -1,1 +1,11 @@
 Sætning 12
+
+Skal jeg gennemgå alle beviser?
+
+Skal der være fodnoter, eller er henvisninger til litteraturlisten ok?
+
+Hvor meget af kilden skal indgå? hjemmeside osv.
+
+hvad tæller en pdf som? https://www.overleaf.com/learn/latex/Bibliography_management_in_LaTeX#Reference_guide
+
+Er det ok at tage de samme sektioner som i pdf'en?

@@ -7,6 +7,12 @@
 \usepackage{lastpage} % Pagenumbering
 \usepackage{fancyhdr} % Custom header/footer
 
+% Biblografi
+\usepackage{csquotes}
+\usepackage[style=numeric, style=verbose-ibid]{biblatex}
+\addbibresource{biblography.bib}
+\DeclareNameAlias{default}{family-given}
+
 
 \usepackage[pdftitle={SOP},pdfauthor={Jens Tinggaard}, hidelinks]{hyperref} %References
 \usepackage[tmargin=1in,bmargin=1in,lmargin=1.25in,rmargin=1.25in]{geometry} %Margins
@@ -48,28 +54,60 @@
 \clearpage\maketitle
 \thispagestyle{empty}
 \maketitle
+
 \begin{abstract}
 her står hvad det kommer til at handle om...
 \end{abstract}
 
+
 \newpage
 \tableofcontents
 
+
 \newpage
-\section{Section eins}
+\section{RSA}
+Kort introduktion til RSA\autocite{vestergaard}
+
+    \subsection{Modulo}
+    Hvad er modulo?
+
+    \subsection{Fælles divisor}
+    Hvad er en fælles divisor?
+
+    \subsection{Primtal}
+    Hvad har primtal med det hele at gøre?
+
+    \subsection{Eulers \texorpdfstring{$\phi$}{Lg}-funktion}
+    Eulers phi funktion
+
+
+
+\section{Hashing}
+Hvad er Hashing
+
+    \subsection{Fordelen ved hashing}
+    Passwords osv.
+
+
+
+\section{Forskkel på hashing og kryptografi}
+Hvorfor man ikke blot kan nøjes med den ene
+
+    \subsection{Alice \& Bob}
+    Eksempel på brug af begge dele
+
+
+
+\section{Hvorfor RSA er vigtig}
+Hvor bliver det brugt
+
+    \subsection{En verden uden RSA}
+
+
+
+
+
 \newpage
-\subsection{Underpargraf}
-
-Her står noget tekst.
-\newpage
-\section{Section duo}
-her er en masse mere tekst...
-bla bla.
-\newpage
-hej
-
-
-
-
+\printbibliography[heading=bibintoc, title={Litteratur}]
 
 \end{document}
