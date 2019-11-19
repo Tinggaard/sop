@@ -18,3 +18,9 @@ Opbygning:
 
 Indbyrdes primiske:
 De har ingen fælle divisor (fællesnævner) udover 1.
+
+
+
+
+ranbowtables
+brute force

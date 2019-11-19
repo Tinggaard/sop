@@ -11,3 +11,7 @@ hvad tæller en pdf som? https://www.overleaf.com/learn/latex/Bibliography_manag
 Er det ok at tage de samme sektioner som i pdf'en?
 
 Skal jeg forklare at kryptografi og kryptologi er det samme?
+
+Metode eller funktion?
+
+Hashing - tilfældigt?
