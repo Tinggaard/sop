@@ -8,8 +8,11 @@
 \usepackage{fancyhdr} % Custom header/footer
 \usepackage{amsthm} % Proofs
 \usepackage{amssymb} % Black square
+\usepackage{amsmath} % Align
+\usepackage{xcolor} % Colors
 \usepackage{mdframed} % Boxing lemmas and such
-\usepackage{float} % Custom examples
+\usepackage{float} % Custom
+\usepackage{multirow} % Multiple rows in tabular
 \usepackage[pdftitle={Sikkerhed bag login-formular på en hjemmeside},pdfauthor={Jens Tinggaard}, hidelinks, bookmarks=true]{hyperref} %References
 \usepackage[tmargin=1in,bmargin=1in,lmargin=1.25in,rmargin=1.25in]{geometry} %Margins
 
@@ -41,11 +44,33 @@
   {}%         Thm head spec
 
 
-\theoremstyle{break}
-\newtheorem{lemma}{Lemma} % Lemma kommando
-\newenvironment{boxframed}
-  {\begin{mdframed}\begin{lemma}}
-  {\end{lemma}\end{mdframed}}
+
+\mdfdefinestyle{boxed}{
+linewidth=1pt,
+frametitlerule=true,
+frametitlebackgroundcolor=gray!20,
+innertopmargin=\topskip,
+innerbottommaring=\topskip
+}
+\mdtheorem[style=boxed]{definition}{Definition}
+
+
+% \theoremstyle{definition}
+% \newtheorem{definition}{Definition}[section] % Definition kommando
+% \newenvironment{define}
+%   {\begin{mdframed}[innertopmargin=0pt]\begin{definition}}
+%   {\end{definition}\end{mdframed}}
+%
+%
+%
+% \theoremstyle{break}
+% \newtheorem{lem}[definition]{Lemma} % Lemma kommando
+% \newenvironment{lemma}
+%   {\begin{mdframed}\begin{lem}}
+%   {\end{lem}\end{mdframed}}
+%
+
+
 
 % \newtheorem{theorem}{Theorem}
 % \newtheorem{claim}[theorem]{Claim}
@@ -58,10 +83,15 @@
 % \newtheorem*{remark}{Remark}
 
 % Eksempel float
-\floatstyle{plain}
-\newfloat{eks}{h}{eks}
+\floatstyle{ruled}
+\newfloat{eks}{h}{eks}[definition]
 \floatname{eks}{Eksempel}
 
+\setlength{\intextsep}{0.75cm plus 1.0pt minus 2.0pt} % Space between float and text
+
+
+\setlength{\tabcolsep}{50pt} % General space between cols (6pt standard)
+\renewcommand{\arraystretch}{1.5} % General space between rows (1 standard)
 
 
 % Headers and footers
@@ -80,7 +110,7 @@
 \author{Jens Tinggaard}
 
 
-% \setlength{\parindent}{0em} % Identeringsstørrelse
+\setlength{\parindent}{0em} % Identeringsstørrelse
 % \setlength{\parskip}{1em} % Paragraf afstand
 % Bruges med \par
 
@@ -108,7 +138,7 @@ her står hvad det kommer til at handle om...
 
 
 \newpage
-\section{Hvad er RSA}
+\section{RSA}
 Uden nødvendigvis at være klar over det, er vi alle afhængige af RSA, det er en helt fundamental ting af vores hverdag.
 RSA er grunden til at man kan handle på nettet, uden at få stjålet sine kreditkortoplysninger.
 RSA-krytografi ligger også til grunde for, at man ikke blot kan lave online identitetstyveri.\autocite{vestergaard}
@@ -118,7 +148,7 @@ RSA er en metode, brugt til at kryptere data, døbt efter sine tre stifere:
 \textit{Ron Rivers}, \textit{Adi Shamir} og \textit{Len Adleman}, tilbage i 1977.\autocite{vestergaard}
 Metoden er baseret på antagelsen om, at det er svært at primtalsfaktorisere et stort tal.
 Talene anvendt ligger typisk i intervallet \(2^{1024}\) til \(2^{4096}\).
-Hvilket svarer til tal mellem \(\approx1.798^{308}\) og \(\approx1.044^{1233}\) i decimaltal.\autocite{MANGLER}
+Hvilket svarer til tal mellem \(\approx1.798\cdot10^{308}\) og \(\approx1.044\cdot10^{1233}\) i decimaltal.\autocite{frividenpdfs21}
 
     \subsection{Modulo}
     Hvad er modulo?
@@ -127,13 +157,33 @@ Hvilket svarer til tal mellem \(\approx1.798^{308}\) og \(\approx1.044^{1233}\) 
     Hvad er en fælles divisor?
 
 
-    \begin{boxframed}
-        Linjens ligning \(y=ax+b\)
-    \end{boxframed}
+    \begin{lemma}
+        For at skrive ikke faktor \(a \nmid b\)
+    \end{lemma}
+
+    \begin{define}
+        Jeg siger at det er sådan! Forresten står der meget tekst her, sådan at det gerne fylder 2 linjer.
+    \end{define}
+
+
+    \begin{definition}[Hvordan man bruger faktor]
+        For at skrive ikke faktor \(a \nmid b\)
+    \end{definition}
+
 
     \begin{proof}
         Ovenstående er sandt, fordi jeg siger det!
     \end{proof}
+
+    \begin{eks}
+        Her er et eksempel!
+
+
+        \caption{Eks}
+    \end{eks}
+
+
+
 
     \subsection{Primtal}
     Hvad har primtal med det hele at gøre?
@@ -142,7 +192,7 @@ Hvilket svarer til tal mellem \(\approx1.798^{308}\) og \(\approx1.044^{1233}\) 
     Eulers phi funktion
 
 
-
+\newpage
 \section{Hashing}
 Hashing er en metode, brugt til at omdanne en tekststreng til en anden tekststreng, med en fikseret længde.
 Den nye tekststreng vil være pseudorandom - den vil fremstå tilfædigt, men faktisk være regelmæssig, baseret på inputtet.
@@ -158,25 +208,88 @@ Med hashing kan man altså ikke gå baglæns, hvis man kun har et hash af en tek
     Dette kan lade sig gøre, da hashing altid giver det samme hash ved brug af samme input.
     Det vil altså sige at hvis man hasher \(abc\), vil man få det samme output hver gang.
     Da et hash er pseudorandom, vil det ikke sige noget om hvad det tidligere har været - der er som sådan ikke noget mønster i metoden.
-    Det ses på eksempel \autoref{tab:hash}.
+    Det ses på eksempel \autoref{eks:hash}.
 
 
-    \begin{eks}
+    \begin{eks}[h]
         \centering
         \texttt{MD5(abc) = 900150983cd24fb0d6963f7d28e17f72}\\
-        \texttt{Md5(Abc) = 35593b7ce5020eae3ca68fd5b6f3e031}
+        \texttt{MD5(Abc) = 35593b7ce5020eae3ca68fd5b6f3e031}\\
+        \texttt{MD5(abd) = 4911e516e5aa21d327512e0c8b197616}
 
-        \caption{Hashing eksempel med MD5}
-        \label{tab:hash}
+        \caption{På trods af de lignende input, er hashet helt forskelligt}
+        \label{eks:hash}
     \end{eks}
 
-    \noindent
+
     Måden man anvender dette på, er at hashe et kodeord inden det bliver puttet ind i databasen.
     Når så brugeren forsøger at logge ind, hasher man igen det indtastede kodeord og hvis det stemmer over ens, med det liggende i databasen, kan man formode at brugeren har indtastet det rigtige kodeord.
 
+    Der findes mange forskellige krytografiske hashfunktioner, blandt de mere kendte er \texttt{MD5}, \texttt{SHA256} og \texttt{SHA512}.
+    Essentielt er de opbygget på samme måde, forskellen i dem er hvor langsomme og dermed sikre de er.
+    For at forstå hvorfor en langsom hashfunktion er god, er det vigtigt at forstå essensen i en hashfunktion.
+    Det at den kun kan bruges en vej, gør nemlig at hvis man gerne vil finde ud af den originale tekst til et hash, er man nødt til at prøve sig frem, i IT-verdenen kaldes dette for \emph{brute-force}.
+
+
+    \begin{eks}[h]
+        Antag at man har et hash, hashet af \texttt{MD5}, hvor man gerne vil finde den oprindelige tekst.
+        Man ved at teksten består af 8 tegn -- som kan være både store og små bogstaver samt tal, men ingen symboler.
+        I det danske alfabet er der \(29\) bogstaver og disse kan både fremstå stor og små \(2\cdot29=58\), derudover er der 10 forskellige tal at tage hensyn til \(58+10=68\).
+        Da alle tegn har mulighed for at stå på alle 8 pladser, er der nu \(68^8\approx4.572\cdot10^{14}\) muligheder.
+        En moderne computer kan udregne omkring \(4\cdot10^9\) hashes i sekundet, i \texttt{MD5}.
+        Mens en lille server kan yde omkring 10 gange så meget \(4\cdot10^{10}\).\footnotemark
+        % \autocite{ytpwd}
+        Det udregnes hvor mange sekunder det vil tage at hashe alle kombinationer af 8 bogstaver og tal, for henholdsvis en computer og en lille server.
+
+        \begin{center}
+            \begin{tabular}{c c}
+
+                \(\frac{4.572\cdot10^{14}}{4\cdot10^9} = 114300\) &
+                \(\frac{4.572\cdot10^{14}}{4\cdot10^{10}} = 11430\)\\
+
+                \multicolumn{2}{c}{Det omskrives til timer.}\\
+
+                \(\frac{114300}{60\cdot60} = 31.75\) &
+                \(\frac{11430}{60\cdot60} = 3.175\)\\
+
+            \end{tabular}
+        \end{center}
+
+
+        Det kan altså konkluderes at det er klogt at vælge et kodeord på mere end 8 tegn.
+        Samt at en god hashfunktion tager lang tid, hvorved det forstås at funktioner som \texttt{SHA256} og \texttt{SHA512} er at foretrække over \texttt{MD5}.
+
+
+        \caption{Kompleksiteten ved brute-force}
+        \label{eks:bruteforce}
+
+    \end{eks}
+    \footnotetext{\fullcite{ytpwd}.} %Footnote won't work inside float env
 
 
 
+
+
+    \subsection{Rainbow tables og Salt}
+    Der findes en \textit{løsning} til problemet, om at hashes er svære at gendanne, er der opfundet det man kalder \emph{rainbow tables}.
+    Et rainbow table er en tabel, hvori der står en masse hashes samt hvad de er oprindet af.
+    Det vil altså sige at man ved at lave et opslag i et ranbow table, meget hurtigt kan finde frem til om et hash allerede er blevet de-hashet.
+    Et rainbow table indeholder naturligvis ikke alle hashes -- det ville være en uoverkommelig opgave at liste dem alle.
+    Det er altså kun de hashes -- og dermed også kodeord, som er mest anvendte, der ligger i et rainbow table.
+    Det er af samme grund, at man ikke blot skal bruge koden \texttt{password}, da den helt sikkert ligger i et rainbow table.
+    \\
+    \\
+    Der er dog heldigvis opfundet en løsning til bekæmpelse af brugen af rainbow tables og den kaldes for salt.
+    Pointen med et salt er at skabe rod i hashet.
+
+
+
+    % \subsection{Hash tabeller}
+
+
+
+
+\newpage
 \section{Forskkel på hashing og kryptografi}
 Hvorfor man ikke blot kan nøjes med den ene
 
@@ -185,6 +298,7 @@ Hvorfor man ikke blot kan nøjes med den ene
 
 
 
+\newpage
 \section{Hvorfor RSA er vigtig}
 Hvor bliver det brugt
 
