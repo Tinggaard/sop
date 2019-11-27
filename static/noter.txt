@@ -25,5 +25,6 @@ De har ingen fælle divisor (fællesnævner) udover 1.
 ranbowtables
 brute force
 hashingtable
+gpg
 
 Antal bits (MD5 128 bit)

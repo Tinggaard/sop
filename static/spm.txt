@@ -17,3 +17,11 @@ Hashing - tilfældigt?
 Hvordan forklarer jeg at der er et emne jeg ikke vil gennemgå?
 
 https://www.xolphin.dk/support/Terminologi/Algoritmer ok?
+
+Meget af det er faktabaseret, modsat opinion, hvordan er man kildekritisk?
+
+Empiri?
+
+Alice og Bob er blot eksempel, behøves der litteratur til dette - hvis ja, hvad?
+
+Forklaring/henvisning til sidenoter, som f.eks. gpg, rainbowtables osv.
