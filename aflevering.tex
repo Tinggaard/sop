@@ -11,14 +11,14 @@
 \usepackage{amsmath} % Align
 \usepackage{xcolor} % Colors
 \usepackage{mdframed} % Boxing lemmas and such
-\usepackage{float} % Custom
+\usepackage{xhfill} % h line after env
 \usepackage{multirow} % Multiple rows in tabular
 \usepackage[pdftitle={Sikkerhed bag login-formular på en hjemmeside},pdfauthor={Jens Tinggaard}, hidelinks, bookmarks=true]{hyperref} %References
 \usepackage[tmargin=1in,bmargin=1in,lmargin=1.25in,rmargin=1.25in]{geometry} %Margins
 
 % Biblografi
 \usepackage{csquotes}
-\usepackage[style=numeric, style=verbose-ibid]{biblatex}
+\usepackage[style=numeric, style=alphabetic]{biblatex} %style=numeric
 \addbibresource{biblography.bib}
 \DeclareNameAlias{default}{family-given}
 
@@ -33,61 +33,60 @@
 
 \renewcommand\qedsymbol{$\blacksquare$} % Black QED
 
-\newtheoremstyle{break}% name
-  {3pt}%         Space above, empty = `usual value'
-  {3pt}%         Space below
-  {\itshape}% Body font
-  {}%         Indent amount (empty = no indent, \parindent = para indent)
-  {\bfseries}% Thm head font
-  {}%        Punctuation after thm head
-  {\newline}% Space after thm head: \newline = linebreak
-  {}%         Thm head spec
+\newcommand{\xfill}[2][1ex]{{%
+  \dimen0=#2\advance\dimen0 by #1
+  \leaders\hrule height \dimen0 depth -#1\hfill%
+}}
+
+
+\newtheoremstyle{breakline}%            name
+  {0.5cm plus 1 pt minus 2 pt}%         Space above, empty = `usual value'
+  {0.5cm plus 1 pt minus 2 pt}%         Space below
+  {}%                                   Body font
+  {}%                                   Indent amount (empty = no indent, \parindent = para indent)
+  {\bfseries}%                          Thm head font
+  {\mbox{}\hspace{0.3cm}\xfill{0.4pt}\vspace{0.3cm}}%Punctuation after thm head
+  {\newline}%                           Space after thm head: \newline = linebreak
+  {}%                                   Thm head spec
+
+\newtheoremstyle{break}%                  name
+    {0.5cm plus 1 pt minus 2 pt}%         Space above, empty = `usual value'
+    {0.5cm plus 1 pt minus 2 pt}%         Space below
+    {}%                                   Body font
+    {}%                                   Indent amount (empty = no indent, \parindent = para indent)
+    {\bfseries}%                          Thm head font
+    {\vspace{0.3cm}}%                     Punctuation after thm head
+    {\newline}%                           Space after thm head: \newline = linebreak
+    {}%                                   Thm head spec
+
+
+\newtheoremstyle{beviser}%                  name
+    {0.5cm plus 1 pt minus 2 pt}%         Space above, empty = `usual value'
+    {0.5cm plus 1 pt minus 2 pt}%         Space below
+    {}%                                   Body font
+    {}%                                   Indent amount (empty = no indent, \parindent = para indent)
+    {\itshape}%                           Thm head font
+    {}%                                  Punctuation after thm head
+    {\newline}%                           Space after thm head: \newline = linebreak
+    {}%                                   Thm head spec
 
 
 
-\mdfdefinestyle{boxed}{
-linewidth=1pt,
-frametitlerule=true,
-frametitlebackgroundcolor=gray!20,
-innertopmargin=\topskip,
-innerbottommaring=\topskip
-}
-\mdtheorem[style=boxed]{definition}{Definition}
+\mdtheorem[style=boxed]{definition}{Definition}[section]
 
 
-% \theoremstyle{definition}
-% \newtheorem{definition}{Definition}[section] % Definition kommando
-% \newenvironment{define}
-%   {\begin{mdframed}[innertopmargin=0pt]\begin{definition}}
-%   {\end{definition}\end{mdframed}}
-%
-%
-%
-% \theoremstyle{break}
-% \newtheorem{lem}[definition]{Lemma} % Lemma kommando
-% \newenvironment{lemma}
-%   {\begin{mdframed}\begin{lem}}
-%   {\end{lem}\end{mdframed}}
-%
+\theoremstyle{break}
+\newtheorem{eks}[definition]{Eksempel} % Eksempel kommando
 
 
+\theoremstyle{breakline}
+\newtheorem{sentence}[definition]{Sætning} % Lemma kommando
+\newenvironment{sent}
+    {\begin{sentence}}
+    {\par\noindent\hrulefill\end{sentence}}
 
-% \newtheorem{theorem}{Theorem}
-% \newtheorem{claim}[theorem]{Claim}
-% \newtheorem{proposition}[theorem]{Proposition}
-% \newtheorem{lemma}[theorem]{Lemma}
-% \newtheorem{corollary}[theorem]{Corollary}
-% \newtheorem{conjecture}[theorem]{Conjecture}
-% \newtheorem*{observation}{Observation}
-% \newtheorem*{example}{Example}
-% \newtheorem*{remark}{Remark}
-
-% Eksempel float
-\floatstyle{ruled}
-\newfloat{eks}{h}{eks}[definition]
-\floatname{eks}{Eksempel}
-
-\setlength{\intextsep}{0.75cm plus 1.0pt minus 2.0pt} % Space between float and text
+\theoremstyle{beviser}
+\newtheorem*{bevis}{Bevis:} % Bevis kommando
 
 
 \setlength{\tabcolsep}{50pt} % General space between cols (6pt standard)
@@ -110,7 +109,7 @@ innerbottommaring=\topskip
 \author{Jens Tinggaard}
 
 
-\setlength{\parindent}{0em} % Identeringsstørrelse
+\setlength{\parindent}{0em} % Identeringsstørrelse = 0
 % \setlength{\parskip}{1em} % Paragraf afstand
 % Bruges med \par
 
@@ -141,14 +140,14 @@ her står hvad det kommer til at handle om...
 \section{RSA}
 Uden nødvendigvis at være klar over det, er vi alle afhængige af RSA, det er en helt fundamental ting af vores hverdag.
 RSA er grunden til at man kan handle på nettet, uden at få stjålet sine kreditkortoplysninger.
-RSA-krytografi ligger også til grunde for, at man ikke blot kan lave online identitetstyveri.\autocite{vestergaard}
+RSA-krytografi ligger også til grunde for, at man ikke blot kan lave online identitetstyveri.\cite{vestergaard}
 \\
 \\
 RSA er en metode, brugt til at kryptere data, døbt efter sine tre stifere:
-\textit{Ron Rivers}, \textit{Adi Shamir} og \textit{Len Adleman}, tilbage i 1977.\autocite{vestergaard}
+\textit{Ron Rivers}, \textit{Adi Shamir} og \textit{Len Adleman}, tilbage i 1977.\cite{vestergaard}
 Metoden er baseret på antagelsen om, at det er svært at primtalsfaktorisere et stort tal.
 Talene anvendt ligger typisk i intervallet \(2^{1024}\) til \(2^{4096}\).
-Hvilket svarer til tal mellem \(\approx1.798\cdot10^{308}\) og \(\approx1.044\cdot10^{1233}\) i decimaltal.\autocite{frividenpdfs21}
+Hvilket svarer til tal mellem \(\approx1.798\cdot10^{308}\) og \(\approx1.044\cdot10^{1233}\) i decimaltal.\cite{frividen} %s21
 
     \subsection{Modulo}
     Hvad er modulo?
@@ -157,13 +156,9 @@ Hvilket svarer til tal mellem \(\approx1.798\cdot10^{308}\) og \(\approx1.044\cd
     Hvad er en fælles divisor?
 
 
-    \begin{lemma}
-        For at skrive ikke faktor \(a \nmid b\)
-    \end{lemma}
-
-    \begin{define}
-        Jeg siger at det er sådan! Forresten står der meget tekst her, sådan at det gerne fylder 2 linjer.
-    \end{define}
+    \begin{sent}
+        For at skrive ikke faktor \(a \nmid b\), derudover står der noget mere tekst her, sådan at det ser godt ud.
+    \end{sent}
 
 
     \begin{definition}[Hvordan man bruger faktor]
@@ -171,15 +166,14 @@ Hvilket svarer til tal mellem \(\approx1.798\cdot10^{308}\) og \(\approx1.044\cd
     \end{definition}
 
 
-    \begin{proof}
+    \begin{bevis}
         Ovenstående er sandt, fordi jeg siger det!
-    \end{proof}
+    \end{bevis}
 
-    \begin{eks}
+    \begin{eks}[Eksempel titel]
         Her er et eksempel!
 
 
-        \caption{Eks}
     \end{eks}
 
 
@@ -211,14 +205,15 @@ Med hashing kan man altså ikke gå baglæns, hvis man kun har et hash af en tek
     Det ses på eksempel \autoref{eks:hash}.
 
 
-    \begin{eks}[h]
-        \centering
-        \texttt{MD5(abc) = 900150983cd24fb0d6963f7d28e17f72}\\
-        \texttt{MD5(Abc) = 35593b7ce5020eae3ca68fd5b6f3e031}\\
-        \texttt{MD5(abd) = 4911e516e5aa21d327512e0c8b197616}
-
-        \caption{På trods af de lignende input, er hashet helt forskelligt}
+    \begin{eks}
+        Det ses at, på trods af lignende input, er hashet helt forskelligt.
+        \begin{center}
+            \texttt{MD5(abc) = 900150983cd24fb0d6963f7d28e17f72}\\
+            \texttt{MD5(Abc) = 35593b7ce5020eae3ca68fd5b6f3e031}\\
+            \texttt{MD5(abd) = 4911e516e5aa21d327512e0c8b197616}\\
+        \end{center}
         \label{eks:hash}
+
     \end{eks}
 
 
@@ -231,14 +226,13 @@ Med hashing kan man altså ikke gå baglæns, hvis man kun har et hash af en tek
     Det at den kun kan bruges en vej, gør nemlig at hvis man gerne vil finde ud af den originale tekst til et hash, er man nødt til at prøve sig frem, i IT-verdenen kaldes dette for \emph{brute-force}.
 
 
-    \begin{eks}[h]
+    \begin{eks}[Kompleksiteten ved brute-force]
         Antag at man har et hash, hashet af \texttt{MD5}, hvor man gerne vil finde den oprindelige tekst.
         Man ved at teksten består af 8 tegn -- som kan være både store og små bogstaver samt tal, men ingen symboler.
         I det danske alfabet er der \(29\) bogstaver og disse kan både fremstå stor og små \(2\cdot29=58\), derudover er der 10 forskellige tal at tage hensyn til \(58+10=68\).
         Da alle tegn har mulighed for at stå på alle 8 pladser, er der nu \(68^8\approx4.572\cdot10^{14}\) muligheder.
         En moderne computer kan udregne omkring \(4\cdot10^9\) hashes i sekundet, i \texttt{MD5}.
-        Mens en lille server kan yde omkring 10 gange så meget \(4\cdot10^{10}\).\footnotemark
-        % \autocite{ytpwd}
+        Mens en lille server kan yde omkring 10 gange så meget \(4\cdot10^{10}\).\cite{ytpwd}
         Det udregnes hvor mange sekunder det vil tage at hashe alle kombinationer af 8 bogstaver og tal, for henholdsvis en computer og en lille server.
 
         \begin{center}
@@ -260,11 +254,7 @@ Med hashing kan man altså ikke gå baglæns, hvis man kun har et hash af en tek
         Samt at en god hashfunktion tager lang tid, hvorved det forstås at funktioner som \texttt{SHA256} og \texttt{SHA512} er at foretrække over \texttt{MD5}.
 
 
-        \caption{Kompleksiteten ved brute-force}
-        \label{eks:bruteforce}
-
     \end{eks}
-    \footnotetext{\fullcite{ytpwd}.} %Footnote won't work inside float env
 
 
 
@@ -301,14 +291,20 @@ Hvorfor man ikke blot kan nøjes med den ene
 \newpage
 \section{Hvorfor RSA er vigtig}
 Hvor bliver det brugt
-
+\cite{dtu}
+\cite{au}
+\cite{frividen}
+\cite{ruc}
+\cite{algoritmer}
+\cite{absalg,krypto}
     \subsection{En verden uden RSA}
 
 
 
-
+    
 
 \newpage
+\setlength\bibitemsep{10pt}
 \printbibliography[heading=bibintoc, title={Litteratur}]
 
 \end{document}

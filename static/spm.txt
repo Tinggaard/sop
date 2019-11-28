@@ -1,27 +1,3 @@
 Sætning 12
 
-Skal jeg gennemgå alle beviser?
-
-Hvor meget af kilden skal indgå? hjemmeside osv.
-
-hvad tæller en pdf som? https://www.overleaf.com/learn/latex/Bibliography_management_in_LaTeX#Reference_guide
-
-Er det ok at tage de samme sektioner som i pdf'en?
-
-Skal jeg forklare at kryptografi og kryptologi er det samme?
-
-Metode eller funktion?
-
-Hashing - tilfældigt?
-
-Hvordan forklarer jeg at der er et emne jeg ikke vil gennemgå?
-
-https://www.xolphin.dk/support/Terminologi/Algoritmer ok?
-
-Meget af det er faktabaseret, modsat opinion, hvordan er man kildekritisk?
-
-Empiri?
-
-Alice og Bob er blot eksempel, behøves der litteratur til dette - hvis ja, hvad?
-
-Forklaring/henvisning til sidenoter, som f.eks. gpg, rainbowtables osv.
+Er den nuværende opbygning ok?
