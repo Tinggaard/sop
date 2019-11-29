@@ -3,15 +3,15 @@
 \usepackage[utf8]{inputenc} % Encoding
 \usepackage{graphicx} % Graphics
 % \usepackage{minted} % Code inclusion
-% \usepackage{amsfonts} % Other letters/signs
+\usepackage{amsfonts} % Other letters/signs
 \usepackage{lastpage} % Pagenumbering
 \usepackage{fancyhdr} % Custom header/footer
 \usepackage{amsthm} % Proofs
 \usepackage{amssymb} % Black square
 \usepackage{amsmath} % Align
-\usepackage{xcolor} % Colors
 \usepackage{mdframed} % Boxing lemmas and such
 \usepackage{xhfill} % h line after env
+\usepackage{changepage} % for the adjustwidth environment
 \usepackage{multirow} % Multiple rows in tabular
 \usepackage[pdftitle={Sikkerhed bag login-formular på en hjemmeside},pdfauthor={Jens Tinggaard}, hidelinks, bookmarks=true]{hyperref} %References
 \usepackage[tmargin=1in,bmargin=1in,lmargin=1.25in,rmargin=1.25in]{geometry} %Margins
@@ -45,8 +45,8 @@
   {}%                                   Body font
   {}%                                   Indent amount (empty = no indent, \parindent = para indent)
   {\bfseries}%                          Thm head font
-  {\mbox{}\hspace{0.3cm}\xfill{0.4pt}\vspace{0.3cm}}%Punctuation after thm head
-  {\newline}%                           Space after thm head: \newline = linebreak
+  {\mbox{}\hspace{0.5cm}\xfill{0.4pt}\vspace{0.3cm}}%Punctuation after thm head
+  {}%                                   Space after thm head: \newline = linebreak
   {}%                                   Thm head spec
 
 \newtheoremstyle{break}%                  name
@@ -60,48 +60,50 @@
     {}%                                   Thm head spec
 
 
-\newtheoremstyle{beviser}%                  name
+\newtheoremstyle{beviser}%                name
     {0.5cm plus 1 pt minus 2 pt}%         Space above, empty = `usual value'
     {0.5cm plus 1 pt minus 2 pt}%         Space below
     {}%                                   Body font
     {}%                                   Indent amount (empty = no indent, \parindent = para indent)
     {\itshape}%                           Thm head font
-    {}%                                  Punctuation after thm head
+    {}%                                   Punctuation after thm head
     {\newline}%                           Space after thm head: \newline = linebreak
     {}%                                   Thm head spec
 
 
-
+% Definitions kommando 'definition'
 \mdtheorem[style=boxed]{definition}{Definition}[section]
 
-
+% Eksempel kommando 'eks'
 \theoremstyle{break}
-\newtheorem{eks}[definition]{Eksempel} % Eksempel kommando
+\newtheorem{eks}[definition]{Eksempel}
 
-
+% Sætning kommando 'sent'
 \theoremstyle{breakline}
-\newtheorem{sentence}[definition]{Sætning} % Lemma kommando
+\newtheorem{sentence}[definition]{Sætning}
 \newenvironment{sent}
-    {\begin{sentence}}
-    {\par\noindent\hrulefill\end{sentence}}
+    {\begin{sentence}\mbox{}\begin{adjustwidth}{1em}{1em}}
+    {\end{adjustwidth}\par\noindent\hrulefill\end{sentence}}
 
+% Bevis kommando 'bevis'
 \theoremstyle{beviser}
 \newtheorem*{bevis}{Bevis:} % Bevis kommando
 
-
-\setlength{\tabcolsep}{50pt} % General space between cols (6pt standard)
-\renewcommand{\arraystretch}{1.5} % General space between rows (1 standard)
 
 
 % Headers and footers
 \lhead{Jens Tinggaard 3.E\\ Odense Tekniske Gymnasium}
 \rhead{Vejledere: LEER \& SSE\\ \today}
+
 % \lfoot{\rightmark} % Subsection
 \lfoot{\leftmark} % SECTION
 \rfoot{Side \thepage\ af \pageref{LastPage}}
 
 % Navn på indholdsfortegnelse
 \addto\captionsdanish{\renewcommand*\contentsname{Indholdsfortegnelse}}
+
+\setlength{\tabcolsep}{50pt} % General space between cols (6pt standard)
+\renewcommand{\arraystretch}{1.5} % General space between rows (1 standard)
 
 % Basic info
 \date{\today}
@@ -125,7 +127,7 @@
 \thispagestyle{empty}
 \maketitle
 
-\begin{abstract}
+\begin{abstract} %Måske det skal flyttes?
 her står hvad det kommer til at handle om...
 \end{abstract}
 
@@ -137,44 +139,91 @@ her står hvad det kommer til at handle om...
 
 
 \newpage
-\section{RSA}
+\section*{Introduktion / Forord}
+Motivation samt formalia -- kroptologi og kryptografi er det samme!
+
+
+\subsection*{RSA}
 Uden nødvendigvis at være klar over det, er vi alle afhængige af RSA, det er en helt fundamental ting af vores hverdag.
 RSA er grunden til at man kan handle på nettet, uden at få stjålet sine kreditkortoplysninger.
 RSA-krytografi ligger også til grunde for, at man ikke blot kan lave online identitetstyveri.\cite{vestergaard}
 \\
-\\
+
+%%%% sektion skal evt flyttes til senere forklaring
 RSA er en metode, brugt til at kryptere data, døbt efter sine tre stifere:
 \textit{Ron Rivers}, \textit{Adi Shamir} og \textit{Len Adleman}, tilbage i 1977.\cite{vestergaard}
 Metoden er baseret på antagelsen om, at det er svært at primtalsfaktorisere et stort tal.
 Talene anvendt ligger typisk i intervallet \(2^{1024}\) til \(2^{4096}\).
-Hvilket svarer til tal mellem \(\approx1.798\cdot10^{308}\) og \(\approx1.044\cdot10^{1233}\) i decimaltal.\cite{frividen} %s21
+Hvilket svarer til tal mellem \(\approx 1.798 \cdot 10^{308}\) og \(\approx 1.044 \cdot 10^{1233}\) i decimaltal.\cite[21]{frividen}
 
-    \subsection{Modulo}
-    Hvad er modulo?
+
+
+\newpage
+\section{Talteori}
+Talteorien beskæftiger sig med alle de hele tal \(\mathbb{Z}\).
+Vi skal i løbet af dette afsnit kigge på hvordan talteori ligger til grunde for, at RSA virker i praksis.
+\\
+Det er ikke alle definitioner og sætninger der bliver bevist, da det ville tage for lang tid.
+Alle beviser kan naturligvis findes i \textit{Kryptografi -- fra viden til videnskab}. \cite{krypto}
+
+
+
+    \subsection{Division med rest og divisor}
+    I stedet for at regne brøker som rationelle mængder \(\mathbb{Q}\) eller decimaltal, skal vi beskæftige os med hvordan man regner med rester.
+    Et tal \(a \neq 0\) kan enten gå op i \(b\) eller ikke gå op i \(b\).
+    Vi definerer at \(a\) går op i \(b\), hvis der ingen rest er, efter division. Eller sagt på en anden måde:
+
+
+    \begin{definition}
+        Givet tallet \(a \neq 0\) og tallet \(b \geq a\), vil \(a\) gå op i \(b\),
+        hvis der findes et heltal \(q\), som opflyder \(b=q \cdot a\).\\
+        Det skrives \(a \mid b\), som betyder at \(a\) går op i \(b\).\\
+        \(a\) betenes som \textit{divisoren} eller en \textit{faktor},
+        % \(b\) betegnes \textit{dividenden},
+        mens \(q\) kaldes for \textit{kvotienten}.\cite[70]{krypto}
+    \end{definition}
+
+    Er der i stedet en rest efter division, vil man kunne skrive tallet som \(a \nmid b\), som betyder at \(a\) ikke går op i \(b\).
+    Det at arbejde med rester er også noget vi skal beskæftige os meget med.
+
+    \begin{sent}
+        Givet tallet \(a > 0\) og tallet \(b\), findes der speicifkke tal \(q\) og \(r\), som opfylder \(b=q \cdot a + r\), hvor \(0 \leq r < q\). \(r\) betegnes som \textit{resten}.
+    \end{sent}
+
+    Det ses ved nogle eksempler
+
+    \begin{eks}
+        Lad \(a = 48\) og \(b = 8\), det ses da at \(q = 6\) og \(r = 0\), da \(48 = 6 \cdot 8 + 0\) og da \(r = 0\), medfører det at \(a \mid b\).\\
+
+        Lad \(a = 17\) og \(b = 4\), det ses da at \(q = 4\) og \(r = 1\), da \(17 = 4 \cdot 4 + 1\) og da \(r \neq 0\), medfører det at \(17 \nmid 4\).\\
+
+        Man kan også udregne resten ud fra et decimaltal.
+        Tryker man \(\frac{17}{4}\) ind på lommeregneren får man \(4.25\), man ganger så decimal delen med \(b\).
+        I dette tilfælde får man \(r = 0.25 \cdot 4 = 1\).
+    \end{eks}
+
+
+
+
+
+
+
 
     \subsection{Fælles divisor}
     Hvad er en fælles divisor?
 
 
-    \begin{sent}
-        For at skrive ikke faktor \(a \nmid b\), derudover står der noget mere tekst her, sådan at det ser godt ud.
-    \end{sent}
-
-
-    \begin{definition}[Hvordan man bruger faktor]
-        For at skrive ikke faktor \(a \nmid b\)
-    \end{definition}
-
-
-    \begin{bevis}
-        Ovenstående er sandt, fordi jeg siger det!
-    \end{bevis}
-
-    \begin{eks}[Eksempel titel]
-        Her er et eksempel!
-
-
-    \end{eks}
+    % \begin{sent}
+    %     For at skrive ikke faktor \(a \nmid b\), derudover står der noget mere tekst her, sådan at det ser godt ud.
+    % \end{sent}
+    %
+    % \begin{bevis}
+    %     Ovenstående er sandt, fordi jeg siger det!
+    % \end{bevis}
+    %
+    % \begin{eks}[Eksempel titel]
+    %     Her er et eksempel!
+    % \end{eks}
 
 
 
@@ -202,7 +251,7 @@ Med hashing kan man altså ikke gå baglæns, hvis man kun har et hash af en tek
     Dette kan lade sig gøre, da hashing altid giver det samme hash ved brug af samme input.
     Det vil altså sige at hvis man hasher \(abc\), vil man få det samme output hver gang.
     Da et hash er pseudorandom, vil det ikke sige noget om hvad det tidligere har været - der er som sådan ikke noget mønster i metoden.
-    Det ses på eksempel \autoref{eks:hash}.
+    Det ses i eksempel \autoref{eks:hash}.
 
 
     \begin{eks}
@@ -216,9 +265,10 @@ Med hashing kan man altså ikke gå baglæns, hvis man kun har et hash af en tek
 
     \end{eks}
 
-
+    \noindent
     Måden man anvender dette på, er at hashe et kodeord inden det bliver puttet ind i databasen.
     Når så brugeren forsøger at logge ind, hasher man igen det indtastede kodeord og hvis det stemmer over ens, med det liggende i databasen, kan man formode at brugeren har indtastet det rigtige kodeord.
+    \\
 
     Der findes mange forskellige krytografiske hashfunktioner, blandt de mere kendte er \texttt{MD5}, \texttt{SHA256} og \texttt{SHA512}.
     Essentielt er de opbygget på samme måde, forskellen i dem er hvor langsomme og dermed sikre de er.
@@ -229,30 +279,29 @@ Med hashing kan man altså ikke gå baglæns, hvis man kun har et hash af en tek
     \begin{eks}[Kompleksiteten ved brute-force]
         Antag at man har et hash, hashet af \texttt{MD5}, hvor man gerne vil finde den oprindelige tekst.
         Man ved at teksten består af 8 tegn -- som kan være både store og små bogstaver samt tal, men ingen symboler.
-        I det danske alfabet er der \(29\) bogstaver og disse kan både fremstå stor og små \(2\cdot29=58\), derudover er der 10 forskellige tal at tage hensyn til \(58+10=68\).
-        Da alle tegn har mulighed for at stå på alle 8 pladser, er der nu \(68^8\approx4.572\cdot10^{14}\) muligheder.
-        En moderne computer kan udregne omkring \(4\cdot10^9\) hashes i sekundet, i \texttt{MD5}.
-        Mens en lille server kan yde omkring 10 gange så meget \(4\cdot10^{10}\).\cite{ytpwd}
+        I det danske alfabet er der \(29\) bogstaver og disse kan både fremstå stor og små \(2 \cdot 29 = 58\), derudover er der 10 forskellige tal at tage hensyn til \(58 + 10 = 68\).
+        Da alle tegn har mulighed for at stå på alle 8 pladser, er der nu \(68^8\approx 4.572 \cdot 10^{14}\) muligheder.
+        En moderne computer kan udregne omkring \(4 \cdot 10^9\) hashes i sekundet, i \texttt{MD5}.
+        Mens en lille server kan yde omkring 10 gange så meget \(4 \cdot 10^{10}\).\cite{ytpwd}
         Det udregnes hvor mange sekunder det vil tage at hashe alle kombinationer af 8 bogstaver og tal, for henholdsvis en computer og en lille server.
 
         \begin{center}
             \begin{tabular}{c c}
 
-                \(\frac{4.572\cdot10^{14}}{4\cdot10^9} = 114300\) &
-                \(\frac{4.572\cdot10^{14}}{4\cdot10^{10}} = 11430\)\\
+                \(\frac{4.572 \cdot 10^{14}}{4 \cdot 10^9} = 114300\) &
+                \(\frac{4.572 \cdot 10^{14}}{4 \cdot 10^{10}} = 11430\)\\
 
                 \multicolumn{2}{c}{Det omskrives til timer.}\\
 
-                \(\frac{114300}{60\cdot60} = 31.75\) &
-                \(\frac{11430}{60\cdot60} = 3.175\)\\
+                \(\frac{114300}{60 \cdot 60} = 31.75\) &
+                \(\frac{11430}{60 \cdot 60} = 3.175\)\\
 
             \end{tabular}
         \end{center}
 
-
+        \noindent
         Det kan altså konkluderes at det er klogt at vælge et kodeord på mere end 8 tegn.
         Samt at en god hashfunktion tager lang tid, hvorved det forstås at funktioner som \texttt{SHA256} og \texttt{SHA512} er at foretrække over \texttt{MD5}.
-
 
     \end{eks}
 
@@ -268,7 +317,7 @@ Med hashing kan man altså ikke gå baglæns, hvis man kun har et hash af en tek
     Det er altså kun de hashes -- og dermed også kodeord, som er mest anvendte, der ligger i et rainbow table.
     Det er af samme grund, at man ikke blot skal bruge koden \texttt{password}, da den helt sikkert ligger i et rainbow table.
     \\
-    \\
+
     Der er dog heldigvis opfundet en løsning til bekæmpelse af brugen af rainbow tables og den kaldes for salt.
     Pointen med et salt er at skabe rod i hashet.
 
@@ -291,20 +340,19 @@ Hvorfor man ikke blot kan nøjes med den ene
 \newpage
 \section{Hvorfor RSA er vigtig}
 Hvor bliver det brugt
-\cite{dtu}
-\cite{au}
-\cite{frividen}
-\cite{ruc}
-\cite{algoritmer}
-\cite{absalg,krypto}
+
     \subsection{En verden uden RSA}
 
 
 
-    
+
 
 \newpage
+\nocite{*}
 \setlength\bibitemsep{10pt}
-\printbibliography[heading=bibintoc, title={Litteratur}]
+\printbibliography[
+heading=bibintoc, %Er med i indholdsfortegnelsen
+title={Litteratur} %Titel
+]
 
 \end{document}
