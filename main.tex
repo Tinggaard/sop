@@ -1,0 +1,174 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[danish]{babel} % Language
+\usepackage[utf8]{inputenc} % Encoding
+\usepackage{graphicx} % Graphics
+% \usepackage{minted} % Code inclusion
+\usepackage{amsfonts} % Other letters/signs
+\usepackage{lastpage} % Pagenumbering
+\usepackage{fancyhdr} % Custom header/footer
+\usepackage{amsthm} % Proofs
+\usepackage{amssymb} % nmid
+% \usepackage{amssymb} % Black square
+\usepackage{amsmath} % Align
+\usepackage{mdframed} % Boxing lemmas and such
+\usepackage{xhfill} % h line after env
+\usepackage{changepage} % for the adjustwidth environment
+\usepackage{multirow} % Multiple rows in tabular
+\usepackage[pdftitle={Sikkerhed bag login-formular på en hjemmeside},pdfauthor={Jens Tinggaard}, hidelinks, bookmarks=true]{hyperref} %References
+\usepackage[tmargin=1in,bmargin=1in,lmargin=1.25in,rmargin=1.25in]{geometry} %Margins
+
+% Biblografi
+\usepackage{csquotes}
+\usepackage[style=numeric, style=alphabetic]{biblatex} %style=numeric
+\addbibresource{biblography.bib}
+\DeclareNameAlias{default}{family-given}
+
+
+\pagestyle{fancy} % Set custom page layout
+\fancyhf{}% to clear existing header/footer
+% Set line on header and footer width
+\renewcommand{\headrulewidth}{2pt}
+\renewcommand{\footrulewidth}{1pt}
+
+
+
+% \renewcommand\qedsymbol{$\blacksquare$} % Black QED
+
+\newcommand{\xfill}[2][1ex]{{%
+  \dimen0=#2\advance\dimen0 by #1
+  \leaders\hrule height \dimen0 depth -#1\hfill%
+}}
+
+
+\newtheoremstyle{breakline}%            name
+  {0.5cm plus 1 pt minus 2 pt}%         Space above, empty = `usual value'
+  {0.5cm plus 1 pt minus 2 pt}%         Space below
+  {}%                                   Body font
+  {}%                                   Indent amount (empty = no indent, \parindent = para indent)
+  {\bfseries}%                          Thm head font
+  {\mbox{}\hspace{0.5cm}\xfill{0.4pt}\vspace{0.3cm}}%Punctuation after thm head
+  {0pt}%                                   Space after thm head: \newline = linebreak
+  {}%                                   Thm head spec
+
+\newtheoremstyle{break}%                  name
+    {0.5cm plus 1 pt minus 2 pt}%         Space above, empty = `usual value'
+    {0.5cm plus 1 pt minus 2 pt}%         Space below
+    {}%                                   Body font
+    {}%                                   Indent amount (empty = no indent, \parindent = para indent)
+    {\bfseries}%                          Thm head font
+    {\vspace{0.3cm}}%                     Punctuation after thm head
+    {\newline}%                           Space after thm head: \newline = linebreak
+    {}%                                   Thm head spec
+
+
+% \newtheoremstyle{beviser}%                name
+%     {0.5cm plus 1 pt minus 2 pt}%         Space above, empty = `usual value'
+%     {0.5cm plus 1 pt minus 2 pt}%         Space below
+%     {}%                                   Body font
+%     {}%                                   Indent amount (empty = no indent, \parindent = para indent)
+%     {\itshape}%                           Thm head font
+%     {}%                                   Punctuation after thm head
+%     {\newline}%                           Space after thm head: \newline = linebreak
+%     {}%                                   Thm head spec
+
+
+% Definitions kommando 'definition'
+\mdtheorem{definition}{Definition}[section]
+
+% Eksempel kommando 'eks'
+\theoremstyle{break}
+\newtheorem{eks}[definition]{Eksempel}
+
+% Sætning kommando 'sent'
+\theoremstyle{breakline}
+\newtheorem{sentence}[definition]{Sætning}
+\newenvironment{sent}
+    {\begin{sentence}\mbox{}\begin{adjustwidth}{1em}{1em}}
+    {\end{adjustwidth}\par\noindent\hrulefill\end{sentence}}
+
+% % Bevis kommando 'bevis'
+% \theoremstyle{beviser}
+% \newtheorem*{bevis}{Bevis:} % Bevis kommando
+
+
+
+% Headers and footers
+\lhead{Jens Tinggaard 3.E\\ Odense Tekniske Gymnasium}
+\rhead{Vejledere: LEER \& SSE\\ \today}
+
+% \lfoot{\rightmark} % Subsection
+\lfoot{\leftmark} % SECTION
+\rfoot{Side \thepage\ af \pageref{LastPage}}
+
+% Navn på indholdsfortegnelse
+\addto\captionsdanish{\renewcommand*\contentsname{Indholdsfortegnelse}}
+
+% Basic info
+\date{\today}
+\title{Sikkerhed bag login-formular på en hjemmeside}
+\author{Jens Tinggaard}
+
+
+\setlength{\parindent}{0em} % Identeringsstørrelse = 0
+% \setlength{\parskip}{1em} % Paragraf afstand
+% Bruges med \par
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\begin{document}
+\clearpage\maketitle
+\thispagestyle{empty}
+\maketitle
+
+\begin{abstract} %Måske det skal flyttes?
+her står hvad det kommer til at handle om...
+\end{abstract}
+
+% Indsæt billede til forside?
+
+
+\newpage
+\tableofcontents
+
+
+\newpage
+\section*{Introduktion / Forord}
+\input{sections/forord.tex}
+
+
+\newpage
+\section{Talteori}
+\input{sections/talteori.tex}
+
+
+\newpage
+\section{Hashing}
+\input{sections/hashing.tex}
+
+
+\newpage
+\section{Forskkel på hashing og kryptografi}
+\input{sections/forskel.tex}
+
+
+\newpage
+\section{Hvorfor RSA er vigtig}
+\input{sections/rsa.tex}
+
+
+
+
+\newpage
+% \nocite{*}
+\setlength\bibitemsep{10pt}
+\printbibliography[
+heading=bibintoc, %Er med i indholdsfortegnelsen
+title={Litteratur} %Titel
+]
+
+\end{document}

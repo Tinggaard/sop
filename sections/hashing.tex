@@ -1,0 +1,89 @@
+Hashing er en metode, brugt til at omdanne en tekststreng til en anden tekststreng, med en fikseret længde.
+Den nye tekststreng vil være pseudorandom - den vil fremstå tilfældigt, men faktisk være regelmæssig, baseret på inputtet.
+Til forskel fra RSA skal man ikke skal generere nogle tal førend metoden bruges, hvilket medfører at der altid bliver genereret det samme output, ved det samme input.
+\\
+Hashing en også envejsfunktion, modsat RSA, hvor man jo både kan kryptere og dekryptere data.
+Med hashing kan man altså ikke gå baglæns, hvis man kun har et hash af en tekst.
+
+
+    \subsection{Fordelen ved hashing}
+    Det at hashing kun går en vej, virker måske lidt nytteløst, da man ikke længere er i stand til at finde ud af hvad man har hashet.
+    I stedet bruger man hashing til at gemme kodeord, sådan at hvis nogle kodeord bliver lækket, er de stadig beskyttede.
+    Dette kan lade sig gøre, da hashing altid giver det samme hash ved brug af samme input.
+    Det vil altså sige at hvis man hasher \(abc\), vil man få det samme output hver gang.
+    Da et hash er pseudorandom, vil det ikke sige noget om hvad det tidligere har været - der er som sådan ikke noget mønster i metoden.
+    Det ses i eksempel \ref{eks:hash}.
+
+
+    \begin{eks}
+        Det ses at, på trods af lignende input, er hashet helt forskelligt.
+        \begin{center}
+            \texttt{MD5(abc) = 900150983cd24fb0d6963f7d28e17f72}\\
+            \texttt{MD5(Abc) = 35593b7ce5020eae3ca68fd5b6f3e031}\\
+            \texttt{MD5(abd) = 4911e516e5aa21d327512e0c8b197616}\\
+        \end{center}
+        \label{eks:hash}
+
+    \end{eks}
+
+    \noindent
+    Måden man anvender dette på, er at hashe et kodeord inden det bliver puttet ind i databasen.
+    Når så brugeren forsøger at logge ind, hasher man igen det indtastede kodeord og hvis det stemmer over ens, med det liggende i databasen, kan man formode at brugeren har indtastet det rigtige kodeord.
+    \\
+
+    Der findes mange forskellige kryptografiske hashfunktioner, blandt de mere kendte er \texttt{MD5}, \texttt{SHA256} og \texttt{SHA512}.
+    Essentielt er de opbygget på samme måde, forskellen i dem er hvor langsomme og dermed sikre de er.
+    For at forstå hvorfor en langsom hashfunktion er god, er det vigtigt at forstå essensen i en hashfunktion.
+    Det at den kun kan bruges en vej, gør nemlig at hvis man gerne vil finde ud af den originale tekst til et hash, er man nødt til at prøve sig frem, i IT-verdenen kaldes dette for \emph{brute-force}.
+
+
+    \begin{eks}[Kompleksiteten ved brute-force]
+        Antag at man har et hash, hashet af \texttt{MD5}, hvor man gerne vil finde den oprindelige tekst.
+        Man ved at teksten består af 8 tegn -- som kan være både store og små bogstaver samt tal, men ingen symboler.
+        I det danske alfabet er der \(29\) bogstaver og disse kan både fremstå stor og små \(2 \cdot 29 = 58\), derudover er der 10 forskellige tal at tage hensyn til \(58 + 10 = 68\).
+        Da alle tegn har mulighed for at stå på alle 8 pladser, er der nu \(68^8\approx 4.572 \cdot 10^{14}\) muligheder.
+        En moderne computer kan udregne omkring \(4 \cdot 10^9\) hashes i sekundet, i \texttt{MD5}.
+        Mens en lille server kan yde omkring 10 gange så meget \(4 \cdot 10^{10}\).\cite{ytpwd}
+        Det udregnes hvor mange sekunder det vil tage at hashe alle kombinationer af 8 bogstaver og tal, for henholdsvis en computer og en lille server.
+
+        \setlength{\tabcolsep}{50pt} % General space between cols (6pt standard)
+        \begin{center}
+            %\renewcommand{\arraystretch}{1.5} % General space between rows (1 standard)
+            \begin{tabular}{c c}
+
+                \(\frac{4.572 \cdot 10^{14}}{4 \cdot 10^9} = 114300\) &
+                \(\frac{4.572 \cdot 10^{14}}{4 \cdot 10^{10}} = 11430\)\\
+
+                \multicolumn{2}{c}{Det omskrives til timer.}\\
+
+                \(\frac{114300}{60 \cdot 60} = 31.75\) &
+                \(\frac{11430}{60 \cdot 60} = 3.175\)\\
+
+            \end{tabular}
+        \end{center}
+
+        \noindent
+        Det kan altså konkluderes at det er klogt at vælge et kodeord på mere end 8 tegn.
+        Samt at en god hashfunktion tager lang tid, hvorved det forstås at funktioner som \texttt{SHA256} og \texttt{SHA512} er at foretrække over \texttt{MD5}.
+
+    \end{eks}
+
+
+
+
+
+    \subsection{Rainbow tables og Salt}
+    Der findes en \textit{løsning} til problemet, om at hashes er svære at gendanne, er der opfundet det man kalder \emph{rainbow tables}.
+    Et rainbow table er en tabel, hvori der står en masse hashes samt hvad de er oprindet af.
+    Det vil altså sige at man ved at lave et opslag i et rainbow table, meget hurtigt kan finde frem til om et hash allerede er blevet de-hashet.
+    Et rainbow table indeholder naturligvis ikke alle hashes -- det ville være en uoverkommelig opgave at liste dem alle.
+    Det er altså kun de hashes -- og dermed også kodeord, som er mest anvendte, der ligger i et rainbow table.
+    Det er af samme grund, at man ikke blot skal bruge koden \texttt{password}, da den helt sikkert ligger i et rainbow table.
+    \\
+
+    Der er dog heldigvis opfundet en løsning til bekæmpelse af brugen af rainbow tables og den kaldes for salt.
+    Pointen med et salt er at skabe rod i hashet.
+
+
+
+    % \subsection{Hash tabeller}
