@@ -3,3 +3,13 @@ Sætning 12
 Er den nuværende opbygning ok?
 
 "Vi skal kigge på...?" ok?
+
+Indsæt figurer - hvilke?
+
+Decimalseperator ".", da "," er til lister
+
+Antal tegn?
+$ pdftotext document.pdf -enc UTF-8 - | wc -m
+$ detex file.tex | wc -C
+
+Meget af talteorien er svær at konkludere noget på, da den blot skal redegøres...

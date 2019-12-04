@@ -7,7 +7,8 @@
 \usepackage{lastpage} % Pagenumbering
 \usepackage{fancyhdr} % Custom header/footer
 \usepackage{amsthm} % Proofs
-\usepackage{amssymb} % Black square
+\usepackage{amssymb} % nmid
+% \usepackage{amssymb} % Black square
 \usepackage{amsmath} % Align
 \usepackage{mdframed} % Boxing lemmas and such
 \usepackage{xhfill} % h line after env
@@ -31,7 +32,7 @@
 
 
 
-\renewcommand\qedsymbol{$\blacksquare$} % Black QED
+% \renewcommand\qedsymbol{$\blacksquare$} % Black QED
 
 \newcommand{\xfill}[2][1ex]{{%
   \dimen0=#2\advance\dimen0 by #1
@@ -46,7 +47,7 @@
   {}%                                   Indent amount (empty = no indent, \parindent = para indent)
   {\bfseries}%                          Thm head font
   {\mbox{}\hspace{0.5cm}\xfill{0.4pt}\vspace{0.3cm}}%Punctuation after thm head
-  {}%                                   Space after thm head: \newline = linebreak
+  {0pt}%                                   Space after thm head: \newline = linebreak
   {}%                                   Thm head spec
 
 \newtheoremstyle{break}%                  name
@@ -60,19 +61,19 @@
     {}%                                   Thm head spec
 
 
-\newtheoremstyle{beviser}%                name
-    {0.5cm plus 1 pt minus 2 pt}%         Space above, empty = `usual value'
-    {0.5cm plus 1 pt minus 2 pt}%         Space below
-    {}%                                   Body font
-    {}%                                   Indent amount (empty = no indent, \parindent = para indent)
-    {\itshape}%                           Thm head font
-    {}%                                   Punctuation after thm head
-    {\newline}%                           Space after thm head: \newline = linebreak
-    {}%                                   Thm head spec
+% \newtheoremstyle{beviser}%                name
+%     {0.5cm plus 1 pt minus 2 pt}%         Space above, empty = `usual value'
+%     {0.5cm plus 1 pt minus 2 pt}%         Space below
+%     {}%                                   Body font
+%     {}%                                   Indent amount (empty = no indent, \parindent = para indent)
+%     {\itshape}%                           Thm head font
+%     {}%                                   Punctuation after thm head
+%     {\newline}%                           Space after thm head: \newline = linebreak
+%     {}%                                   Thm head spec
 
 
 % Definitions kommando 'definition'
-\mdtheorem[style=boxed]{definition}{Definition}[section]
+\mdtheorem{definition}{Definition}[section]
 
 % Eksempel kommando 'eks'
 \theoremstyle{break}
@@ -85,9 +86,9 @@
     {\begin{sentence}\mbox{}\begin{adjustwidth}{1em}{1em}}
     {\end{adjustwidth}\par\noindent\hrulefill\end{sentence}}
 
-% Bevis kommando 'bevis'
-\theoremstyle{beviser}
-\newtheorem*{bevis}{Bevis:} % Bevis kommando
+% % Bevis kommando 'bevis'
+% \theoremstyle{beviser}
+% \newtheorem*{bevis}{Bevis:} % Bevis kommando
 
 
 
@@ -101,9 +102,6 @@
 
 % Navn på indholdsfortegnelse
 \addto\captionsdanish{\renewcommand*\contentsname{Indholdsfortegnelse}}
-
-\setlength{\tabcolsep}{50pt} % General space between cols (6pt standard)
-\renewcommand{\arraystretch}{1.5} % General space between rows (1 standard)
 
 % Basic info
 \date{\today}
@@ -140,17 +138,17 @@ her står hvad det kommer til at handle om...
 
 \newpage
 \section*{Introduktion / Forord}
-Motivation samt formalia -- kroptologi og kryptografi er det samme!
+Motivation samt formalia -- kryptologi og kryptografi er det samme!
 
 
 \subsection*{RSA}
 Uden nødvendigvis at være klar over det, er vi alle afhængige af RSA, det er en helt fundamental ting af vores hverdag.
 RSA er grunden til at man kan handle på nettet, uden at få stjålet sine kreditkortoplysninger.
-RSA-krytografi ligger også til grunde for, at man ikke blot kan lave online identitetstyveri.\cite{vestergaard}
+RSA-krytpografi ligger også til grunde for, at man ikke blot kan lave online identitetstyveri.\cite{vestergaard}
 \\
 
 %%%% sektion skal evt flyttes til senere forklaring
-RSA er en metode, brugt til at kryptere data, døbt efter sine tre stifere:
+RSA er en metode, brugt til at kryptere data, døbt efter sine tre stiftere:
 \textit{Ron Rivers}, \textit{Adi Shamir} og \textit{Len Adleman}, tilbage i 1977.\cite{vestergaard}
 Metoden er baseret på antagelsen om, at det er svært at primtalsfaktorisere et stort tal.
 Talene anvendt ligger typisk i intervallet \(2^{1024}\) til \(2^{4096}\).
@@ -170,13 +168,16 @@ Alle beviser kan naturligvis findes i \textit{Kryptografi -- fra viden til viden
 
     \subsection{Division med rest og divisor}
     I stedet for at regne brøker som rationelle mængder \(\mathbb{Q}\) eller decimaltal, skal vi beskæftige os med hvordan man regner med rester.
+    Det vil altså sige at vi udelukkende vil beskæftige os med heltal \(\mathbb{Z}\).
+
     Et tal \(a \neq 0\) kan enten gå op i \(b\) eller ikke gå op i \(b\).
     Vi definerer at \(a\) går op i \(b\), hvis der ingen rest er, efter division. Eller sagt på en anden måde:
 
 
     \begin{definition}
+        \label{heldiv}
         Givet tallet \(a \neq 0\) og tallet \(b \geq a\), vil \(a\) gå op i \(b\),
-        hvis der findes et heltal \(q\), som opflyder \(b=q \cdot a\).\\
+        hvis der findes et heltal \(q\), som opfylder \(b = q \cdot a\).\\
         Det skrives \(a \mid b\), som betyder at \(a\) går op i \(b\).\\
         \(a\) betenes som \textit{divisoren} eller en \textit{faktor},
         % \(b\) betegnes \textit{dividenden},
@@ -184,10 +185,11 @@ Alle beviser kan naturligvis findes i \textit{Kryptografi -- fra viden til viden
     \end{definition}
 
     Er der i stedet en rest efter division, vil man kunne skrive tallet som \(a \nmid b\), som betyder at \(a\) ikke går op i \(b\).
-    Det at arbejde med rester er også noget vi skal beskæftige os meget med.
+    % Det at arbejde med rester er også noget vi skal beskæftige os meget med.
 
     \begin{sent}
-        Givet tallet \(a > 0\) og tallet \(b\), findes der speicifkke tal \(q\) og \(r\), som opfylder \(b=q \cdot a + r\), hvor \(0 \leq r < q\). \(r\) betegnes som \textit{resten}.
+        \label{rest}
+        Givet tallet \(a > 0\) og tallet \(b\), findes der specifikke tal \(q\) og \(r\), som opfylder \(b = q \cdot a + r\), hvor \(0 \leq r < q\). \(r\) betegnes som \textit{resten}.
     \end{sent}
 
     Det ses ved nogle eksempler
@@ -198,32 +200,149 @@ Alle beviser kan naturligvis findes i \textit{Kryptografi -- fra viden til viden
         Lad \(a = 17\) og \(b = 4\), det ses da at \(q = 4\) og \(r = 1\), da \(17 = 4 \cdot 4 + 1\) og da \(r \neq 0\), medfører det at \(17 \nmid 4\).\\
 
         Man kan også udregne resten ud fra et decimaltal.
-        Tryker man \(\frac{17}{4}\) ind på lommeregneren får man \(4.25\), man ganger så decimal delen med \(b\).
+        Trykker man \(17 \div 4\) ind på lommeregneren får man \(4.25\), man ganger så decimal delen med \(b\), vil man få resten efter divisionen.
         I dette tilfælde får man \(r = 0.25 \cdot 4 = 1\).
     \end{eks}
 
 
 
 
+    \begin{sent}
+        Givet tallene \(a, b, c \in \mathbb{Z}\), hvor \(a, c \neq 0\), vil \(a \mid b\) medføre at \(a c \mid b c\).
+    \end{sent}
+
+    \begin{proof}
+        Beviset tager selvfølgelig udgangspunkt i definition \ref{heldiv}.
+        Da \(a \mid b \implies b = q \cdot a\), vil man ved at gange \(c\) ind, på begge sider, blot få \(b c = q \cdot a c\).
+        Og da \(c\) indgår på begge sider af lighedstegnet, kan dette fjernes fra udtrkket, hvorved man er tilbage ved \(b = q \cdot a\).
+    \end{proof}
 
 
+
+
+
+    \begin{sent}
+        Givet tallene \(a, b, c \in \mathbb{Z}\), hvor \(a, c \neq 0\), vil \(a \mid b \land b \mid c\) medføre at \(a \mid c\).
+    \end{sent}
+
+    \begin{proof}
+        \(a \mid b\) skrives som \(b = q_1 \cdot a\), mens \(b \mid c\) skrives som \(c = q_2 \cdot b\). Ved at substituere \(b\) med udtyrkket fra \(a \mid b\), haves \(a = q_1 \cdot q_2 \cdot c\). \(a \mid c\) er altså sand hvis kvotienten er \(q_1 \cdot q_2\).
+    \end{proof}
+
+
+    \begin{eks}
+        Her skal gerne være lidt eksempler for at spice det lidt op...
+    \end{eks}
+
+
+
+    \subsubsection{Modulo}
+    Når man laver division med heltal, vil man ofte kigge på resten efter division.
+    Derfor er der naturligvis lavet en matematisk operator til at udregne rest efter division -- den kaldes for \emph{modulo}.
+    Skriver man f.eks. \(a \pmod{n}\), udregner man resten efter division, som angivet i sætning \ref{rest}.
+
+    \begin{definition}
+        For \(m \in \mathbb{Z}\) og \(n \in \mathbb{N}\) gælder:
+        \[n \mid m \iff m \pmod{n} = 0\]
+        \[r = n - q m = m \pmod{n}\]\cite[72]{krypto}
+    \end{definition}
+
+    \begin{eks}
+        Et par eksempler på brugen af modulo.
+        \begin{center}
+            \setlength{\tabcolsep}{20pt} % General space between cols (6pt standard)
+            \begin{tabular}{l c r}
+                \(43 \pmod{6} = 1\) & \(74 \pmod{10} = 4\) & \(58 \pmod{6} = 4\)
+            \end{tabular}
+        \end{center}
+    \end{eks}
+
+
+    % sent 4.7 fra bogen (s 73)
 
 
     \subsection{Fælles divisor}
-    Hvad er en fælles divisor?
+    En fællesvidisor bruges til at sige noget om sammenhængen mellem 2 tal.
+
+    \begin{definition}
+        For tallene \(a, b, d \in \mathbb{Z}\), betegnes \(d\) som en \emph{fælles divisor}, hvis \(d \mid a \land d \mid b\).
+    \end{definition}
+
+    \(a\) og \(b\) vil have et endeligt antal fælles divisorer, da et tal højere end enten \(a\) eller \(b\) naturligvis ikke er en fælles divisor (medmindre \(a\) og \(b\) begge er \(0\).
+    Det kan altså konkluderes at der findes en største fælles divisor.
+
+    \begin{definition}
+        Den største fælles divisor for tallene \(a\) og \(b\), betegnes som \((a,b)\).
+    \end{definition}
+
+    \begin{eks}
+        Lad \(a = 8\) og \(b = 12\).\\
+        \begin{tabular*}{\textwidth}{@{} l l}
+            Det ses at divisorne i \(8\) er: & \(\pm 1, \pm 2, \pm 4, \pm 8\).\\
+            Og det ses at divisorne i \(12\) er:  &\(\pm 1, \pm 2, \pm 3, \pm 4, \pm 6, \pm 12\).\\
+            Til fælles har de altså divisorne: & \(\pm 1, \pm 2, \pm 4\).
+        \end{tabular*}
+
+        Dermed bliver \((8, 12) = 4\).
+    \end{eks}
+
+    %\paragraph{Observationer}
+    Det ses at fortegnet for både \(a\) og \(b\) er ubetydeligt, da kvotienterne kan være negative.
+
+    Som vist, kan være bøvlet at udregne fælles divisorer for 2 tal, derfor kommer nu en sætning, til at mindske vanskeligheden lidt.
+
+    \begin{sent}
+        \label{commod}
+        \((a, b) = (a, b \pmod{a})\)
+    \end{sent}
+
+    \begin{proof}
+        Måske...
+    \end{proof}
 
 
-    % \begin{sent}
-    %     For at skrive ikke faktor \(a \nmid b\), derudover står der noget mere tekst her, sådan at det ser godt ud.
-    % \end{sent}
-    %
-    % \begin{bevis}
-    %     Ovenstående er sandt, fordi jeg siger det!
-    % \end{bevis}
-    %
-    % \begin{eks}[Eksempel titel]
-    %     Her er et eksempel!
-    % \end{eks}
+    \subsubsection{Euclids algoritme}
+    Euclids algoritme er essentielt gentagen anvendelse af sætning \ref{commod}.
+    \begin{definition}[Euclids algoritme]
+        Lad \(a, b \in \mathbb{N}\), hvor \(a \geq b\).
+        Hvis \(a \mid b\), så er \((a, b) = b\).
+        Hvis \(a \nmid b\), bruges følgende algoritme:
+        \begin{align*}
+            a   &= b q_0    + r_0   & 0 &<    r_0 < b\\
+            b   &= r_0 q_1  + r_1   & 0 &\leq r_1 < r_0\\
+            r_0 &= r_1 q_2  + r_2   & 0 &\leq r_2 < r_1\\
+            r_1 &= r_2 q_3  + r_3   & 0 &\leq r_3 < r_2\\
+            &\vdots
+        \end{align*}
+        Denne proces slutter, idet der findes en rest på 0.
+        Det vil ske efter et endeligt antal gennemløb \(t\).
+
+        \begin{align*}
+            r_{t-2} &= r_{t-1}  q_t      + r_t   & 0 &\leq r_t < r_{t-1}\\
+            r_{t-1} &= r_t      q_{t+1}  + r_0
+        \end{align*}
+        Den sidste rest, som ikke er 0, er dermed den største fælles divisor.\cite[11]{absalg}
+    \end{definition}
+
+    Det ses hvordan Euclids algoritme bruges, til at overskue udregningen af største fælles divisor.
+
+    \begin{eks}
+        % Udregning af største fællesfaktor ved brug af sætning \ref{commod}.\\
+        \begin{tabular*}{\textwidth}{r l c r l c r}
+            \((1048, 672)\) & \(= (376, 672)\) & idet & \(1048\) & \(= 1 \cdot 672\) & \(+\) & \(376\)\\
+            & \(= (376, 296)\) & -- & \(672\) & \(= 1 \cdot 376\) & \(+\) & \(296\)\\
+            & \(= (80, 296)\) & -- & \(376\) & \(= 1 \cdot 296\) & \(+\) & \(80\)\\
+            & \(= (80, 56)\) & -- & \(296\) & \(= 3 \cdot 80\) & \(+\) & \(56\)\\
+            & \(= (24, 56)\) & -- & \(80\) & \(= 1 \cdot 56\) & \(+\) & \(24\)\\
+            & \(= (24, 8)\) & -- & \(56\) & \(= 2 \cdot 24\) & \(+\) & \(8\)\\
+            & \(= (0, 8)\) & -- & \(24\) & \(= 3 \cdot 8\) & \(+\) & \(0\)\\
+            & \(= 8\) & & & & &
+        \end{tabular*}
+    \end{eks}
+
+    Ovenstående metode er faktisk en algoritme, fremskrevet af Euclid. Af samme grund kaldes den Euclids algoritme.
+    Da der allerede er et eksempel på den, vil algoritmen ikke vises -- dog ligger den implementeret i Python som bilag. %Indsæt bilag!
+
 
 
 
@@ -238,7 +357,7 @@ Alle beviser kan naturligvis findes i \textit{Kryptografi -- fra viden til viden
 \newpage
 \section{Hashing}
 Hashing er en metode, brugt til at omdanne en tekststreng til en anden tekststreng, med en fikseret længde.
-Den nye tekststreng vil være pseudorandom - den vil fremstå tilfædigt, men faktisk være regelmæssig, baseret på inputtet.
+Den nye tekststreng vil være pseudorandom - den vil fremstå tilfældigt, men faktisk være regelmæssig, baseret på inputtet.
 Til forskel fra RSA skal man ikke skal generere nogle tal førend metoden bruges, hvilket medfører at der altid bliver genereret det samme output, ved det samme input.
 \\
 Hashing en også envejsfunktion, modsat RSA, hvor man jo både kan kryptere og dekryptere data.
@@ -251,7 +370,7 @@ Med hashing kan man altså ikke gå baglæns, hvis man kun har et hash af en tek
     Dette kan lade sig gøre, da hashing altid giver det samme hash ved brug af samme input.
     Det vil altså sige at hvis man hasher \(abc\), vil man få det samme output hver gang.
     Da et hash er pseudorandom, vil det ikke sige noget om hvad det tidligere har været - der er som sådan ikke noget mønster i metoden.
-    Det ses i eksempel \autoref{eks:hash}.
+    Det ses i eksempel \ref{eks:hash}.
 
 
     \begin{eks}
@@ -270,7 +389,7 @@ Med hashing kan man altså ikke gå baglæns, hvis man kun har et hash af en tek
     Når så brugeren forsøger at logge ind, hasher man igen det indtastede kodeord og hvis det stemmer over ens, med det liggende i databasen, kan man formode at brugeren har indtastet det rigtige kodeord.
     \\
 
-    Der findes mange forskellige krytografiske hashfunktioner, blandt de mere kendte er \texttt{MD5}, \texttt{SHA256} og \texttt{SHA512}.
+    Der findes mange forskellige kryptografiske hashfunktioner, blandt de mere kendte er \texttt{MD5}, \texttt{SHA256} og \texttt{SHA512}.
     Essentielt er de opbygget på samme måde, forskellen i dem er hvor langsomme og dermed sikre de er.
     For at forstå hvorfor en langsom hashfunktion er god, er det vigtigt at forstå essensen i en hashfunktion.
     Det at den kun kan bruges en vej, gør nemlig at hvis man gerne vil finde ud af den originale tekst til et hash, er man nødt til at prøve sig frem, i IT-verdenen kaldes dette for \emph{brute-force}.
@@ -285,7 +404,9 @@ Med hashing kan man altså ikke gå baglæns, hvis man kun har et hash af en tek
         Mens en lille server kan yde omkring 10 gange så meget \(4 \cdot 10^{10}\).\cite{ytpwd}
         Det udregnes hvor mange sekunder det vil tage at hashe alle kombinationer af 8 bogstaver og tal, for henholdsvis en computer og en lille server.
 
+        \setlength{\tabcolsep}{50pt} % General space between cols (6pt standard)
         \begin{center}
+            %\renewcommand{\arraystretch}{1.5} % General space between rows (1 standard)
             \begin{tabular}{c c}
 
                 \(\frac{4.572 \cdot 10^{14}}{4 \cdot 10^9} = 114300\) &
@@ -312,7 +433,7 @@ Med hashing kan man altså ikke gå baglæns, hvis man kun har et hash af en tek
     \subsection{Rainbow tables og Salt}
     Der findes en \textit{løsning} til problemet, om at hashes er svære at gendanne, er der opfundet det man kalder \emph{rainbow tables}.
     Et rainbow table er en tabel, hvori der står en masse hashes samt hvad de er oprindet af.
-    Det vil altså sige at man ved at lave et opslag i et ranbow table, meget hurtigt kan finde frem til om et hash allerede er blevet de-hashet.
+    Det vil altså sige at man ved at lave et opslag i et rainbow table, meget hurtigt kan finde frem til om et hash allerede er blevet de-hashet.
     Et rainbow table indeholder naturligvis ikke alle hashes -- det ville være en uoverkommelig opgave at liste dem alle.
     Det er altså kun de hashes -- og dermed også kodeord, som er mest anvendte, der ligger i et rainbow table.
     Det er af samme grund, at man ikke blot skal bruge koden \texttt{password}, da den helt sikkert ligger i et rainbow table.
