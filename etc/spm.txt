@@ -13,3 +13,9 @@ $ pdftotext document.pdf -enc UTF-8 - | wc -m
 $ detex file.tex | wc -C
 
 Meget af talteorien er svær at konkludere noget på, da den blot skal redegøres...
+
+Bilag eller litteratur først?
+
+Bilag i git? (må det være offentligt?)
+
+Skal jeg citere flere kilder, på samme definition i talteori?

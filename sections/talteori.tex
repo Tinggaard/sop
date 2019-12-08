@@ -111,8 +111,8 @@ Alle beviser kan naturligvis findes i \textit{Kryptografi -- fra viden til viden
     \(a\) og \(b\) vil have et endeligt antal fælles divisorer, da et tal højere end enten \(a\) eller \(b\) naturligvis ikke er en fælles divisor (medmindre \(a\) og \(b\) begge er \(0\).
     Det kan altså konkluderes at der findes en største fælles divisor.
 
-    \begin{definition}
-        Den største fælles divisor for tallene \(a\) og \(b\), betegnes som \((a,b)\).
+    \begin{definition}[Største fælles divisor]
+        Den største fælles divisor for tallene \(a\) og \(b\), betegnes som \((a, b)\).
     \end{definition}
 
     \begin{eks}
@@ -127,7 +127,11 @@ Alle beviser kan naturligvis findes i \textit{Kryptografi -- fra viden til viden
     \end{eks}
 
     %\paragraph{Observationer}
-    Det ses at fortegnet for både \(a\) og \(b\) er ubetydeligt, da kvotienterne kan være negative.
+    % Det ses at fortegnet for både \(a\) og \(b\) er ubetydeligt, da kvotienterne kan være negative.
+
+    \begin{definition}[Indbyrdes primiske tal]
+        Hvis \((a, b) = 1\), siges \(a\) og \(b\) at være indbyrdes primiske.
+    \end{definition}
 
     Som vist, kan være bøvlet at udregne fælles divisorer for 2 tal, derfor kommer nu en sætning, til at mindske vanskeligheden lidt.
 
@@ -136,10 +140,7 @@ Alle beviser kan naturligvis findes i \textit{Kryptografi -- fra viden til viden
         \((a, b) = (a, b \pmod{a})\)
     \end{sent}
 
-    \begin{proof}
-        Måske...
-    \end{proof}
-
+    Sætning \ref{commod} bevises ikke, i stedet vil Euclids algoritme (som bygger på sætningen) blive vist.
 
     \subsubsection{Euclids algoritme}
     Euclids algoritme er essentielt gentagen anvendelse af sætning \ref{commod}.
@@ -159,36 +160,92 @@ Alle beviser kan naturligvis findes i \textit{Kryptografi -- fra viden til viden
 
         \begin{align*}
             r_{t-2} &= r_{t-1}  q_t      + r_t   & 0 &\leq r_t < r_{t-1}\\
-            r_{t-1} &= r_t      q_{t+1}  + r_0
+            r_{t-1} &= r_t      q_{t+1}  + 0
         \end{align*}
         Den sidste rest, som ikke er 0, er dermed den største fælles divisor.\cite[11]{absalg}
     \end{definition}
 
     Det ses hvordan Euclids algoritme bruges, til at overskue udregningen af største fælles divisor.
 
+    \begin{eks}[Anvendelse af Euclids algoritme]
+        Lad \(a = 1048\) og \(b = 672\).
+        Ved brug af Euclids algoritme, findes da største fællesnævner.
+        \begin{center}
+            \setlength{\tabcolsep}{5pt} % General space between cols (6pt standard)
+            \begin{tabular}{r l c r l c r}
+                \((1048, 672)\) & \(= (376, 672)\) & idet & \(1048\) & \(= 1 \cdot 672\) & \(+\) & \(376\)\\
+                                & \(= (376, 296)\) & --   & \(672\) & \(= 1 \cdot 376\)  & \(+\) & \(296\)\\
+                                & \(= (80, 296)\)  & --   & \(376\) & \(= 1 \cdot 296\)  & \(+\) & \(80\)\\
+                                & \(= (80, 56)\)   & --   & \(296\) & \(= 3 \cdot 80\)   & \(+\) & \(56\)\\
+                                & \(= (24, 56)\)   & --   & \(80\)  & \(= 1 \cdot 56\)   & \(+\) & \(24\)\\
+                                & \(= (24, 8)\)    & --   & \(56\)  & \(= 2 \cdot 24\)   & \(+\) & \(8\)\\
+                                & \(= (0, 8)\)     & --   & \(24\)  & \(= 3 \cdot 8\)    & \(+\) & \(0\)\\
+                                & \(= 8\) & & & & &
+            \end{tabular}
+        \end{center}
+    \end{eks}
+    Bilag \ref{file:euclid}, viser en implementering af Euclids algoritme i Python og kan køres således
+    (kræver at Python er installeret\footnote{\url{https://www.python.org/downloads/}}):
+    \begin{minted}[fontsize=\footnotesize, bgcolor=bg]{bash}
+$ python euclid.py a b
+    \end{minted}
+
+
+    \subsection{Eulers \texorpdfstring{\(\phi\)}{Lg}-funktion}
+    Euler fremskrev også en funktion, der ud fra et gevent tal \(n\), kan bestemme mængden af tal, som er indbyrdes primiske med \(n\).
+    Først betragtes mængden \(\mathbb{Z}_n\). Som er angivet ud fra \(n \in \mathbb{N}\).
+    \[\mathbb{Z}_n = \{0, 1, 2, 3, \hdots, n-1 \}\]
+
+    Dette sæt repræsenterer nu alle de mulige rester efter division med \(n\), altså \(\pmod{n}\).
+    Der laves nu et nyt sæt bestående udelukkende af tallene, som er indbyrdes primiske med \(n\).
+    \[\mathbb{Z}_n^* = \{a \in \mathbb{Z}_n | a \neq 0 \land (a, n) = 1\}\]
+
+    Eulers \(\phi\)-funktion, siges nu at være antallet af elementer i sættet \(\mathbb{Z}_n^*\).
+
     \begin{eks}
-        % Udregning af største fællesfaktor ved brug af sætning \ref{commod}.\\
-        \begin{tabular*}{\textwidth}{r l c r l c r}
-            \((1048, 672)\) & \(= (376, 672)\) & idet & \(1048\) & \(= 1 \cdot 672\) & \(+\) & \(376\)\\
-            & \(= (376, 296)\) & -- & \(672\) & \(= 1 \cdot 376\) & \(+\) & \(296\)\\
-            & \(= (80, 296)\) & -- & \(376\) & \(= 1 \cdot 296\) & \(+\) & \(80\)\\
-            & \(= (80, 56)\) & -- & \(296\) & \(= 3 \cdot 80\) & \(+\) & \(56\)\\
-            & \(= (24, 56)\) & -- & \(80\) & \(= 1 \cdot 56\) & \(+\) & \(24\)\\
-            & \(= (24, 8)\) & -- & \(56\) & \(= 2 \cdot 24\) & \(+\) & \(8\)\\
-            & \(= (0, 8)\) & -- & \(24\) & \(= 3 \cdot 8\) & \(+\) & \(0\)\\
-            & \(= 8\) & & & & &
-        \end{tabular*}
+        \mbox{}\vspace*{-1.5em}
+        \begin{align*}
+            n &= 14 & \mathbb{Z}_{14}^*  &= \{1, 3, 5, 9, 11, 13 \} & \phi(14) &= 6\\
+            n &= 9  & \mathbb{Z}_9^*     &= \{1, 2, 4, 5, 7, 8\}    & \phi(9)  &= 6
+        \end{align*}
     \end{eks}
 
-    Ovenstående metode er faktisk en algoritme, fremskrevet af Euclid. Af samme grund kaldes den Euclids algoritme.
-    Da der allerede er et eksempel på den, vil algoritmen ikke vises -- dog ligger den implementeret i Python som bilag. %Indsæt bilag!
 
 
 
 
 
     \subsection{Primtal}
-    Hvad har primtal med det hele at gøre?
+    Primtal viser sig at være interessante, i beskæftigelsen med talteori og deivisoere.
 
-    \subsection{Eulers \texorpdfstring{\(\phi\)}{Lg}-funktion}
-    Eulers phi funktion
+    \begin{definition}[Primtal]
+        Primtal er heltal, større end \(1\), som kun går op i sig selv og \(1\).
+    \end{definition}
+
+    % Vi skal først kigge på en sætning om primtal og division.
+    %
+    % \begin{sent}
+    %     For primtallet \(p\) gælder: \(p \mid a b \implies p \mid a \lor p \mid b\)
+    % \end{sent}
+
+
+
+    \begin{sent}[Algebraens fundamentalsætning]
+        Alle positive heltal, kan skrives som et produkt af primtal.
+        Denne faktorisering er unik, hvis man ser bort fra rækkefølgen af primtallene.
+    \end{sent}
+
+    \begin{proof}
+        Hvis
+    \end{proof}
+
+
+    Derpå bygges en sætning om primtal.
+
+    \begin{sent}
+        Der findes uendeligt mange primtal.
+    \end{sent}
+
+    \begin{proof}
+
+    \end{proof}

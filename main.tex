@@ -2,7 +2,7 @@
 \usepackage[danish]{babel} % Language
 \usepackage[utf8]{inputenc} % Encoding
 \usepackage{graphicx} % Graphics
-% \usepackage{minted} % Code inclusion
+\usepackage{minted} % Code inclusion
 \usepackage{amsfonts} % Other letters/signs
 \usepackage{lastpage} % Pagenumbering
 \usepackage{fancyhdr} % Custom header/footer
@@ -15,7 +15,8 @@
 \usepackage{changepage} % for the adjustwidth environment
 \usepackage{multirow} % Multiple rows in tabular
 \usepackage[pdftitle={Sikkerhed bag login-formular på en hjemmeside},pdfauthor={Jens Tinggaard}, hidelinks, bookmarks=true]{hyperref} %References
-\usepackage[tmargin=1in,bmargin=1in,lmargin=1.25in,rmargin=1.25in]{geometry} %Margins
+\usepackage[margin=1in]{geometry} %Margins
+\usepackage{attachfile} % Attach files in sources
 
 % Biblografi
 \usepackage{csquotes}
@@ -30,7 +31,13 @@
 \renewcommand{\headrulewidth}{2pt}
 \renewcommand{\footrulewidth}{1pt}
 
+\definecolor{bg}{rgb}{0.95,0.95,0.95} % Baggrund af kode.
 
+\attachfilesetup{ % Setup af attachfile pakken.
+author={Jens Tinggaard},
+color={1 0 0},
+icon={Paperclip}
+}
 
 % \renewcommand\qedsymbol{$\blacksquare$} % Black QED
 
@@ -61,17 +68,6 @@
     {}%                                   Thm head spec
 
 
-% \newtheoremstyle{beviser}%                name
-%     {0.5cm plus 1 pt minus 2 pt}%         Space above, empty = `usual value'
-%     {0.5cm plus 1 pt minus 2 pt}%         Space below
-%     {}%                                   Body font
-%     {}%                                   Indent amount (empty = no indent, \parindent = para indent)
-%     {\itshape}%                           Thm head font
-%     {}%                                   Punctuation after thm head
-%     {\newline}%                           Space after thm head: \newline = linebreak
-%     {}%                                   Thm head spec
-
-
 % Definitions kommando 'definition'
 \mdtheorem{definition}{Definition}[section]
 
@@ -85,11 +81,6 @@
 \newenvironment{sent}
     {\begin{sentence}\mbox{}\begin{adjustwidth}{1em}{1em}}
     {\end{adjustwidth}\par\noindent\hrulefill\end{sentence}}
-
-% % Bevis kommando 'bevis'
-% \theoremstyle{beviser}
-% \newtheorem*{bevis}{Bevis:} % Bevis kommando
-
 
 
 % Headers and footers
@@ -170,5 +161,9 @@ her står hvad det kommer til at handle om...
 heading=bibintoc, %Er med i indholdsfortegnelsen
 title={Litteratur} %Titel
 ]
+
+\newpage
+\section{Bilag}
+\input{sections/bilag.tex}
 
 \end{document}

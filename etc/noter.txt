@@ -35,3 +35,6 @@ Hashing og RSA er begge metoder
 
 Alice og Bob: protokol
 Forklar evt. kryptografi og kryptologi
+
+
+https://primes.utm.edu/lists/small/millions/
