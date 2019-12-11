@@ -230,22 +230,19 @@ $ python euclid.py a b
 
 
 
-    \begin{sent}[Algebraens fundamentalsætning]
+    \begin{sent}% [Algebraens fundamentalsætning]
+        Denne sætning er også kendt som ``Algebraens fundamentalsætning''
         Alle positive heltal, kan skrives som et produkt af primtal.
         Denne faktorisering er unik, hvis man ser bort fra rækkefølgen af primtallene.
+        \label{algbfund}
     \end{sent}
 
     \begin{proof}
-        Hvis
+        Dette bevis bygger naturligvis på definitionen af primtal.
+        Antag at \(n\) ikke er et primtal, det kan da skrives som et produkt af to tal \(n = n_1 + n_2\).
+        Er \(n_1\) et primtal, forbliver det uberørt fremover, ellers faktoriseres det endnu en gang.
+        Denne process fortsætter, frem til alle produkter er primtal.
     \end{proof}
 
-
-    Derpå bygges en sætning om primtal.
-
-    \begin{sent}
-        Der findes uendeligt mange primtal.
-    \end{sent}
-
-    \begin{proof}
-
-    \end{proof}
+    Det ses da også at der findes uendeligt mange primtal, som følge af sætning \ref{algbfund}.
+    Samt at man for at tjekke om et tal \(n\) er et primtal, ikke behøver at tjekke for divisoere større end \(\sqrt{n}\).

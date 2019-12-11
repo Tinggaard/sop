@@ -241,4 +241,14 @@ TSWLatexianTemp*
 # generated if using elsarticle.cls
 *.spl
 
+
+### Curstom filters
+
+# output pdf file
 main.pdf
+
+# minted
+*.mintedcmd
+
+# python stuff
+__pycache__

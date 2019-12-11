@@ -19,3 +19,5 @@ Bilag eller litteratur først?
 Bilag i git? (må det være offentligt?)
 
 Skal jeg citere flere kilder, på samme definition i talteori?
+
+Skal der billede på forsiden, eller skal resumeet være der?
