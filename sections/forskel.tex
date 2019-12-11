@@ -1,10 +1,101 @@
-Hvorfor man ikke blot kan nøjes med den
+Det ses tydeligt hvordan krytografi er godt, til at sende hemmelige beskeder, som kun kan aflæses af den rette.
+Hashing er derimod blot en metode man bruger til at validere data, uden at have nødvendigheden i at vide hvad det originale data var.
+
 
     \subsection{Alice \& Bob}
-    Eksempel på brug af begge
+    Til fremvisning af protokoller i kryptografien, bruger man ofte \emph{Alice} og \emph{Bob} som pladsholdere for aktører.
+    Det skal ses hvordan RSA anvendes i praksis, samt problemer ved anvendelse af metoden.
+
+    \begin{eks}[Generel protokol for RSA]
+        Bob er en server, som Alice gerne vil kontakte.
+        Al kommunikation mellem de to parter, foregår i offentligt rum, så alle og enhver kan læse beskederne sendt mellem dem.
+        For at holde sin besked til Bob hemmelig, tager Alice, finder hun Bobs offentlige nøgle \(P_B\) (Public Bob), og krypterer sin besked med den.
+        Efter dette er gjort, er det kun Bob som kan dekryptere beskeden. Da det kun er ham, som har den hemmelige nøgle \(S_B\) (Secret Bob).
+        Nu kan beskeden altså godt sendes over det offentlige rum, uden at Alice skal frygte for at beskeden bliver opsnappet.\\
+        Vil Bob gerne sende et svar tilbage til Alice foregår det naturligvis på samme måde, han krypterer sin besked med \(P_A\) og sender den så.\\
+
+        Det opskrives som en protokol:
+        \begin{enumerate}[noitemsep]
+            \item Alice krypterer sin besked med \(P_B\).
+            \item Alice sender den krypterede besked ud i det offentlige rum.
+            \item Bob opfanger beskeden og dekrypterer den med \(S_B\).
+        \end{enumerate}
+    \end{eks}
+
+    Der er dog visse problemer ved denne form for samtale, da en tredjepart i det offentlige rum \emph{Eve}, kunne udgive sig for at være Bob.
+    Sådan at når Alice tror hun krypterer sin besked med \(P_B\), krypterer hun den faktisk med \(P_E\).
+    Når beskeden så bliver sendt ud i det offentlige rum, vil Eve kunne læse den, fordi kun hun har den hemmelige nøgle \(S_E\).
+    Er Eve smart, tager hun så -- efter at have aflæst beskeden -- og krypterer den igen med \(P_B\) og sender den så videre, sådan at Bob læser den.
+    På denne måde kan Eve aflytte enhver besked sendt mellem Alice og Bob, uden at hverken Alice eller Bob får mistanke.
+    Denne slags angreb kaldes for \emph{man in the middle}. \cite{ytmitm}
+
+
 
     \subsection{Online autentificering}
-    Hvordan man benytter både RSA og Hashing på én gang.
+    Skal man autentificere sig online, er der heldigvis lavet en protokol til at undgå angreb som man in the middle.\cite{dtu}
+    Protokollen anvender både hashing samt RSA til at verificere ægteheden af et dokument eller lignende.\\
+    Vil Bob gerne sikre sig at beskeden stammer fra Alice, kræver det at Alice følger protokollen:
+    Udover at sende beskeden, bruger hun en hashfunktion på beskeden \(H(m)\), signerer det så med sin private nøgle \(S_A\) og sender så dette krypterede hash \(y\) afsted, sammen med den originale besked.
+    Det siges at Alice nu har sat sin \emph{digitale signatur} på beskeden.\\
+    Når Bob så modtager beskeden sammen med det krypterede hash, tager han blot og hasher beskeden selv \(H(m)\).
+    Og dekrypterer så det tilsendte hash \(y\) med Alices offentlige nøgle \(P_A\).
+    Hvis de to hashes stemmer over ens, kan han verificere at beskeden er fra Alice.
+    Dette virker, da det kun er Alices offentlige nøgle \(P_A\), som kan bruges til at dekryptere hashet, bruger Bob Eves offentlige nøgle \(P_E\), vil han ikke få samme hash, hvorfor beskeden ikke er fra Eve.\\
+
+    Protokollen foregår som følger:
+    \begin{enumerate}[noitemsep]
+        \item Alice hasher beskeden \(m\) med en bestemt hashfunktion \(H(m)\).
+        \item Alice krypterer hashet med sin private nøgle \(S_A\), som afgiver \(y\).
+        \item Alice sender så den originale besked \(m\), samt det krypterede hash \(y\) afsted.
+        \item Når Bob modtager \(m\) og \(y\), tager han og hasher beskeden \(H(m)\).
+        \item Bob dekrypterer \(y\) med \(P_A\).
+        \item Bob validerer at de to hashes er ens.
+    \end{enumerate}
+
+    Fordelen ved dette er at man ikke behøver at kryptere hele beskeden \(m\), som kan være meget stor. I stedet krypterer man blot den hashede del af beskeden, som jo altid har en fikseret længde.
+
 
     \subsubsection{GNU Privacy Guard}
-    % https://gnupg.org/
+    En meget brugt metode til at generere digitale signaturer, er systemet GNU Privacy Guard (gpg)\footnote{\url{https://gnupg.org/}}.
+    gpg bruges til at generere nøgler, kryptering af data samt autentificering.
+    Når man genererer en nøgle, vælger man først og fremmest størrelsen (mellem 1024 og 4096 bit).
+    Derudover skal man vælge et navn samt en email at 'binde' nøglen til.\\
+
+    %Figur med nøgle
+    \begin{wrapfigure}{r}{0.6\textwidth}
+        \vspace{-30pt}
+        \begin{center}
+            \inputminted[python3, breaklines, fontsize=\scriptsize]{bash}{src/public.key}
+            \vspace{-20pt}
+            \caption{1024-bit nøgle genereret i gpg}
+            \label{fig:key}
+        \end{center}
+        \vspace{-100pt}
+    \end{wrapfigure}
+
+
+
+    Dette kan gøres i gpg ved kommadoen:
+    \begin{minted}[fontsize=\footnotesize, bgcolor=bg]{bash}
+$ gpg --full-generate-key
+    \end{minted}
+
+
+Efter nøglen er blevet genereret, ligger den som en binær fil, som altså kun er læsbar af computeren.
+For at konvertere den til, vi kan forstå, køres kommandoen:
+  \begin{minted}[fontsize=\footnotesize, bgcolor=bg]{bash}
+$ gpg --export -a
+  \end{minted}
+
+Et eksempel på outputtet af denne kommando, kan ses på figur \ref{fig:key}.\\
+
+
+Slutteligt vises det, at man kan signere en fil i gpg.
+Dette gøres med flaget \texttt{clearsign}.
+    \begin{minted}[fontsize=\footnotesize, bgcolor=bg]{bash}
+$ gpg --clearsign fil
+    \end{minted}
+
+gpg er altså en stor del af kryptografi, hvis man selv ønsker at kryptere sine data.
+Det kan f.eks. være idet man udgiver noget vigtigt offentligt.
+Så vil læserne gerne validere hvem udgiveren er -- det kan gøres i gpg.

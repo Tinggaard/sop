@@ -1,25 +1,4 @@
-Tag ud på uni og find et par bøger
-YouTube er ok ish som kilde
-Kan godt opbygge størstedelen ud fra en kilde
-
-
 Der må gerne ændres lidt på titlen
-Gerne afsnit eller numre på sektioner i kilde
-
-
-
-
-Opbygning:
-    Intro til RSA
-    Talteori og den anvendelse i RSA (evt blandet sammen)
-
-
-
-
-Indbyrdes primiske:
-De har ingen fælle divisor (fællesnævner) udover 1.
-
-
 
 
 ranbowtables
@@ -30,6 +9,8 @@ certifikater
 
 Antal bits (MD5 128 bit)
 
+http vs https
+
 
 Hashing og RSA er begge metoder
 
@@ -38,3 +19,11 @@ Forklar evt. kryptografi og kryptologi
 
 
 https://primes.utm.edu/lists/small/millions/
+
+
+tegn
+$ pdftotext document.pdf -enc UTF-8 - | wc -m
+$ detex file.tex | wc -C
+
+Forside billede eller resumé er ligegyldigt
+Tag udgangspunkt i de sætninger der anvendes i RSA, evt bevis de som den bygger på, ellers lig dem i bilag.

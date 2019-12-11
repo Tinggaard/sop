@@ -191,29 +191,6 @@ $ python euclid.py a b
     \end{minted}
 
 
-    \subsection{Eulers \texorpdfstring{\(\phi\)}{Lg}-funktion}
-    Euler fremskrev også en funktion, der ud fra et gevent tal \(n\), kan bestemme mængden af tal, som er indbyrdes primiske med \(n\).
-    Først betragtes mængden \(\mathbb{Z}_n\). Som er angivet ud fra \(n \in \mathbb{N}\).
-    \[\mathbb{Z}_n = \{0, 1, 2, 3, \hdots, n-1 \}\]
-
-    Dette sæt repræsenterer nu alle de mulige rester efter division med \(n\), altså \(\pmod{n}\).
-    Der laves nu et nyt sæt bestående udelukkende af tallene, som er indbyrdes primiske med \(n\).
-    \[\mathbb{Z}_n^* = \{a \in \mathbb{Z}_n | a \neq 0 \land (a, n) = 1\}\]
-
-    Eulers \(\phi\)-funktion, siges nu at være antallet af elementer i sættet \(\mathbb{Z}_n^*\).
-
-    \begin{eks}
-        \mbox{}\vspace*{-1.5em}
-        \begin{align*}
-            n &= 14 & \mathbb{Z}_{14}^*  &= \{1, 3, 5, 9, 11, 13 \} & \phi(14) &= 6\\
-            n &= 9  & \mathbb{Z}_9^*     &= \{1, 2, 4, 5, 7, 8\}    & \phi(9)  &= 6
-        \end{align*}
-    \end{eks}
-
-
-
-
-
 
     \subsection{Primtal}
     Primtal viser sig at være interessante, i beskæftigelsen med talteori og deivisoere.
@@ -244,5 +221,34 @@ $ python euclid.py a b
         Denne process fortsætter, frem til alle produkter er primtal.
     \end{proof}
 
-    Det ses da også at der findes uendeligt mange primtal, som følge af sætning \ref{algbfund}.
+    Det ses da at der findes uendeligt mange primtal, som følge af sætning \ref{algbfund}.
     Samt at man for at tjekke om et tal \(n\) er et primtal, ikke behøver at tjekke for divisoere større end \(\sqrt{n}\).
+
+
+
+    \subsection{Eulers \texorpdfstring{\(\phi\)}{Lg}-funktion}
+    Euler fremskrev også en funktion, der ud fra et gevent tal \(n\), kan bestemme mængden af tal, som er indbyrdes primiske med \(n\).
+    Først betragtes mængden \(\mathbb{Z}_n\). Som er angivet ud fra \(n \in \mathbb{N}\).
+    \[\mathbb{Z}_n = \{0, 1, 2, 3, \hdots, n-1 \}\]
+
+    Dette sæt repræsenterer nu alle de mulige rester efter division med \(n\), altså \(\pmod{n}\).
+    Der laves nu et nyt sæt bestående udelukkende af tallene, som er indbyrdes primiske med \(n\).
+    \[\mathbb{Z}_n^* = \{a \in \mathbb{Z}_n | a \neq 0 \land (a, n) = 1\}\]
+
+    Eulers \(\phi\)-funktion, siges nu at være antallet af elementer i sættet \(\mathbb{Z}_n^*\).
+
+    \begin{eks}
+        \mbox{}\vspace*{-1.5em}
+        \begin{align*}
+            n &= 14 & \mathbb{Z}_{14}^*  &= \{1, 3, 5, 9, 11, 13 \} & \phi(14) &= 6\\
+            n &= 9  & \mathbb{Z}_9^*     &= \{1, 2, 4, 5, 7, 8\}    & \phi(9)  &= 6
+        \end{align*}
+    \end{eks}
+
+    Det er bevist at Eulers \(\phi\)-funktion kan defineres ud fra alle primfaktorerne i \(n\).
+
+    \begin{sent}
+        Givet \(p_1, p_2 \hdots p_r\), som er alle primtalsfaktoerne i \(n\).
+        \[\phi(n) = n \cdot \left(1-\frac{1}{p_1}\right) \cdot \left(1-\frac{1}{p_2}\right) \cdot \hdots \cdot \left(1-\frac{1}{p_r}\right)\]
+        Det ses da, at \(r = \phi(n)\)
+    \end{sent}
