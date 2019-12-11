@@ -6,249 +6,249 @@ Alle beviser kan naturligvis findes i \textit{Kryptografi -- fra viden til viden
 
 
 
-    \subsection{Division med rest og divisor}
-    I stedet for at regne brøker som rationelle mængder \(\mathbb{Q}\) eller decimaltal, skal vi beskæftige os med hvordan man regner med rester.
-    Det vil altså sige at vi udelukkende vil beskæftige os med heltal \(\mathbb{Z}\).
+\subsection{Division med rest og divisor}
+I stedet for at regne brøker som rationelle mængder \(\mathbb{Q}\) eller decimaltal, skal vi beskæftige os med hvordan man regner med rester.
+Det vil altså sige at vi udelukkende vil beskæftige os med heltal \(\mathbb{Z}\).
 
-    Et tal \(a \neq 0\) kan enten gå op i \(b\) eller ikke gå op i \(b\).
-    Vi definerer at \(a\) går op i \(b\), hvis der ingen rest er, efter division. Eller sagt på en anden måde:
-
-
-    \begin{definition}
-        \label{heldiv}
-        Givet tallet \(a \neq 0\) og tallet \(b \geq a\), vil \(a\) gå op i \(b\),
-        hvis der findes et heltal \(q\), som opfylder \(b = q \cdot a\).\\
-        Det skrives \(a \mid b\), som betyder at \(a\) går op i \(b\).\\
-        \(a\) betenes som \textit{divisoren} eller en \textit{faktor},
-        % \(b\) betegnes \textit{dividenden},
-        mens \(q\) kaldes for \textit{kvotienten}.\cite[70]{krypto}
-    \end{definition}
-
-    Er der i stedet en rest efter division, vil man kunne skrive tallet som \(a \nmid b\), som betyder at \(a\) ikke går op i \(b\).
-    % Det at arbejde med rester er også noget vi skal beskæftige os meget med.
-
-    \begin{sent}
-        \label{rest}
-        Givet tallet \(a > 0\) og tallet \(b\), findes der specifikke tal \(q\) og \(r\), som opfylder \(b = q \cdot a + r\), hvor \(0 \leq r < q\). \(r\) betegnes som \textit{resten}.
-    \end{sent}
-
-    Det ses ved nogle eksempler
-
-    \begin{eks}
-        Lad \(a = 48\) og \(b = 8\), det ses da at \(q = 6\) og \(r = 0\), da \(48 = 6 \cdot 8 + 0\) og da \(r = 0\), medfører det at \(a \mid b\).\\
-
-        Lad \(a = 17\) og \(b = 4\), det ses da at \(q = 4\) og \(r = 1\), da \(17 = 4 \cdot 4 + 1\) og da \(r \neq 0\), medfører det at \(17 \nmid 4\).\\
-
-        Man kan også udregne resten ud fra et decimaltal.
-        Trykker man \(17 \div 4\) ind på lommeregneren får man \(4.25\), man ganger så decimal delen med \(b\), vil man få resten efter divisionen.
-        I dette tilfælde får man \(r = 0.25 \cdot 4 = 1\).
-    \end{eks}
+Et tal \(a \neq 0\) kan enten gå op i \(b\) eller ikke gå op i \(b\).
+Vi definerer at \(a\) går op i \(b\), hvis der ingen rest er, efter division. Eller sagt på en anden måde:
 
 
+\begin{definition}
+    \label{heldiv}
+    Givet tallet \(a \neq 0\) og tallet \(b \geq a\), vil \(a\) gå op i \(b\),
+    hvis der findes et heltal \(q\), som opfylder \(b = q \cdot a\).\\
+    Det skrives \(a \mid b\), som betyder at \(a\) går op i \(b\).\\
+    \(a\) betenes som \textit{divisoren} eller en \textit{faktor},
+    % \(b\) betegnes \textit{dividenden},
+    mens \(q\) kaldes for \textit{kvotienten}.\cite[70]{krypto}
+\end{definition}
 
+Er der i stedet en rest efter division, vil man kunne skrive tallet som \(a \nmid b\), som betyder at \(a\) ikke går op i \(b\).
+% Det at arbejde med rester er også noget vi skal beskæftige os meget med.
 
-    \begin{sent}
-        Givet tallene \(a, b, c \in \mathbb{Z}\), hvor \(a, c \neq 0\), vil \(a \mid b\) medføre at \(a c \mid b c\).
-    \end{sent}
+\begin{sent}
+    \label{rest}
+    Givet tallet \(a > 0\) og tallet \(b\), findes der specifikke tal \(q\) og \(r\), som opfylder \(b = q \cdot a + r\), hvor \(0 \leq r < q\). \(r\) betegnes som \textit{resten}.
+\end{sent}
 
-    \begin{proof}
-        Beviset tager selvfølgelig udgangspunkt i definition \ref{heldiv}.
-        Da \(a \mid b \implies b = q \cdot a\), vil man ved at gange \(c\) ind, på begge sider, blot få \(b c = q \cdot a c\).
-        Og da \(c\) indgår på begge sider af lighedstegnet, kan dette fjernes fra udtrkket, hvorved man er tilbage ved \(b = q \cdot a\).
-    \end{proof}
+Det ses ved nogle eksempler
+
+\begin{eks}
+    Lad \(a = 48\) og \(b = 8\), det ses da at \(q = 6\) og \(r = 0\), da \(48 = 6 \cdot 8 + 0\) og da \(r = 0\), medfører det at \(a \mid b\).\\
+
+    Lad \(a = 17\) og \(b = 4\), det ses da at \(q = 4\) og \(r = 1\), da \(17 = 4 \cdot 4 + 1\) og da \(r \neq 0\), medfører det at \(17 \nmid 4\).\\
+
+    Man kan også udregne resten ud fra et decimaltal.
+    Trykker man \(17 \div 4\) ind på lommeregneren får man \(4.25\), man ganger så decimal delen med \(b\), vil man få resten efter divisionen.
+    I dette tilfælde får man \(r = 0.25 \cdot 4 = 1\).
+\end{eks}
 
 
 
 
+\begin{sent}
+    Givet tallene \(a, b, c \in \mathbb{Z}\), hvor \(a, c \neq 0\), vil \(a \mid b\) medføre at \(a c \mid b c\).
+\end{sent}
 
-    \begin{sent}
-        Givet tallene \(a, b, c \in \mathbb{Z}\), hvor \(a, c \neq 0\), vil \(a \mid b \land b \mid c\) medføre at \(a \mid c\).
-    \end{sent}
-
-    \begin{proof}
-        \(a \mid b\) skrives som \(b = q_1 \cdot a\), mens \(b \mid c\) skrives som \(c = q_2 \cdot b\). Ved at substituere \(b\) med udtyrkket fra \(a \mid b\), haves \(a = q_1 \cdot q_2 \cdot c\). \(a \mid c\) er altså sand hvis kvotienten er \(q_1 \cdot q_2\).
-    \end{proof}
-
-
-    \begin{eks}
-        Her skal gerne være lidt eksempler for at spice det lidt op...
-    \end{eks}
+\begin{proof}
+    Beviset tager selvfølgelig udgangspunkt i definition \ref{heldiv}.
+    Da \(a \mid b \implies b = q \cdot a\), vil man ved at gange \(c\) ind, på begge sider, blot få \(b c = q \cdot a c\).
+    Og da \(c\) indgår på begge sider af lighedstegnet, kan dette fjernes fra udtrkket, hvorved man er tilbage ved \(b = q \cdot a\).
+\end{proof}
 
 
 
-    \subsubsection{Modulo}
-    Når man laver division med heltal, vil man ofte kigge på resten efter division.
-    Derfor er der naturligvis lavet en matematisk operator til at udregne rest efter division -- den kaldes for \emph{modulo}.
-    Skriver man f.eks. \(a \pmod{n}\), udregner man resten efter division, som angivet i sætning \ref{rest}.
-
-    \begin{definition}
-        For \(m \in \mathbb{Z}\) og \(n \in \mathbb{N}\) gælder:
-        \[n \mid m \iff m \pmod{n} = 0\]
-        \[r = n - q m = m \pmod{n}\]\cite[72]{krypto}
-    \end{definition}
-
-    \begin{eks}
-        Et par eksempler på brugen af modulo.
-        \begin{center}
-            \setlength{\tabcolsep}{20pt} % General space between cols (6pt standard)
-            \begin{tabular}{l c r}
-                \(43 \pmod{6} = 1\) & \(74 \pmod{10} = 4\) & \(58 \pmod{6} = 4\)
-            \end{tabular}
-        \end{center}
-    \end{eks}
 
 
-    % sent 4.7 fra bogen (s 73)
+\begin{sent}
+    Givet tallene \(a, b, c \in \mathbb{Z}\), hvor \(a, c \neq 0\), vil \(a \mid b \land b \mid c\) medføre at \(a \mid c\).
+\end{sent}
+
+\begin{proof}
+    \(a \mid b\) skrives som \(b = q_1 \cdot a\), mens \(b \mid c\) skrives som \(c = q_2 \cdot b\). Ved at substituere \(b\) med udtyrkket fra \(a \mid b\), haves \(a = q_1 \cdot q_2 \cdot c\). \(a \mid c\) er altså sand hvis kvotienten er \(q_1 \cdot q_2\).
+\end{proof}
 
 
-    \subsection{Fælles divisor}
-    En fællesvidisor bruges til at sige noget om sammenhængen mellem 2 tal.
+\begin{eks}
+    Her skal gerne være lidt eksempler for at spice det lidt op...
+\end{eks}
 
-    \begin{definition}
-        For tallene \(a, b, d \in \mathbb{Z}\), betegnes \(d\) som en \emph{fælles divisor}, hvis \(d \mid a \land d \mid b\).
-    \end{definition}
 
-    \(a\) og \(b\) vil have et endeligt antal fælles divisorer, da et tal højere end enten \(a\) eller \(b\) naturligvis ikke er en fælles divisor (medmindre \(a\) og \(b\) begge er \(0\).
-    Det kan altså konkluderes at der findes en største fælles divisor.
 
-    \begin{definition}[Største fælles divisor]
-        Den største fælles divisor for tallene \(a\) og \(b\), betegnes som \((a, b)\).
-    \end{definition}
+\subsubsection{Modulo}
+Når man laver division med heltal, vil man ofte kigge på resten efter division.
+Derfor er der naturligvis lavet en matematisk operator til at udregne rest efter division -- den kaldes for \emph{modulo}.
+Skriver man f.eks. \(a \pmod{n}\), udregner man resten efter division, som angivet i sætning \ref{rest}.
 
-    \begin{eks}
-        Lad \(a = 8\) og \(b = 12\).\\
-        \begin{tabular*}{\textwidth}{@{} l l}
-            Det ses at divisorne i \(8\) er: & \(\pm 1, \pm 2, \pm 4, \pm 8\).\\
-            Og det ses at divisorne i \(12\) er:  &\(\pm 1, \pm 2, \pm 3, \pm 4, \pm 6, \pm 12\).\\
-            Til fælles har de altså divisorne: & \(\pm 1, \pm 2, \pm 4\).
-        \end{tabular*}
+\begin{definition}
+    For \(m \in \mathbb{Z}\) og \(n \in \mathbb{N}\) gælder:
+    \[n \mid m \iff m \pmod{n} = 0\]
+    \[r = n - q m = m \pmod{n}\]\cite[72]{krypto}
+\end{definition}
 
-        Dermed bliver \((8, 12) = 4\).
-    \end{eks}
+\begin{eks}
+    Et par eksempler på brugen af modulo.
+    \begin{center}
+        \setlength{\tabcolsep}{20pt} % General space between cols (6pt standard)
+        \begin{tabular}{l c r}
+            \(43 \pmod{6} = 1\) & \(74 \pmod{10} = 4\) & \(58 \pmod{6} = 4\)
+        \end{tabular}
+    \end{center}
+\end{eks}
 
-    %\paragraph{Observationer}
-    % Det ses at fortegnet for både \(a\) og \(b\) er ubetydeligt, da kvotienterne kan være negative.
 
-    \begin{definition}[Indbyrdes primiske tal]
-        Hvis \((a, b) = 1\), siges \(a\) og \(b\) at være indbyrdes primiske.
-    \end{definition}
+% sent 4.7 fra bogen (s 73)
 
-    Som vist, kan være bøvlet at udregne fælles divisorer for 2 tal, derfor kommer nu en sætning, til at mindske vanskeligheden lidt.
 
-    \begin{sent}
-        \label{commod}
-        \((a, b) = (a, b \pmod{a})\)
-    \end{sent}
+\subsection{Fælles divisor}
+En fællesvidisor bruges til at sige noget om sammenhængen mellem 2 tal.
 
-    Sætning \ref{commod} bevises ikke, i stedet vil Euclids algoritme (som bygger på sætningen) blive vist.
+\begin{definition}
+    For tallene \(a, b, d \in \mathbb{Z}\), betegnes \(d\) som en \emph{fælles divisor}, hvis \(d \mid a \land d \mid b\).
+\end{definition}
 
-    \subsubsection{Euclids algoritme}
-    Euclids algoritme er essentielt gentagen anvendelse af sætning \ref{commod}.
-    \begin{definition}[Euclids algoritme]
-        Lad \(a, b \in \mathbb{N}\), hvor \(a \geq b\).
-        Hvis \(a \mid b\), så er \((a, b) = b\).
-        Hvis \(a \nmid b\), bruges følgende algoritme:
-        \begin{align*}
-            a   &= b q_0    + r_0   & 0 &<    r_0 < b\\
-            b   &= r_0 q_1  + r_1   & 0 &\leq r_1 < r_0\\
-            r_0 &= r_1 q_2  + r_2   & 0 &\leq r_2 < r_1\\
-            r_1 &= r_2 q_3  + r_3   & 0 &\leq r_3 < r_2\\
-            &\vdots
-        \end{align*}
-        Denne proces slutter, idet der findes en rest på 0.
-        Det vil ske efter et endeligt antal gennemløb \(t\).
+\(a\) og \(b\) vil have et endeligt antal fælles divisorer, da et tal højere end enten \(a\) eller \(b\) naturligvis ikke er en fælles divisor (medmindre \(a\) og \(b\) begge er \(0\).
+Det kan altså konkluderes at der findes en største fælles divisor.
 
-        \begin{align*}
-            r_{t-2} &= r_{t-1}  q_t      + r_t   & 0 &\leq r_t < r_{t-1}\\
-            r_{t-1} &= r_t      q_{t+1}  + 0
-        \end{align*}
-        Den sidste rest, som ikke er 0, er dermed den største fælles divisor.\cite[11]{absalg}
-    \end{definition}
+\begin{definition}[Største fælles divisor]
+    Den største fælles divisor for tallene \(a\) og \(b\), betegnes som \((a, b)\).
+\end{definition}
 
-    Det ses hvordan Euclids algoritme bruges, til at overskue udregningen af største fælles divisor.
+\begin{eks}
+    Lad \(a = 8\) og \(b = 12\).\\
+    \begin{tabular*}{\textwidth}{@{} l l}
+        Det ses at divisorne i \(8\) er: & \(\pm 1, \pm 2, \pm 4, \pm 8\).\\
+        Og det ses at divisorne i \(12\) er:  &\(\pm 1, \pm 2, \pm 3, \pm 4, \pm 6, \pm 12\).\\
+        Til fælles har de altså divisorne: & \(\pm 1, \pm 2, \pm 4\).
+    \end{tabular*}
 
-    \begin{eks}[Anvendelse af Euclids algoritme]
-        Lad \(a = 1048\) og \(b = 672\).
-        Ved brug af Euclids algoritme, findes da største fællesnævner.
-        \begin{center}
-            \setlength{\tabcolsep}{5pt} % General space between cols (6pt standard)
-            \begin{tabular}{r l c r l c r}
-                \((1048, 672)\) & \(= (376, 672)\) & idet & \(1048\) & \(= 1 \cdot 672\) & \(+\) & \(376\)\\
-                                & \(= (376, 296)\) & --   & \(672\) & \(= 1 \cdot 376\)  & \(+\) & \(296\)\\
-                                & \(= (80, 296)\)  & --   & \(376\) & \(= 1 \cdot 296\)  & \(+\) & \(80\)\\
-                                & \(= (80, 56)\)   & --   & \(296\) & \(= 3 \cdot 80\)   & \(+\) & \(56\)\\
-                                & \(= (24, 56)\)   & --   & \(80\)  & \(= 1 \cdot 56\)   & \(+\) & \(24\)\\
-                                & \(= (24, 8)\)    & --   & \(56\)  & \(= 2 \cdot 24\)   & \(+\) & \(8\)\\
-                                & \(= (0, 8)\)     & --   & \(24\)  & \(= 3 \cdot 8\)    & \(+\) & \(0\)\\
-                                & \(= 8\) & & & & &
-            \end{tabular}
-        \end{center}
-    \end{eks}
-    Bilag \ref{file:euclid}, viser en implementering af Euclids algoritme i Python og kan køres således
-    (kræver at Python er installeret\footnote{\url{https://www.python.org/downloads/}}):
-    \begin{minted}[fontsize=\footnotesize, bgcolor=bg]{bash}
+    Dermed bliver \((8, 12) = 4\).
+\end{eks}
+
+%\paragraph{Observationer}
+% Det ses at fortegnet for både \(a\) og \(b\) er ubetydeligt, da kvotienterne kan være negative.
+
+\begin{definition}[Indbyrdes primiske tal]
+    Hvis \((a, b) = 1\), siges \(a\) og \(b\) at være indbyrdes primiske.
+\end{definition}
+
+Som vist, kan være bøvlet at udregne fælles divisorer for 2 tal, derfor kommer nu en sætning, til at mindske vanskeligheden lidt.
+
+\begin{sent}
+    \label{commod}
+    \((a, b) = (a, b \pmod{a})\)
+\end{sent}
+
+Sætning \ref{commod} bevises ikke, i stedet vil Euclids algoritme (som bygger på sætningen) blive vist.
+
+\subsubsection{Euclids algoritme}
+Euclids algoritme er essentielt gentagen anvendelse af sætning \ref{commod}.
+\begin{definition}[Euclids algoritme]
+    Lad \(a, b \in \mathbb{N}\), hvor \(a \geq b\).
+    Hvis \(a \mid b\), så er \((a, b) = b\).
+    Hvis \(a \nmid b\), bruges følgende algoritme:
+    \begin{align*}
+        a   &= b q_0    + r_0   & 0 &<    r_0 < b\\
+        b   &= r_0 q_1  + r_1   & 0 &\leq r_1 < r_0\\
+        r_0 &= r_1 q_2  + r_2   & 0 &\leq r_2 < r_1\\
+        r_1 &= r_2 q_3  + r_3   & 0 &\leq r_3 < r_2\\
+        &\vdots
+    \end{align*}
+    Denne proces slutter, idet der findes en rest på 0.
+    Det vil ske efter et endeligt antal gennemløb \(t\).
+
+    \begin{align*}
+        r_{t-2} &= r_{t-1}  q_t      + r_t   & 0 &\leq r_t < r_{t-1}\\
+        r_{t-1} &= r_t      q_{t+1}  + 0
+    \end{align*}
+    Den sidste rest, som ikke er 0, er dermed den største fælles divisor.\cite[11]{absalg}
+\end{definition}
+
+Det ses hvordan Euclids algoritme bruges, til at overskue udregningen af største fælles divisor.
+
+\begin{eks}[Anvendelse af Euclids algoritme]
+    Lad \(a = 1048\) og \(b = 672\).
+    Ved brug af Euclids algoritme, findes da største fællesnævner.
+    \begin{center}
+        \setlength{\tabcolsep}{5pt} % General space between cols (6pt standard)
+        \begin{tabular}{r l c r l c r}
+            \((1048, 672)\) & \(= (376, 672)\) & idet & \(1048\) & \(= 1 \cdot 672\) & \(+\) & \(376\)\\
+                            & \(= (376, 296)\) & --   & \(672\) & \(= 1 \cdot 376\)  & \(+\) & \(296\)\\
+                            & \(= (80, 296)\)  & --   & \(376\) & \(= 1 \cdot 296\)  & \(+\) & \(80\)\\
+                            & \(= (80, 56)\)   & --   & \(296\) & \(= 3 \cdot 80\)   & \(+\) & \(56\)\\
+                            & \(= (24, 56)\)   & --   & \(80\)  & \(= 1 \cdot 56\)   & \(+\) & \(24\)\\
+                            & \(= (24, 8)\)    & --   & \(56\)  & \(= 2 \cdot 24\)   & \(+\) & \(8\)\\
+                            & \(= (0, 8)\)     & --   & \(24\)  & \(= 3 \cdot 8\)    & \(+\) & \(0\)\\
+                            & \(= 8\) & & & & &
+        \end{tabular}
+    \end{center}
+\end{eks}
+Bilag \ref{file:euclid}, viser en implementering af Euclids algoritme i Python og kan køres således
+(kræver at Python er installeret\footnote{\url{https://www.python.org/downloads/}}):
+\begin{minted}[fontsize=\footnotesize, bgcolor=bg]{bash}
 $ python euclid.py a b
-    \end{minted}
+\end{minted}
 
 
 
-    \subsection{Primtal}
-    Primtal viser sig at være interessante, i beskæftigelsen med talteori og deivisoere.
+\subsection{Primtal}
+Primtal viser sig at være interessante, i beskæftigelsen med talteori og deivisoere.
 
-    \begin{definition}[Primtal]
-        Primtal er heltal, større end \(1\), som kun går op i sig selv og \(1\).
-    \end{definition}
+\begin{definition}[Primtal]
+    Primtal er heltal, større end \(1\), som kun går op i sig selv og \(1\).
+\end{definition}
 
-    % Vi skal først kigge på en sætning om primtal og division.
-    %
-    % \begin{sent}
-    %     For primtallet \(p\) gælder: \(p \mid a b \implies p \mid a \lor p \mid b\)
-    % \end{sent}
-
-
-
-    \begin{sent}% [Algebraens fundamentalsætning]
-        Denne sætning er også kendt som ``Algebraens fundamentalsætning''
-        Alle positive heltal, kan skrives som et produkt af primtal.
-        Denne faktorisering er unik, hvis man ser bort fra rækkefølgen af primtallene.
-        \label{algbfund}
-    \end{sent}
-
-    \begin{proof}
-        Dette bevis bygger naturligvis på definitionen af primtal.
-        Antag at \(n\) ikke er et primtal, det kan da skrives som et produkt af to tal \(n = n_1 + n_2\).
-        Er \(n_1\) et primtal, forbliver det uberørt fremover, ellers faktoriseres det endnu en gang.
-        Denne process fortsætter, frem til alle produkter er primtal.
-    \end{proof}
-
-    Det ses da at der findes uendeligt mange primtal, som følge af sætning \ref{algbfund}.
-    Samt at man for at tjekke om et tal \(n\) er et primtal, ikke behøver at tjekke for divisoere større end \(\sqrt{n}\).
+% Vi skal først kigge på en sætning om primtal og division.
+%
+% \begin{sent}
+%     For primtallet \(p\) gælder: \(p \mid a b \implies p \mid a \lor p \mid b\)
+% \end{sent}
 
 
 
-    \subsection{Eulers \texorpdfstring{\(\phi\)}{Lg}-funktion}
-    Euler fremskrev også en funktion, der ud fra et gevent tal \(n\), kan bestemme mængden af tal, som er indbyrdes primiske med \(n\).
-    Først betragtes mængden \(\mathbb{Z}_n\). Som er angivet ud fra \(n \in \mathbb{N}\).
-    \[\mathbb{Z}_n = \{0, 1, 2, 3, \hdots, n-1 \}\]
+\begin{sent}% [Algebraens fundamentalsætning]
+    Denne sætning er også kendt som ``Algebraens fundamentalsætning''
+    Alle positive heltal, kan skrives som et produkt af primtal.
+    Denne faktorisering er unik, hvis man ser bort fra rækkefølgen af primtallene.
+    \label{algbfund}
+\end{sent}
 
-    Dette sæt repræsenterer nu alle de mulige rester efter division med \(n\), altså \(\pmod{n}\).
-    Der laves nu et nyt sæt bestående udelukkende af tallene, som er indbyrdes primiske med \(n\).
-    \[\mathbb{Z}_n^* = \{a \in \mathbb{Z}_n | a \neq 0 \land (a, n) = 1\}\]
+\begin{proof}
+    Dette bevis bygger naturligvis på definitionen af primtal.
+    Antag at \(n\) ikke er et primtal, det kan da skrives som et produkt af to tal \(n = n_1 + n_2\).
+    Er \(n_1\) et primtal, forbliver det uberørt fremover, ellers faktoriseres det endnu en gang.
+    Denne process fortsætter, frem til alle produkter er primtal.
+\end{proof}
 
-    Eulers \(\phi\)-funktion, siges nu at være antallet af elementer i sættet \(\mathbb{Z}_n^*\).
+Det ses da at der findes uendeligt mange primtal, som følge af sætning \ref{algbfund}.
+Samt at man for at tjekke om et tal \(n\) er et primtal, ikke behøver at tjekke for divisoere større end \(\sqrt{n}\).
 
-    \begin{eks}
-        \mbox{}\vspace*{-1.5em}
-        \begin{align*}
-            n &= 14 & \mathbb{Z}_{14}^*  &= \{1, 3, 5, 9, 11, 13 \} & \phi(14) &= 6\\
-            n &= 9  & \mathbb{Z}_9^*     &= \{1, 2, 4, 5, 7, 8\}    & \phi(9)  &= 6
-        \end{align*}
-    \end{eks}
 
-    Det er bevist at Eulers \(\phi\)-funktion kan defineres ud fra alle primfaktorerne i \(n\).
 
-    \begin{sent}
-        Givet \(p_1, p_2 \hdots p_r\), som er alle primtalsfaktoerne i \(n\).
-        \[\phi(n) = n \cdot \left(1-\frac{1}{p_1}\right) \cdot \left(1-\frac{1}{p_2}\right) \cdot \hdots \cdot \left(1-\frac{1}{p_r}\right)\]
-        Det ses da, at \(r = \phi(n)\)
-    \end{sent}
+\subsection{Eulers \texorpdfstring{\(\phi\)}{Lg}-funktion}
+Euler fremskrev også en funktion, der ud fra et gevent tal \(n\), kan bestemme mængden af tal, som er indbyrdes primiske med \(n\).
+Først betragtes mængden \(\mathbb{Z}_n\). Som er angivet ud fra \(n \in \mathbb{N}\).
+\[\mathbb{Z}_n = \{0, 1, 2, 3, \hdots, n-1 \}\]
+
+Dette sæt repræsenterer nu alle de mulige rester efter division med \(n\), altså \(\pmod{n}\).
+Der laves nu et nyt sæt bestående udelukkende af tallene, som er indbyrdes primiske med \(n\).
+\[\mathbb{Z}_n^* = \{a \in \mathbb{Z}_n | a \neq 0 \land (a, n) = 1\}\]
+
+Eulers \(\phi\)-funktion, siges nu at være antallet af elementer i sættet \(\mathbb{Z}_n^*\).
+
+\begin{eks}
+    \mbox{}\vspace*{-1.5em}
+    \begin{align*}
+        n &= 14 & \mathbb{Z}_{14}^*  &= \{1, 3, 5, 9, 11, 13 \} & \phi(14) &= 6\\
+        n &= 9  & \mathbb{Z}_9^*     &= \{1, 2, 4, 5, 7, 8\}    & \phi(9)  &= 6
+    \end{align*}
+\end{eks}
+
+Det er bevist at Eulers \(\phi\)-funktion kan defineres ud fra alle primfaktorerne i \(n\).
+
+\begin{sent}
+    Givet \(p_1, p_2 \hdots p_r\), som er alle primtalsfaktoerne i \(n\).
+    \[\phi(n) = n \cdot \left(1-\frac{1}{p_1}\right) \cdot \left(1-\frac{1}{p_2}\right) \cdot \hdots \cdot \left(1-\frac{1}{p_r}\right)\]
+    Det ses da, at \(r = \phi(n)\)
+\end{sent}

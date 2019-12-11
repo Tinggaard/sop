@@ -16,7 +16,7 @@
 \usepackage{multirow} % Multiple rows in tabular
 \usepackage{enumitem} % space between items in list
 \usepackage{wrapfig}
-\usepackage[pdftitle={Sikkerhed bag login-formular på en hjemmeside},pdfauthor={Jens Tinggaard}, hidelinks, bookmarks=true]{hyperref} %References
+\usepackage[pdftitle={SOP},pdfauthor={Jens Tinggaard}, hidelinks, bookmarks=true]{hyperref} %References
 \usepackage[margin=1in]{geometry} %Margins
 \usepackage{attachfile} % Attach files in sources
 
@@ -87,7 +87,7 @@ icon={Paperclip}
 
 % Headers and footers
 \lhead{Jens Tinggaard 3.E\\ Odense Tekniske Gymnasium}
-\rhead{Vejledere: LEER \& SSE\\ \today}
+\rhead{Vejledere: LEER \& SSE\\ 20. december 2019}
 
 % \lfoot{\rightmark} % Subsection
 \lfoot{\leftmark} % SECTION
@@ -97,7 +97,7 @@ icon={Paperclip}
 \addto\captionsdanish{\renewcommand*\contentsname{Indholdsfortegnelse}}
 
 % Basic info
-\date{\today}
+\date{20. december 2019}
 \title{Sikkerhed bag login-formular på en hjemmeside}
 \author{Jens Tinggaard}
 
@@ -114,58 +114,60 @@ icon={Paperclip}
 
 
 \begin{document}
-\clearpage\maketitle
-\thispagestyle{empty}
-\maketitle
 
-\begin{abstract} %Måske det skal flyttes?
-her står hvad det kommer til at handle om...
-\end{abstract}
+
+% \clearpage\maketitle
+% \thispagestyle{empty}
+% \maketitle
+%
+% \begin{abstract} %Måske det skal flyttes?
+% her står hvad det kommer til at handle om...
+% \end{abstract}
 
 % Indsæt billede til forside?
 
 
-\newpage
-\tableofcontents
+% \newpage
+% \tableofcontents
 
 
-\newpage
-\section*{Introduktion / Forord}
-\input{sections/forord.tex}
+% \newpage
+% \section*{Introduktion / Forord}
+% \input{sections/forord.tex}
 
 
-\newpage
-\section{Talteori}
-\input{sections/talteori.tex}
+% \newpage
+% \section{Talteori}
+% \input{sections/talteori.tex}
 
 
-\newpage
+% \newpage
 \section{Hashing}
 \input{sections/hashing.tex}
 
 
 \newpage
-\section{Forskkel på hashing og kryptografi}
+\section{Forskel på hashing og kryptografi}
 \input{sections/forskel.tex}
 
 
-\newpage
-\section{Hvorfor RSA er vigtig}
-\input{sections/rsa.tex}
+% \newpage
+% \section{Hvorfor RSA er vigtig}
+% \input{sections/rsa.tex}
 
 
 
 
-\newpage
+% \newpage
 % \nocite{*}
-\setlength\bibitemsep{10pt}
-\printbibliography[
-heading=bibintoc, %Er med i indholdsfortegnelsen
-title={Litteratur} %Titel
-]
+% \setlength\bibitemsep{10pt}
+% \printbibliography[
+% heading=bibintoc, %Er med i indholdsfortegnelsen
+% title={Litteratur} %Titel
+% ]
 
-\newpage
-\section{Bilag}
-\input{sections/bilag.tex}
+% \newpage
+% \section{Bilag}
+% \input{sections/bilag.tex}
 
 \end{document}

@@ -2,57 +2,57 @@ Det ses tydeligt hvordan krytografi er godt, til at sende hemmelige beskeder, so
 Hashing er derimod blot en metode man bruger til at validere data, uden at have nødvendigheden i at vide hvad det originale data var.
 
 
-    \subsection{Alice \& Bob}
-    Til fremvisning af protokoller i kryptografien, bruger man ofte \emph{Alice} og \emph{Bob} som pladsholdere for aktører.
-    Det skal ses hvordan RSA anvendes i praksis, samt problemer ved anvendelse af metoden.
+\subsection{Alice \& Bob}
+Til fremvisning af protokoller i kryptografien, bruger man ofte \emph{Alice} og \emph{Bob} som pladsholdere for aktører.
+Det skal ses hvordan RSA anvendes i praksis, samt problemer ved anvendelse af metoden.
 
-    \begin{eks}[Generel protokol for RSA]
-        Bob er en server, som Alice gerne vil kontakte.
-        Al kommunikation mellem de to parter, foregår i offentligt rum, så alle og enhver kan læse beskederne sendt mellem dem.
-        For at holde sin besked til Bob hemmelig, tager Alice, finder hun Bobs offentlige nøgle \(P_B\) (Public Bob), og krypterer sin besked med den.
-        Efter dette er gjort, er det kun Bob som kan dekryptere beskeden. Da det kun er ham, som har den hemmelige nøgle \(S_B\) (Secret Bob).
-        Nu kan beskeden altså godt sendes over det offentlige rum, uden at Alice skal frygte for at beskeden bliver opsnappet.\\
-        Vil Bob gerne sende et svar tilbage til Alice foregår det naturligvis på samme måde, han krypterer sin besked med \(P_A\) og sender den så.\\
+\begin{eks}[Generel protokol for RSA]
+    Bob er en server, som Alice gerne vil kontakte.
+    Al kommunikation mellem de to parter, foregår i offentligt rum, så alle og enhver kan læse beskederne sendt mellem dem.
+    For at holde sin besked til Bob hemmelig, tager Alice, finder hun Bobs offentlige nøgle \(P_B\) (Public Bob), og krypterer sin besked med den.
+    Efter dette er gjort, er det kun Bob som kan dekryptere beskeden. Da det kun er ham, som har den hemmelige nøgle \(S_B\) (Secret Bob).
+    Nu kan beskeden altså godt sendes over det offentlige rum, uden at Alice skal frygte for at beskeden bliver opsnappet.\\
+    Vil Bob gerne sende et svar tilbage til Alice foregår det naturligvis på samme måde, han krypterer sin besked med \(P_A\) og sender den så.\\
 
-        Det opskrives som en protokol:
-        \begin{enumerate}[noitemsep]
-            \item Alice krypterer sin besked med \(P_B\).
-            \item Alice sender den krypterede besked ud i det offentlige rum.
-            \item Bob opfanger beskeden og dekrypterer den med \(S_B\).
-        \end{enumerate}
-    \end{eks}
-
-    Der er dog visse problemer ved denne form for samtale, da en tredjepart i det offentlige rum \emph{Eve}, kunne udgive sig for at være Bob.
-    Sådan at når Alice tror hun krypterer sin besked med \(P_B\), krypterer hun den faktisk med \(P_E\).
-    Når beskeden så bliver sendt ud i det offentlige rum, vil Eve kunne læse den, fordi kun hun har den hemmelige nøgle \(S_E\).
-    Er Eve smart, tager hun så -- efter at have aflæst beskeden -- og krypterer den igen med \(P_B\) og sender den så videre, sådan at Bob læser den.
-    På denne måde kan Eve aflytte enhver besked sendt mellem Alice og Bob, uden at hverken Alice eller Bob får mistanke.
-    Denne slags angreb kaldes for \emph{man in the middle}. \cite{ytmitm}
-
-
-
-    \subsection{Online autentificering}
-    Skal man autentificere sig online, er der heldigvis lavet en protokol til at undgå angreb som man in the middle.\cite{dtu}
-    Protokollen anvender både hashing samt RSA til at verificere ægteheden af et dokument eller lignende.\\
-    Vil Bob gerne sikre sig at beskeden stammer fra Alice, kræver det at Alice følger protokollen:
-    Udover at sende beskeden, bruger hun en hashfunktion på beskeden \(H(m)\), signerer det så med sin private nøgle \(S_A\) og sender så dette krypterede hash \(y\) afsted, sammen med den originale besked.
-    Det siges at Alice nu har sat sin \emph{digitale signatur} på beskeden.\\
-    Når Bob så modtager beskeden sammen med det krypterede hash, tager han blot og hasher beskeden selv \(H(m)\).
-    Og dekrypterer så det tilsendte hash \(y\) med Alices offentlige nøgle \(P_A\).
-    Hvis de to hashes stemmer over ens, kan han verificere at beskeden er fra Alice.
-    Dette virker, da det kun er Alices offentlige nøgle \(P_A\), som kan bruges til at dekryptere hashet, bruger Bob Eves offentlige nøgle \(P_E\), vil han ikke få samme hash, hvorfor beskeden ikke er fra Eve.\\
-
-    Protokollen foregår som følger:
+    Det opskrives som en protokol:
     \begin{enumerate}[noitemsep]
-        \item Alice hasher beskeden \(m\) med en bestemt hashfunktion \(H(m)\).
-        \item Alice krypterer hashet med sin private nøgle \(S_A\), som afgiver \(y\).
-        \item Alice sender så den originale besked \(m\), samt det krypterede hash \(y\) afsted.
-        \item Når Bob modtager \(m\) og \(y\), tager han og hasher beskeden \(H(m)\).
-        \item Bob dekrypterer \(y\) med \(P_A\).
-        \item Bob validerer at de to hashes er ens.
+        \item Alice krypterer sin besked med \(P_B\).
+        \item Alice sender den krypterede besked ud i det offentlige rum.
+        \item Bob opfanger beskeden og dekrypterer den med \(S_B\).
     \end{enumerate}
+\end{eks}
 
-    Fordelen ved dette er at man ikke behøver at kryptere hele beskeden \(m\), som kan være meget stor. I stedet krypterer man blot den hashede del af beskeden, som jo altid har en fikseret længde.
+Der er dog visse problemer ved denne form for samtale, da en tredjepart i det offentlige rum \emph{Eve}, kunne udgive sig for at være Bob.
+Sådan at når Alice tror hun krypterer sin besked med \(P_B\), krypterer hun den faktisk med \(P_E\).
+Når beskeden så bliver sendt ud i det offentlige rum, vil Eve kunne læse den, fordi kun hun har den hemmelige nøgle \(S_E\).
+Er Eve smart, tager hun så -- efter at have aflæst beskeden -- og krypterer den igen med \(P_B\) og sender den så videre, sådan at Bob læser den.
+På denne måde kan Eve aflytte enhver besked sendt mellem Alice og Bob, uden at hverken Alice eller Bob får mistanke.
+Denne slags angreb kaldes for \emph{man in the middle}. \cite{ytmitm}
+
+
+
+\subsection{Online autentificering}
+Skal man autentificere sig online, er der heldigvis lavet en protokol til at undgå angreb som man in the middle.\cite{dtu}
+Protokollen anvender både hashing samt RSA til at verificere ægteheden af et dokument eller lignende.\\
+Vil Bob gerne sikre sig at beskeden stammer fra Alice, kræver det at Alice følger protokollen:
+Udover at sende beskeden, bruger hun en hashfunktion på beskeden \(H(m)\), signerer det så med sin private nøgle \(S_A\) og sender så dette krypterede hash \(y\) afsted, sammen med den originale besked.
+Det siges at Alice nu har sat sin \emph{digitale signatur} på beskeden.\\
+Når Bob så modtager beskeden sammen med det krypterede hash, tager han blot og hasher beskeden selv \(H(m)\).
+Og dekrypterer så det tilsendte hash \(y\) med Alices offentlige nøgle \(P_A\).
+Hvis de to hashes stemmer over ens, kan han verificere at beskeden er fra Alice.
+Dette virker, da det kun er Alices offentlige nøgle \(P_A\), som kan bruges til at dekryptere hashet, bruger Bob Eves offentlige nøgle \(P_E\), vil han ikke få samme hash, hvorfor beskeden ikke er fra Eve.\\
+
+Protokollen foregår som følger:
+\begin{enumerate}[noitemsep]
+    \item Alice hasher beskeden \(m\) med en bestemt hashfunktion \(H(m)\).
+    \item Alice krypterer hashet med sin private nøgle \(S_A\), som afgiver \(y\).
+    \item Alice sender så den originale besked \(m\), samt det krypterede hash \(y\) afsted.
+    \item Når Bob modtager \(m\) og \(y\), tager han og hasher beskeden \(H(m)\).
+    \item Bob dekrypterer \(y\) med \(P_A\).
+    \item Bob validerer at de to hashes er ens.
+\end{enumerate}
+
+Fordelen ved dette er at man ikke behøver at kryptere hele beskeden \(m\), som kan være meget stor. I stedet krypterer man blot den hashede del af beskeden, som jo altid har en fikseret længde.
 
 
     \subsubsection{GNU Privacy Guard}
@@ -75,27 +75,96 @@ Hashing er derimod blot en metode man bruger til at validere data, uden at have 
 
 
 
-    Dette kan gøres i gpg ved kommadoen:
+    Dette kan gøres i gpg ved kommandoen:
     \begin{minted}[fontsize=\footnotesize, bgcolor=bg]{bash}
-$ gpg --full-generate-key
+    $ gpg --full-generate-key
     \end{minted}
 
 
-Efter nøglen er blevet genereret, ligger den som en binær fil, som altså kun er læsbar af computeren.
-For at konvertere den til, vi kan forstå, køres kommandoen:
-  \begin{minted}[fontsize=\footnotesize, bgcolor=bg]{bash}
-$ gpg --export -a
-  \end{minted}
-
-Et eksempel på outputtet af denne kommando, kan ses på figur \ref{fig:key}.\\
-
-
-Slutteligt vises det, at man kan signere en fil i gpg.
-Dette gøres med flaget \texttt{clearsign}.
+    Efter nøglen er blevet genereret, ligger den som en binær fil, som altså kun er læsbar af computeren.
+    For at konvertere den til, vi kan forstå, køres kommandoen:
     \begin{minted}[fontsize=\footnotesize, bgcolor=bg]{bash}
-$ gpg --clearsign fil
+    $ gpg --export -a
     \end{minted}
 
-gpg er altså en stor del af kryptografi, hvis man selv ønsker at kryptere sine data.
-Det kan f.eks. være idet man udgiver noget vigtigt offentligt.
-Så vil læserne gerne validere hvem udgiveren er -- det kan gøres i gpg.
+    Et eksempel på outputtet af denne kommando, kan ses på figur \ref{fig:key}.\\
+
+
+    Slutteligt vises det, at man kan signere en fil i gpg.
+    Dette gøres med flaget \texttt{clearsign}.
+    \begin{minted}[fontsize=\footnotesize, bgcolor=bg]{bash}
+    $ gpg --clearsign fil
+    \end{minted}
+
+    gpg er altså en stor del af kryptografi, hvis man selv ønsker at kryptere sine data.
+    Det kan f.eks. være idet man udgiver noget vigtigt offentligt.
+    Så vil læserne gerne validere hvem udgiveren er -- det kan gøres i gpg.
+
+
+\subsection{Kodeord}
+Hashing er som tidligere fortalt, anvendt til at 'hemmeliggøre' kodeord.
+Det skal ses hvordan man kan forsøge at finde frem til den originale besked, på trods af hashets envejs-egenskab.
+
+
+    \subsubsection{Rainbow tables}
+    Der er naturligvis også andre metoder end brute-force, til at forsøge at tilbageskabe kodeord ud fra et hash.
+    Et \emph{rainbow table} er en tabel, hvori der ligger nogle forudberegnede hashes, samt de originale kodeord dertil.
+    Det gør at man, uden at være nødt til at brute-force alle \(29^n\) muligheder, kan finde finde frem til en brugers kodeord.
+
+
+    Et rainbow table indeholder naturligvis ikke alle hashes -- det ville være en uendelig opgave at liste dem alle.
+    Det er altså kun de hashes -- og dermed også kodeord, som er mest anvendte, der ligger i et rainbow table.
+    Det er af samme grund, at man ikke blot skal bruge koden \texttt{password}, da den helt sikkert ligger i et rainbow table.
+    Det betyder ikke at hvis man blote vælger 8 tilfældige bogstaver som kodeord, at de ikke er i et rainbow table et sted.
+    Der findes efter hånden rainbow tables som er meget komplekse\footnote{\url{https://project-rainbowcrack.com/table.htm}}.
+    I realiteten er rainbow tables noget mere komplekst bygget op, men dette forklarer essensen i dem.
+
+
+    \subsubsection{Salt}
+    Som modsvar til rainbow tables, bruger man \emph{salt} sammen med lagringen af kodeord på en server. \cite{version2}
+    Måden man anvender salt på er, at efter brugeren har lavet et kodeord, genererer man et salt -- en tilfældig tekststreng.
+    Denne tekststreng putter man blot bag det originale kodeord, inden man hasher det.
+    Dermed vil hashet ikke være identisk med et andet hash af det samme kodeord, da de ikke er hashet med samme værdi.
+    I stedet for blot at gemme et hashet kodeord på serveren, gemmer man nu både det hashede kodeord, samt saltet som er blevet brugt til at generere det.
+    Når en bruger så forsøger at logge ind, kigger man på kodeordet, lægger saltet til og hasher det så.
+    Stemmer de to hashes over ens, er det det rigtige kodeord man har fået fat i.\\
+    Kigger man fra hackerens side, vil man se at for rainbow tables ikke længere er brugbare, da man ikke længere blot kan lave et opslag af et kodeord, fordi det er blevet hashet med dette salt efter.
+    Det vil altså sige, at man ikke længere blot kan forsøge at knække alle kodeordene i en database på én gang.
+    I stedet vil man være nødt til, først at lave et gæt på et kodeord, så tage et salt og lægge oveni og så hashe det.
+
+    \begin{eks}[Kodeord og salt]
+        \label{eks:salt}
+        Antag at Alice og Bob oprette hver deres konto på \texttt{example.com}.
+        Da de begge er ukendte i viden om sikkerhed ved kodeord, vælger de begge kodeordet \texttt{kodeord123}.
+        Sitet de opretter sig på, har heldigvis styr på sikkerheden, da de bruger salt, til at hashe deres kodeord.\\
+        Når Alice opretter sig, får hun tildelt et salt af værdien \texttt{*j2!\#6wdGQ}.\\
+        Idet Bob opreter sig, får han tildelt salt-værdien \texttt{Cc8h*cZ\string^Kg}.\\
+        Det ses nu hvordan saltet bruges til at generere forskellige hashes, af samme kodeord.
+        Det er dog vigtigt at understrege at \texttt{MD5} er en gammel hashfunktion, som aldrig bør benyttes til at lagre kodeord.
+        Den anvendes blot her, da den ikke returnerer så mange bits (længden af hashet).
+        Pointen ses dog den samme ved alle hash metoder.
+        \begin{center}
+            \begin{tabular}{l l}
+                \texttt{MD5(kodeord123*j2!\#6wdGQ)}        & \texttt{= 2132e21016df4bae1bde175262cefac3}\\
+                \texttt{MD5(kodeord123Cc8h*cZ\string^Kg)}  & \texttt{= 552288e992d32eea0b6dd0a57f6e251d}\\
+                \texttt{MD5(kodeord123)}                   & \texttt{= c1b1e28f2d5c35233298c0d0bbb4886d}
+            \end{tabular}
+        \end{center}
+
+        \centerline{I databasen gemmes nu værdierne}
+
+        \begin{center}
+            \begin{tabular}{|l | l | l|}
+                \hline
+                \textbf{Navn}   & \textbf{Kodeord}                              & \textbf{Salt}\\ \hline
+                Alice           & \texttt{2132e21016df4bae1bde175262cefac3}     & \texttt{*j2!\#6wdGQ}\\
+                Bob             & \texttt{53caf0a58f60602ae7f3d3fc6fb99832}     & \texttt{Cc8h*cZ\string^Kg}\\ \hline
+            \end{tabular}
+        \end{center}
+
+    \end{eks}
+
+
+
+
+% opsumering
