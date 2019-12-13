@@ -116,32 +116,32 @@ icon={Paperclip}
 \begin{document}
 
 
-% \clearpage\maketitle
-% \thispagestyle{empty}
-% \maketitle
-%
-% \begin{abstract} %Måske det skal flyttes?
-% her står hvad det kommer til at handle om...
-% \end{abstract}
+\clearpage\maketitle
+\thispagestyle{empty}
+\maketitle
 
-% Indsæt billede til forside?
+\begin{abstract} %Måske det skal flyttes?
+her står hvad det kommer til at handle om...
+\end{abstract}
 
-
-% \newpage
-% \tableofcontents
+Indsæt billede til forside?
 
 
-% \newpage
-% \section*{Introduktion / Forord}
-% \input{sections/forord.tex}
+\newpage
+\tableofcontents
 
 
-% \newpage
-% \section{Talteori}
-% \input{sections/talteori.tex}
+\newpage
+\section*{Introduktion / Forord}
+\input{sections/forord.tex}
 
 
-% \newpage
+\newpage
+\section{Talteori}
+\input{sections/talteori.tex}
+
+
+\newpage
 \section{Hashing}
 \input{sections/hashing.tex}
 
@@ -151,23 +151,23 @@ icon={Paperclip}
 \input{sections/forskel.tex}
 
 
-% \newpage
-% \section{Hvorfor RSA er vigtig}
-% \input{sections/rsa.tex}
+\newpage
+\section{Hvorfor RSA er vigtig}
+\input{sections/rsa.tex}
 
 
 
 
-% \newpage
-% \nocite{*}
-% \setlength\bibitemsep{10pt}
-% \printbibliography[
-% heading=bibintoc, %Er med i indholdsfortegnelsen
-% title={Litteratur} %Titel
-% ]
+\newpage
+\nocite{*}
+\setlength\bibitemsep{10pt}
+\printbibliography[
+heading=bibintoc, %Er med i indholdsfortegnelsen
+title={Litteratur} %Titel
+]
 
-% \newpage
-% \section{Bilag}
-% \input{sections/bilag.tex}
+\newpage
+\section{Bilag}
+\input{sections/bilag.tex}
 
 \end{document}

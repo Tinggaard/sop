@@ -22,8 +22,28 @@ https://primes.utm.edu/lists/small/millions/
 
 
 tegn
-$ pdftotext document.pdf -enc UTF-8 - | wc -m
+$ pdftotext main.pdf -enc UTF-8 - | wc -m
 $ detex file.tex | wc -C
 
 Forside billede eller resumé er ligegyldigt
 Tag udgangspunkt i de sætninger der anvendes i RSA, evt bevis de som den bygger på, ellers lig dem i bilag.
+
+
+
+##### metode #####
+n = q*p
+phi(n) = (p-1)(q-1)
+0 < e < phi(n)
+d := ed (mod phi(n)) = 1
+
+offentlig: n e
+hemmelig: d
+
+kryptering
+m -> c = m^e (mod n)
+
+dektyptering
+c -> m = c^d (mod n)
+
+
+c^d (mod n) = (m^e (mod n))^d (mod n) = (m^e)^d (mod n) = m^ed (mod n) = m

@@ -1,5 +1,6 @@
 Det ses tydeligt hvordan krytografi er godt, til at sende hemmelige beskeder, som kun kan aflæses af den rette.
 Hashing er derimod blot en metode man bruger til at validere data, uden at have nødvendigheden i at vide hvad det originale data var.
+Ved nogle eksempler ses, hvordan de forskellige metoder bruges.
 
 
 \subsection{Alice \& Bob}
@@ -77,14 +78,14 @@ Fordelen ved dette er at man ikke behøver at kryptere hele beskeden \(m\), som 
 
     Dette kan gøres i gpg ved kommandoen:
     \begin{minted}[fontsize=\footnotesize, bgcolor=bg]{bash}
-    $ gpg --full-generate-key
+$ gpg --full-generate-key
     \end{minted}
 
 
     Efter nøglen er blevet genereret, ligger den som en binær fil, som altså kun er læsbar af computeren.
     For at konvertere den til, vi kan forstå, køres kommandoen:
     \begin{minted}[fontsize=\footnotesize, bgcolor=bg]{bash}
-    $ gpg --export -a
+$ gpg --export -a
     \end{minted}
 
     Et eksempel på outputtet af denne kommando, kan ses på figur \ref{fig:key}.\\
@@ -93,7 +94,7 @@ Fordelen ved dette er at man ikke behøver at kryptere hele beskeden \(m\), som 
     Slutteligt vises det, at man kan signere en fil i gpg.
     Dette gøres med flaget \texttt{clearsign}.
     \begin{minted}[fontsize=\footnotesize, bgcolor=bg]{bash}
-    $ gpg --clearsign fil
+$ gpg --clearsign fil
     \end{minted}
 
     gpg er altså en stor del af kryptografi, hvis man selv ønsker at kryptere sine data.
