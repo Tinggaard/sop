@@ -1,0 +1,29 @@
+0.
+Kryptografi / kryptologi
+Hvad er RSA og hvad bygger det på?
+
+
+1.
+Kort intro til mod og primtal
+Noget om største fælles divisor og indbyrdes primisk
+Dernæst eulers funktion
+Så til de sætninger som er vigtige...
+
+2.
+Hvad er hashing - pseudorandom - envejs
+Evt. forskellige hashfunktioner
+Noget om hashtabeller og kodeord?
+
+3.
+Først et eksempel på en protokol med kryptografi
+Derefter et eksempel på hashing og kodeord
+Brute-force
+Så hvordan man bruger begge dele i hverdagen, til verificering
+Til sidst en vurdering - hvis ikke først til sidst.
+
+4.
+Hvor bruger man det?
+Eksempel på RSA
+UNI login som eks
+Hvordan verden ville være uden RSA
+Husk: http vs https

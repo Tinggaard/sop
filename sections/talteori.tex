@@ -79,12 +79,12 @@ Det ses ved nogle eksempler
 \subsubsection{Modulo}
 Når man laver division med heltal, vil man ofte kigge på resten efter division.
 Derfor er der naturligvis lavet en matematisk operator til at udregne rest efter division -- den kaldes for \emph{modulo}.
-Skriver man f.eks. \(a \pmod{n}\), udregner man resten efter division, som angivet i sætning \ref{rest}.
+Skriver man f.eks. \(a \Mod{n}\), udregner man resten efter division, som angivet i sætning \ref{rest}.
 
 \begin{definition}
     For \(m \in \mathbb{Z}\) og \(n \in \mathbb{N}\) gælder:
-    \[n \mid m \iff m \pmod{n} = 0\]
-    \[r = n - q m = m \pmod{n}\]\cite[72]{krypto}
+    \[n \mid m \iff m \Mod{n} = 0\]
+    \[r = n - q m = m \Mod{n}\]\cite[72]{krypto}
 \end{definition}
 
 \begin{eks}
@@ -92,7 +92,7 @@ Skriver man f.eks. \(a \pmod{n}\), udregner man resten efter division, som angiv
     \begin{center}
         \setlength{\tabcolsep}{20pt} % General space between cols (6pt standard)
         \begin{tabular}{l c r}
-            \(43 \pmod{6} = 1\) & \(74 \pmod{10} = 4\) & \(58 \pmod{6} = 4\)
+            \(43 \Mod{6} = 1\) & \(74 \Mod{10} = 4\) & \(58 \Mod{6} = 4\)
         \end{tabular}
     \end{center}
 \end{eks}
@@ -137,7 +137,7 @@ Som vist, kan være bøvlet at udregne fælles divisorer for 2 tal, derfor komme
 
 \begin{sent}
     \label{commod}
-    \((a, b) = (a, b \pmod{a})\)
+    \((a, b) = (a, b \Mod{a})\)
 \end{sent}
 
 Sætning \ref{commod} bevises ikke, i stedet vil Euclids algoritme (som bygger på sætningen) blive vist.
@@ -225,13 +225,13 @@ Det ses da at der findes uendeligt mange primtal, som følge af sætning \ref{al
 Samt at man for at tjekke om et tal \(n\) er et primtal, ikke behøver at tjekke for divisoere større end \(\sqrt{n}\).
 
 
-
+% kort om hvordan med primtal, potens, samt produkt.
 \subsection{Eulers \texorpdfstring{\(\phi\)}{Lg}-funktion}
 Euler fremskrev også en funktion, der ud fra et gevent tal \(n\), kan bestemme mængden af tal, som er indbyrdes primiske med \(n\).
 Først betragtes mængden \(\mathbb{Z}_n\). Som er angivet ud fra \(n \in \mathbb{N}\).
 \[\mathbb{Z}_n = \{0, 1, 2, 3, \hdots, n-1 \}\]
 
-Dette sæt repræsenterer nu alle de mulige rester efter division med \(n\), altså \(\pmod{n}\).
+Dette sæt repræsenterer nu alle de mulige rester efter division med \(n\), altså \(\Mod{n}\).
 Der laves nu et nyt sæt bestående udelukkende af tallene, som er indbyrdes primiske med \(n\).
 \[\mathbb{Z}_n^* = \{a \in \mathbb{Z}_n | a \neq 0 \land (a, n) = 1\}\]
 
@@ -250,5 +250,33 @@ Det er bevist at Eulers \(\phi\)-funktion kan defineres ud fra alle primfaktorer
 \begin{sent}
     Givet \(p_1, p_2 \hdots p_r\), som er alle primtalsfaktoerne i \(n\).
     \[\phi(n) = n \cdot \left(1-\frac{1}{p_1}\right) \cdot \left(1-\frac{1}{p_2}\right) \cdot \hdots \cdot \left(1-\frac{1}{p_r}\right)\]
+    \[\Updownarrow\]
+    \[\phi(n) = (p_1 - 1) \cdot (p_2 - 1) \cdot \hdots \cdot (p_r - 1)\]
     Det ses da, at \(r = \phi(n)\)
 \end{sent}
+
+
+
+\vspace{100pt}
+
+
+
+\begin{sent}
+    For \(a \in \mathbb{Z}\) og \(n, t \in \mathbb{N}\) hvor \((a, n) = 1\), gælder det at:\\
+    \[a^t \Mod{n} = a^{t \Mod{\phi(n)}} \Mod{n}\]
+\end{sent}
+
+
+\begin{proof}
+    \(t\) angives på formen \(t = q \cdot \phi(n) + r\), hvorved \(r = t \Mod{\phi(n)}\).
+    Det bevises nu at \(a^t = a^r\).
+    \[a^t \Mod{n} = a^{q \cdot \phi(n) + r} \Mod{n}\]
+    Først deles summen af potensen op i to dele.
+    \[a^t \Mod{n} = (a^{\phi(n)})^q \cdot a^r \Mod{n}\]
+    Modulo af et produkt, kan opdeles ifølge regneregel %link
+    \[a^t \Mod{n} = \Big[ \big( (a^{\phi(n)} \Mod{n})^q \Mod{n} \big) \cdot \big( a^r \Mod{n} \big) \Big] \Mod{n}\] %9b og 9c
+    Og da \(a^{\phi(n)} \Mod{n} = 1\), fås
+    \[a^t \Mod{n} = \Big[ \big( 1^q \Mod{n} \big) \cdot \big( a^r \Mod{n} \big) \Big] \Mod{n}\]
+    Da \(1^q \Mod{n} = 1\), kan dette blot udelades, hvorved det ses at.
+    \[a^t = a^r\]
+\end{proof}

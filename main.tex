@@ -15,7 +15,7 @@
 \usepackage{changepage} % for the adjustwidth environment
 \usepackage{multirow} % Multiple rows in tabular
 \usepackage{enumitem} % space between items in list
-\usepackage{wrapfig}
+\usepackage{wrapfig} % small figure
 \usepackage[pdftitle={SOP},pdfauthor={Jens Tinggaard}, hidelinks, bookmarks=true]{hyperref} %References
 \usepackage[margin=1in]{geometry} %Margins
 \usepackage{attachfile} % Attach files in sources
@@ -42,6 +42,8 @@ icon={Paperclip}
 }
 
 % \renewcommand\qedsymbol{$\blacksquare$} % Black QED
+
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)} % mod command no space
 
 \newcommand{\xfill}[2][1ex]{{%
   \dimen0=#2\advance\dimen0 by #1

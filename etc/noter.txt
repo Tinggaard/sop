@@ -28,6 +28,7 @@ $ detex file.tex | wc -C
 Forside billede eller resumé er ligegyldigt
 Tag udgangspunkt i de sætninger der anvendes i RSA, evt bevis de som den bygger på, ellers lig dem i bilag.
 
+#RSA bygger på at phi(n) ikke kan beregnes, ud over hvis man har p og q
 
 
 ##### metode #####
@@ -47,3 +48,7 @@ c -> m = c^d (mod n)
 
 
 c^d (mod n) = (m^e (mod n))^d (mod n) = (m^e)^d (mod n) = m^ed (mod n) = m
+
+
+# rsa bevis
+m^ed (mod n) = m
