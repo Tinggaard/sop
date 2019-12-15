@@ -9,7 +9,7 @@ def phi(n): #Eulers phi-funktion
 def produkt(liste): #Returnerer produktet af en liste
     n = 1
     for i in liste:
-        i *= i
+        n *= i
     return n
 
 

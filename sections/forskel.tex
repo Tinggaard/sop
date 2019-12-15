@@ -34,12 +34,28 @@ Denne slags angreb kaldes for \emph{man in the middle}. \cite{ytmitm}
 \subsection{Kodeord}
 Hashing er som tidligere fortalt, anvendt til at 'hemmeliggøre' kodeord.
 Det skal ses hvordan man kan forsøge at finde frem til den originale besked, på trods af hashets envejs-egenskab.
+Hvorved det vises, hvorfor det er vigtigt at bruge et godt kodeord, samt -- som udvikler -- at bruge en god hashfunktion til at gemme disse.
 
+
+    \subsubsection{Hashcat}
+    Hashcat er formentlig et af de allermest brugte værktøjer, til at brute-force hashes.\footnote{\url{https://hashcat.net/hashcat/}}
+    Hashcat er et kommandolinjeværktøj, som udelukkende er bygget til at hashe tekststrenge og sammenligne dem med et (eller flere) hashes.
+    Fordelen ved hashcat er, at man som angriber, kan opsætte mere specifikke regler for, hvordan tekststrengen som man hasher, skal se ud.
+    Det står nærmere beskrevet her: \url{https://hashcat.net/wiki/doku.php?id=mask_attack} (på engelsk).
+    Det skal nu ses, hvordan man kan bruge hashcat til at brute-force kodeord, som set i eksempel \ref{brutefc}.\\
+    Ønsker man f.eks. at finde alle kodeord, som består af 6 små bogstaver, efterfulgt af 4 tal, køres kommandoen
+    \begin{minted}[fontsize=\footnotesize, bgcolor=bg]{bash}
+$ hashcat -a 3 <hashfil> ?l?l?l?l?l?l?d?d?d?d
+    \end{minted}
+    Det ses da, at i modsætning til eksempel \ref{brutefc}, vil antallet af hashes, som skal beregnes blot være
+    \[26^6 + 10^4 = 308,925,776 \approx 3.089 \cdot 10^8\]
+    Da \(?l\) specificerer et lille bogstav mellem a-z og ikke a-å, er der blot 26 muligheder og ikke 29.
+    Uanset er det et meget mindre tal, end \(4.572 \cdot 10^{14}\). Hvorved det er vist, at man gør klogt i at vælge længere kodeord, eller kodeord med både små bogstaver, store bogstaver, tegn og tal i.
 
     \subsubsection{Rainbow tables}
     Der er naturligvis også andre metoder end brute-force, til at forsøge at tilbageskabe kodeord ud fra et hash.
-    Et \emph{rainbow table} er en tabel, hvori der ligger nogle forudberegnede hashes, samt de originale kodeord dertil.
-    Det gør at man, uden at være nødt til at brute-force alle \(29^n\) muligheder, kan finde finde frem til en brugers kodeord.
+    Et \emph{rainbow table} er en tabel, hvori der ligger nogle forudberegnede hashes, samt de originale kodeord dertil.\cite{rainbow}
+    Dette gør at man, uden at være nødt til at brute-force alle \(29^n\) muligheder, kan finde finde frem til en brugers kodeord.
 
 
     Et rainbow table indeholder naturligvis ikke alle hashes -- det ville være en uendelig opgave at liste dem alle.
@@ -168,7 +184,6 @@ $ gpg --clearsign fil
 
 
 
-
-
-
-% opsumering
+\subsection{Opsumering?}
+Det forstås altså, at kryptografi og hashing begge er meget vigtige for den digitale sikkerhed i dag.
+Begge metoder har sine fordele og det blev vist hvordan man kan bruge de to på én gang, til at lave online autentifikation.

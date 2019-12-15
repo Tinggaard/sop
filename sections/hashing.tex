@@ -1,9 +1,10 @@
-Hashing er en metode, brugt til at omdanne en tekststreng til en anden tekststreng, med en fikseret længde.
-Den nye tekststreng vil være pseudorandom\footnote{Forklar pseudorandom} - den vil fremstå tilfældigt, men faktisk være regelmæssig, baseret på inputtet.
+Hashing er en metode, brugt til at omdanne data til en tekststreng, med en fikseret længde.
+Den nye tekststreng vil være pseudorandom\footnote{Fra engelsk: Fremstå tilfældigt, men i virkeligheden være forsætlig.} % -- den vil fremstå tilfældigt, men faktisk være regelmæssig, baseret på inputtet.
 Til forskel fra RSA skal man ikke skal generere nogle tal førend metoden bruges, hvilket medfører at der altid bliver genereret det samme output, ved det samme input.
+Outputtet efter en hashfunktion, omtales som et \emph{hash} (eller \emph{digest} på engelsk).
 \\
-Hashing en også envejsfunktion, modsat RSA, hvor man jo både kan kryptere og dekryptere data.
-Med hashing kan man altså ikke gå baglæns, hvis man kun har et hash af en tekst.
+Derudover er hashing en envejsfunktion, modsat RSA, hvor man jo både kan kryptere og dekryptere data.
+Med hashing kan man altså ikke gå baglæns, hvis man kun har et hash af en tekst.\cite{algoritmer}
 
 
 \subsection{Fordelen ved hashing}
@@ -14,8 +15,7 @@ Det vil altså sige at hvis man hasher \(abc\), vil man få det samme output hve
 Da et hash er pseudorandom, vil det ikke sige noget om hvad det tidligere har været - der er som sådan ikke noget mønster i metoden.
 Det ses i eksempel \ref{eks:hash}.
 
-
-\begin{eks}[Hashing fremstår pseudorandom]
+\begin{eks}[Hashing ved brug af hashfunktionen \texttt{MD5}]
     \label{eks:hash}
     Det ses at, på trods af lignende input, er hashet helt forskelligt.
     \begin{center}
@@ -23,28 +23,30 @@ Det ses i eksempel \ref{eks:hash}.
         \texttt{MD5(Abc) = 35593b7ce5020eae3ca68fd5b6f3e031}\\
         \texttt{MD5(abd) = 4911e516e5aa21d327512e0c8b197616}\\
     \end{center}
-
 \end{eks}
 
 \noindent
+%HALLLO
 Måden man anvender dette på, er at hashe et kodeord inden det bliver puttet ind i databasen.
 Når så brugeren forsøger at logge ind, hasher man igen det indtastede kodeord og hvis det stemmer over ens, med det liggende i databasen, kan man formode at brugeren har indtastet det rigtige kodeord.
 \\
 
-Der findes mange forskellige kryptografiske hashfunktioner, blandt de mere kendte er \texttt{MD5}, \texttt{SHA256} og \texttt{SHA512}.
-Essentielt er de opbygget på samme måde, forskellen i dem er hvor langsomme og dermed sikre de er.
+Der findes mange forskellige kryptografiske hashfunktioner, blandt de mere kendte er \texttt{MD5}, \texttt{SHA256} og \texttt{SHA512}.\cite{algoritmer}
+Essentielt er de opbygget på samme måde, forskellen i dem er hvor langsomme og dermed sikre de er. Samt hvor mange bit de returnerer.
 For at forstå hvorfor en langsom hashfunktion er god, er det vigtigt at forstå essensen i en hashfunktion.
-Det at den kun kan bruges en vej, gør nemlig at hvis man gerne vil finde ud af den originale tekst til et hash, er man nødt til at prøve sig frem, i IT-verdenen kaldes dette for \emph{brute-force}.
+Det at den kun kan bruges en vej, gør nemlig at hvis man gerne vil finde ud af den originale tekst til et hash, er man nødt til at prøve sig frem, i IT-verdenen kaldes dette for \emph{brute-force}\footnote{Når man prøver alle kobinationer af en fremgangsmetode, for at finde frem til det rigtige svar.}.
 
 
 \begin{eks}[Kompleksiteten ved brute-force]
+    \label{brutefc}
     Antag at man har et hash, hashet af \texttt{MD5}, hvor man gerne vil finde den oprindelige tekst.
     Man ved at teksten består af 8 tegn -- som kan være både store og små bogstaver samt tal, men ingen symboler.
     I det danske alfabet er der \(29\) bogstaver og disse kan både fremstå stor og små \(2 \cdot 29 = 58\), derudover er der 10 forskellige tal at tage hensyn til \(58 + 10 = 68\).
     Da alle tegn har mulighed for at stå på alle 8 pladser, er der nu \(68^8\approx 4.572 \cdot 10^{14}\) muligheder.
     En moderne computer kan udregne omkring \(4 \cdot 10^9\) hashes i sekundet, i \texttt{MD5}.
     Mens en lille server kan yde omkring 10 gange så meget \(4 \cdot 10^{10}\).\cite{ytpwd}
-    Det udregnes hvor mange sekunder det vil tage at hashe alle kombinationer af 8 bogstaver og tal, for henholdsvis en computer og en lille server.
+    Det udregnes hvor mange sekunder det vil tage at hashe alle kombinationer af 8 bogstaver og tal, for henholdsvis en computer og en lille server.\\
+    Det er dog vigtigt at understrege, at man i dag aldrig bør bruge \texttt{MD5}, da metoden er gammel og har vist sige at være for svag til nudagens hardware.\footnote{\url{https://www.kb.cert.org/vuls/id/836068/}}
 
     \setlength{\tabcolsep}{50pt} % General space between cols (6pt standard)
     \begin{center}
@@ -65,8 +67,16 @@ Det at den kun kan bruges en vej, gør nemlig at hvis man gerne vil finde ud af 
     \noindent
     Det kan altså konkluderes at det er klogt at vælge et kodeord på mere end 8 tegn.
     Samt at en god hashfunktion tager lang tid, hvorved det forstås at funktioner som \texttt{SHA256} og \texttt{SHA512} er at foretrække over \texttt{MD5}.
-
 \end{eks}
 
+Det skal senere ses, hvordan man kan brute-force endnu længere hashes, uden at det tager helt så lang tid.
+Samt hvad man gør for at bekæmpe dette.
 
-% hash tabeller
+\subsection{Hashtabeller}
+En anden ting, som hashfunktioner kan bruges til, er at generere hashtabeller.
+Dette vil blot blive kort gennemgået, da det ikke er den del af hashfunktioner, som denne tekst ellers beskæftiger sig med.\\
+En hashtabel kan bruges idet man har en masse (hashbart) data, som skal sættes op i en tabel.
+Når man så skal finde noget af dette data tilbage i tabellen efter at have indsat det, vil man normalt skulle gennemgå alle cellerne i tabellen, for at finde ud af hvor, netop hvor det data man søger er. Det er her hashtabeller kommer ind i billedet.\\
+
+Meget forsimplet, fungerer en hashtabel ved, at man -- inden man insætter dataen i tabellen -- hasher dataen og i stedet for at indsætte det i den næste ledige celle, indsætter man det i en celle, svarende til det hash som dataen genererede.
+Når man så vil tilgå noget data i en tabel, hasher man blot dataen igen, for så at lave et opslag i tabellen i den celle tilsvarende til hashet. På den måde sparer man en masse tid, ved ikke at skulle lave et gennemløb af alle celler i tabellen.\cite{hashtables}

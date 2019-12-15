@@ -1,15 +1,17 @@
 Der må gerne ændres lidt på titlen
 
 
-ranbowtables
+rainbowtables
 brute force
-hashingtable
+hashtable
 gpg
 certifikater
+http vs https
+
+Billede af pgp fra hashcat
 
 Antal bits (MD5 128 bit)
 
-http vs https
 
 
 Hashing og RSA er begge metoder
@@ -19,6 +21,8 @@ Forklar evt. kryptografi og kryptologi
 
 
 https://primes.utm.edu/lists/small/millions/
+
+hashcat masker https://hashcat.net/wiki/doku.php?id=mask_attack
 
 
 tegn

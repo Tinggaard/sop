@@ -235,7 +235,9 @@ Dette sæt repræsenterer nu alle de mulige rester efter division med \(n\), alt
 Der laves nu et nyt sæt bestående udelukkende af tallene, som er indbyrdes primiske med \(n\).
 \[\mathbb{Z}_n^* = \{a \in \mathbb{Z}_n | a \neq 0 \land (a, n) = 1\}\]
 
-Eulers \(\phi\)-funktion, siges nu at være antallet af elementer i sættet \(\mathbb{Z}_n^*\).
+\begin{definition}
+    Eulers \(\phi\)-funktion, siges nu at være antallet af elementer i sættet \(\mathbb{Z}_n^*\).
+\end{definition}
 
 \begin{eks}
     \mbox{}\vspace*{-1.5em}
@@ -246,14 +248,31 @@ Eulers \(\phi\)-funktion, siges nu at være antallet af elementer i sættet \(\m
 \end{eks}
 
 Det er bevist at Eulers \(\phi\)-funktion kan defineres ud fra alle primfaktorerne i \(n\).
+Det er ikke et bevis som vil blive gennemgået her.
 
 \begin{sent}
     Givet \(p_1, p_2 \hdots p_r\), som er alle primtalsfaktoerne i \(n\).
     \[\phi(n) = n \cdot \left(1-\frac{1}{p_1}\right) \cdot \left(1-\frac{1}{p_2}\right) \cdot \hdots \cdot \left(1-\frac{1}{p_r}\right)\]
+    % \[\Updownarrow\]
+    % \[\phi(n) = \prod_{p \mid n}(p - 1)\]
     \[\Updownarrow\]
     \[\phi(n) = (p_1 - 1) \cdot (p_2 - 1) \cdot \hdots \cdot (p_r - 1)\]
     Det ses da, at \(r = \phi(n)\)
 \end{sent}
+
+Det viser sig, at ved beregning med primtal, er meget nemt.
+
+\begin{eks}
+    Lad \(p\) og \(q\) være primtal. Det haves da at.\\
+    \begin{align}
+        \phi(p)   &= p - 1\\
+        \phi(p^2) &= (p - 1)^2\\
+        %\phi(p^2) &= p (p - 1)\\
+        \phi(p q) &= (p - 1)(q - 1)
+    \end{align}
+    Dette vil vise sig nyttigt ved senere brug.
+\end{eks}
+
 
 
 
@@ -262,7 +281,7 @@ Det er bevist at Eulers \(\phi\)-funktion kan defineres ud fra alle primfaktorer
 
 
 \begin{sent}
-    For \(a \in \mathbb{Z}\) og \(n, t \in \mathbb{N}\) hvor \((a, n) = 1\), gælder det at:\\
+    For \(a \in \mathbb{Z}\) og \(n, t \in \mathbb{N}\) hvor \((a, n) = 1\), gælder det at:
     \[a^t \Mod{n} = a^{t \Mod{\phi(n)}} \Mod{n}\]
 \end{sent}
 
