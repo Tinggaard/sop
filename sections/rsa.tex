@@ -1,16 +1,20 @@
-RSA bruges som sagt til så godt som alting der foregår online,
+RSA bruges som sagt til så godt som alting der foregår online.......
 
 Først vil det kort blive gennemgået, hvordan RSA virker, på matematisk niveau. Hvorefter der vil være et Konkreteksempel.
-\subsection{Protokol for RSA}\label{rsaprot}
+
+\subsection{Matematisk protokol for RSA}\label{rsaprot}
 Der følges igen i protokol, til fremstilling af den offentlige og den hemmelige nøgle.
-\begin{enumerate}
+
+\begin{enumerate} %[noitemsep]
     \item Udvælg 2 primtal \(p\) og \(q\), de skal gerne være omkring de 100 cifre hver og sæt så \(n = p \cdot q\)
     \item Udregn \(\phi(n)\), som er \((p - 1) (q - 1)\), da \(p\) og \(q\) er primtal.
     \item Vælg et tal \(e \in Z_{phi(n)}^*\), altså sådan at \(0 < e < \phi(n)\) og \((e, \phi(n)) = 1\)
     \item Udregn det inverse element \(d\) til \(e \Mod{\phi(n)}\), sådan at \(e \cdot d = 1 \Mod{\phi(n)}\). \label{stepfour}
 \end{enumerate}
+
 Når dette er gjort, er vi klar til at sende hemmelige beskeder.
-\begin{itemize}
+
+\begin{itemize} %[noitemsep]
     \item Den offentlige nøgle er hhv. \(n\) og \(e\).
     \item Den hemmelige nøgle er \(d\).
 \end{itemize}
@@ -45,8 +49,6 @@ Det er kun beviset for det sidste lighedstegn, som mangler
 \end{proof}
 
 
-% Vi skal senere kigge på hvorfor det sidste af lighedstegnene gør sig gældende.
-
 \subsection{RSA i aktion}
 Vi skal nu tage et kig på hvordan RSA rent faktisk fungerer.
 Tallene anvendt er naturligvis blot til eksempel -- i virkeligheden er de som sagt på omkring 100 cifre hver.\\
@@ -64,11 +66,11 @@ Alice vil gerne logge på \url{https://www.netproever.dk/}, som Bob (staten) eje
 \end{wrapfigure}
 
 For at forhindre dette benytter Bobs website sig heldigvis af kryptering, hvilket også indikeres af browseren, hvor der står \texttt{https} oppe i søgebaren samtidig med at der er en hængelås før URLen -- se figur \ref{sikker}.
-\texttt{https} 'HyperText Transfer Protocol Secure' er en protokol som lader browseren vide, hvordan den skal handle forespørgsler til websitet. \cite{https} Havde der blot stået \texttt{http}, ville forbindelsen ikke være krypteret. Det er altså vigtig at kigge på, inden man logger ind på en hjemmeside, for at undgå identitetstyveri.\\
+\texttt{https} ``HyperText Transfer Protocol Secure'' er en protokol som lader browseren vide, hvordan den skal handle forespørgsler til websitet. \cite{https} Havde der blot stået \texttt{http}, ville forbindelsen ikke være krypteret. Det er altså vigtig at kigge på, inden man logger ind på en hjemmeside, for at undgå identitetstyveri.\\
 
 Det ses nu, hvordan Bob genererer en offentlig og en hemmelig nøgle ud fra protokollen fra sektion \ref{rsaprot}.
 
-\begin{enumerate}
+\begin{enumerate}%[noitemsep]
     \item \(p = 41\) og \(q = 83\), \(n = 3403\)
     \item \(\phi(n) = (41 - 1) (83 - 1) = 40 \cdot 82 = 3280\)
     \item \(e\) kan være mange værdier, men sættes i dette tilfælde til \(e = 43\)
@@ -130,16 +132,7 @@ Det er hermed vist, ved et eksempel, at RSA virker.
 
 
 
-
-
-
-
-\subsection{En verden uden RSA}
-
-
-
 \subsection{UNI•Login}
 
 
-%https
-%certifikater
+\subsection{Hvis vi ikke havde RSA}

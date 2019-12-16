@@ -70,3 +70,9 @@ c^d (mod n) = (m^e (mod n))^d (mod n) = (m^e)^d (mod n) = m^ed (mod n) = m
 
 # rsa bevis
 m^ed (mod n) = m
+
+
+
+Bedste alg (1997)
+for tallet n
+e^{\sqrt{\ln(\ln(n)) \cdot \ln(n)}}

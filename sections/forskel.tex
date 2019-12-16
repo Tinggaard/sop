@@ -1,13 +1,16 @@
-Det ses tydeligt hvordan krytografi er godt, til at sende hemmelige beskeder, som kun kan aflæses af den rette.
-Hashing er derimod blot en metode man bruger til at validere data, uden at have nødvendigheden i at vide hvad det originale data var.
-Ved nogle eksempler ses, hvordan de forskellige metoder bruges.
-
+Nu da de grundlæggende træk i hashing er blevet vist, skal vi kigge på, hvordan et public-key kryptografi, som RSA virker.\\
+Pointen med et public-key krypto-system er, at et parti har både en offentlig og en hemmelig nøgle.
+Som navnene antyder, er den offentlige nøgle tilgængelige for alle, mens den private, ikke deles med nogen.
+De to nøgler er hinandens modsætninger, så at sige, krypterer man noget med den offentlige nøgle, kan det kun dekrypteres med den tilsvarende private nøgle og vice versa.
+Det vil altså sige, at hvis parti A, vil sende en krypteret besked til parti B. Tager A blot og krypterer beskeden med Bs offentlige nøgle, hvorefter det kun er Bs hemmelige nøgle, som kan dekryptere beskeden.\\
+Det ses ved nogle Konkreteksempeler.
 
 \subsection{Alice \& Bob}
 Til fremvisning af protokoller i kryptografien, bruger man ofte \emph{Alice} og \emph{Bob} som pladsholdere for aktører.
 Det skal ses hvordan RSA anvendes i praksis, samt problemer ved anvendelse af metoden.
 
 \begin{eks}[Generel protokol for RSA]
+    \label{genrsa}
     Bob er en server, som Alice gerne vil kontakte.
     Al kommunikation mellem de to parter, foregår i offentligt rum, så alle og enhver kan læse beskederne sendt mellem dem.
     For at holde sin besked til Bob hemmelig, tager Alice, finder hun Bobs offentlige nøgle \(P_B\) (Public Bob), og krypterer sin besked med den.
@@ -16,7 +19,7 @@ Det skal ses hvordan RSA anvendes i praksis, samt problemer ved anvendelse af me
     Vil Bob gerne sende et svar tilbage til Alice foregår det naturligvis på samme måde, han krypterer sin besked med \(P_A\) og sender den så.\\
 
     Det opskrives som en protokol:
-    \begin{enumerate}[noitemsep]
+    \begin{enumerate}%[noitemsep]
         \item Alice krypterer sin besked med \(P_B\).
         \item Alice sender den krypterede besked ud i det offentlige rum.
         \item Bob opfanger beskeden og dekrypterer den med \(S_B\).
@@ -31,6 +34,23 @@ På denne måde kan Eve aflytte enhver besked sendt mellem Alice og Bob, uden at
 Denne slags angreb kaldes for \emph{man in the middle}. \cite{ytmitm}
 
 
+\subsection{RSA i praksis}
+Skal man kryptere en længere besked, et billede, eller måske en hel hjemmeside, bliver det hurtigt en møjsommelig affære.
+Derfor følger man ikke protokollen fra eksempel \ref{genrsa} i praksis, men bruger i stedet en symmetrisk krypterings algoritme (som f.eks. \texttt{AES} Advanced Encryption Standard), som er kendetegnet ved, at den bruger samme nøgle til kryptering og dekryptering og samtidig ikke er på så mange bit (128 bit), som en asymmetrisk krypteringsnøgle (som RSA). \cite{xolphin}
+Det vil sige at man blot et nødt til at kryptere den symmetriske krypteringsnøgle med den asymmetriske krypteringsnøgle (RSA nøglen). \cite[112]{krypto}\\
+Det opskrives som en ny protokol:
+
+\begin{enumerate}
+    \item Alice udvælger en tilfældig AES-nøgle og krypterer så sin besked med den, udeldende \(c\).
+    \item Alice krypterer den symmetriske krypteringsnøgle med \(P_B\).
+    \item Alice sender nu \(c\) afsted til Bob, sammen med den krypterede AES-nøgle.
+    \item Bob dekrypterer AES-nøglen, med \(S_B\) og krypterer derefter \(c\), med den nu fundne AES-nøgle.
+\end{enumerate}
+
+
+
+
+
 \subsection{Kodeord}
 Hashing er som tidligere fortalt, anvendt til at 'hemmeliggøre' kodeord.
 Det skal ses hvordan man kan forsøge at finde frem til den originale besked, på trods af hashets envejs-egenskab.
@@ -41,7 +61,7 @@ Hvorved det vises, hvorfor det er vigtigt at bruge et godt kodeord, samt -- som 
     Hashcat er formentlig et af de allermest brugte værktøjer, til at brute-force hashes.\footnote{\url{https://hashcat.net/hashcat/}}
     Hashcat er et kommandolinjeværktøj, som udelukkende er bygget til at hashe tekststrenge og sammenligne dem med et (eller flere) hashes.
     Fordelen ved hashcat er, at man som angriber, kan opsætte mere specifikke regler for, hvordan tekststrengen som man hasher, skal se ud.
-    Det står nærmere beskrevet her: \url{https://hashcat.net/wiki/doku.php?id=mask_attack} (på engelsk).
+    Det står nærmere beskrevet i dokumentationen.\footnote{\url{https://hashcat.net/wiki/doku.php?id=mask_attack}}
     Det skal nu ses, hvordan man kan bruge hashcat til at brute-force kodeord, som set i eksempel \ref{brutefc}.\\
     Ønsker man f.eks. at finde alle kodeord, som består af 6 små bogstaver, efterfulgt af 4 tal, køres kommandoen
     \begin{minted}[fontsize=\footnotesize, bgcolor=bg]{bash}
@@ -114,7 +134,7 @@ $ hashcat -a 3 <hashfil> ?l?l?l?l?l?l?d?d?d?d
 
 
 \subsection{Online autentificering}
-Skal man autentificere sig online, er der heldigvis lavet en protokol til at undgå angreb som man in the middle.\cite{dtu}
+Skal man autentificere sig online, er der heldigvis lavet en protokol, som gør at man kan validere gyldigheden af en besked.\cite{dtu}
 Protokollen anvender både hashing samt RSA til at verificere ægteheden af et dokument eller lignende.\\
 Vil Bob gerne sikre sig at beskeden stammer fra Alice, kræver det at Alice følger protokollen:
 Udover at sende beskeden, bruger hun en hashfunktion på beskeden \(H(m)\), signerer det så med sin private nøgle \(S_A\) og sender så dette krypterede hash \(y\) afsted, sammen med den originale besked.
@@ -125,7 +145,7 @@ Hvis de to hashes stemmer over ens, kan han verificere at beskeden er fra Alice.
 Dette virker, da det kun er Alices offentlige nøgle \(P_A\), som kan bruges til at dekryptere hashet, bruger Bob Eves offentlige nøgle \(P_E\), vil han ikke få samme hash, hvorfor beskeden ikke er fra Eve.\\
 
 Protokollen foregår som følger:
-\begin{enumerate}[noitemsep]
+\begin{enumerate}%[noitemsep]
     \item Alice hasher beskeden \(m\) med en bestemt hashfunktion \(H(m)\).
     \item Alice krypterer hashet med sin private nøgle \(S_A\), som afgiver \(y\).
     \item Alice sender så den originale besked \(m\), samt det krypterede hash \(y\) afsted.
