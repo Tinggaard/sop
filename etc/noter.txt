@@ -5,8 +5,8 @@ rainbowtables
 brute force
 hashtable
 gpg
-certifikater
 http vs https
+certifikater
 2fa
 kvantecomputere
 
