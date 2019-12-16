@@ -7,6 +7,17 @@ hashtable
 gpg
 certifikater
 http vs https
+2fa
+kvantecomputere
+
+faktoere ved login:
+kodeord
+Kryptering
+hashing
+2fa
+
+
+https://docs.python.org/3/library/functions.html#pow
 
 Billede af pgp fra hashcat
 
@@ -33,6 +44,9 @@ Forside billede eller resumé er ligegyldigt
 Tag udgangspunkt i de sætninger der anvendes i RSA, evt bevis de som den bygger på, ellers lig dem i bilag.
 
 #RSA bygger på at phi(n) ikke kan beregnes, ud over hvis man har p og q
+#Derudover skal det være primtal, da man ellers ikke ville få entydige svar.
+
+Forklar lige hvad RSA går ud på, hvordan med hemmelig offentlig nøgle!
 
 
 ##### metode #####

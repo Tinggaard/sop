@@ -2,4 +2,13 @@ Sætning 12
 
 Bilag eller litteratur først?
 
-Eulers phi - Som produkt
+Eulers phi - Som produkt, er det ikke forkert?
+
+Må jeg godt tage og svare på hvordan RSA virker til aller sidst?
+Eller skal det være i sammenhæng med talteorien?
+
+Inverse elementer?!?
+
+\eq eller \equiv
+
+Må jeg sætte nogle forklaringer i forordene? Som f.eks. forklaring af hemmelig/offentlig.
