@@ -1,18 +1,10 @@
 # TODO
-* Billede af pgp fra hashcat
-* Antal bits (MD5 128 bit)
-* faktoere ved login:
-    * kodeord
-    * Kryptering
-    * hashing
-    * 2fa
 * kode til kryptering i Python
-* hashlib ved MD5
 * protokol env
 * Hvad er en protokol?
 * Flyt evt. hashcat til sektion 2
-* vejledere, sidetal osv på forside.
 * haveibeenpwned.com
+* beviser i bilag
 
 **Læs nu lige igennem, for sammenhæng**
 
@@ -32,12 +24,6 @@
 ## links
 
 pow til Python: https://docs.python.org/3/library/functions.html#pow
-
-primtal: https://primes.utm.edu/lists/small/millions/
-
-hashcat pgp https://hashcat.net/hashcat/
-
-uni login: https://viden.stil.dk/pages/viewpage.action?pageId=70582342
 
 re: https://docs.python.org/3.8/library/re.html#regular-expression-syntax
 
@@ -62,11 +48,11 @@ $ detex file.tex | wc -C
     - [x] Kort intro til mod og primtal (måske for lang)
     - [x] Noget om største fælles divisor og indbyrdes primisk
     - [x] Dernæst eulers funktion
-    - [ ] Så til de sætninger som er vigtige...
+    - [x] Så til de sætninger som er vigtige...
 
 2. Hashing (2)
     - [x] Hvad er hashing - pseudorandom - envejs
-    - [ ] Evt. forskellige hashfunktioner
+    - [x] Evt. forskellige hashfunktioner
     - [x] Noget om hashtabeller?
 
 3. Forskel (5)

@@ -173,6 +173,8 @@ $ gpg --full-generate-key
 
     Efter nøglen er blevet genereret, ligger den som en binær fil, som altså kun er læsbar af computeren.
     For at konvertere den til, vi kan forstå, køres kommandoen:
+
+
     \begin{minted}[fontsize=\footnotesize, bgcolor=bg]{bash}
 $ gpg --export -a
     \end{minted}
@@ -186,7 +188,7 @@ $ gpg --export -a
             \caption{1024-bit nøgle genereret i gpg}
             \label{fig:key}
         \end{center}
-        \vspace{-100pt}
+        \vspace{-50pt}
     \end{wrapfigure}
 
     Et eksempel på outputtet af denne kommando, kan ses på figur \ref{fig:key}.\\
@@ -200,6 +202,8 @@ $ gpg --clearsign fil
     gpg er altså en stor del af kryptografi, hvis man selv ønsker at kryptere sine data.
     Det kan f.eks. være idet man udgiver noget vigtigt offentligt.
     Så vil læserne gerne validere hvem udgiveren er -- det kan gøres i gpg.\\
+    På downloadsiden til hashcat\footnote{\url{https://hashcat.net/hashcat/}}, kan man -- udover at downloade kildekoden til hashcat, downloade en signatur af kilekoden, ud fra hvilken, man kan vadidere at dowloadet er ægte.
+
 
     \subsubsection{Certifikater}
     For at undgå, hele tiden at skulle signere et dokument (eller hjemmeside), inden det deles online, bruger man certifikater.\cite{cert}
@@ -209,7 +213,7 @@ $ gpg --clearsign fil
     Når en bruger så ønsker at tilgå hjemmesiden, sender hjemmesiden blot sin offentlige nøgle tilbage.
     Browseren laver så et tjek med de kendte certifikatudbydere, for at verificere ægteheden af hjemmesidens offentlige nøgle.
     Denne metoden er protokol eksisterer, for at undgå man in the middle angreb.
-    Samtidig med at den er langt hurtigere end processen beskrevet i afsnit \ref{auth} 
+    Samtidig med at den er langt hurtigere end processen beskrevet i afsnit \ref{auth}
 
 
 

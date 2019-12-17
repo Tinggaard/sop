@@ -35,7 +35,7 @@ def euclid(a,b):
 
 
 
-
+# Kan finde største fælles divisor for tallene a og b
 if __name__ == '__main__':
     try:
         a = int(sys.argv[1])
