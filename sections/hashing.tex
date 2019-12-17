@@ -1,5 +1,5 @@
 Hashing er en metode, brugt til at omdanne data til en tekststreng, med en fikseret længde.
-Den nye tekststreng vil være pseudorandom\footnote{Fra engelsk: Fremstå tilfældigt, men i virkeligheden være forsætlig.} % -- den vil fremstå tilfældigt, men faktisk være regelmæssig, baseret på inputtet.
+Den nye tekststreng vil være \emph{pseudorandom}\footnote{Fra engelsk: Fremstå tilfældigt, men i virkeligheden være forsætlig.} % -- den vil fremstå tilfældigt, men faktisk være regelmæssig, baseret på inputtet.
 Til forskel fra RSA skal man ikke skal generere nogle tal førend metoden bruges, hvilket medfører at der altid bliver genereret det samme output, ved det samme input.
 Outputtet efter en hashfunktion, omtales som et \emph{hash} (eller \emph{digest} på engelsk).
 \\
@@ -7,12 +7,26 @@ Derudover er hashing en envejsfunktion, modsat RSA, hvor man jo både kan krypte
 Med hashing kan man altså ikke gå baglæns, hvis man kun har et hash af en tekst.\cite{algoritmer}
 
 
+\subsection{Hashfunktioner}
+Der findes en del forskellige hashfunktioner, mange af dem er også implementeret i Python biblioteket\footnote{I programmeringsverdenen er et bibliotek, noget kode, som andre har skrevet og kan implementeres i brugerens egen kode.} ``hashlib''\footnote{\url{https://docs.python.org/3/library/hashlib.html}}.
+De forskellige hashfunktioner varierer i længden af output og dermed også hastighed.
+Den efterhånden gamle hashfunktion \texttt{MD5}, giver et output på 128-bit, mens nyere funktioner som \texttt{SHA256} og \texttt{SHA384} giver henholdsvis 256 og 384-bit, som navnene antyder.
+Det skal senere ses, hvorfor en hashfunktion med et langt output er bedre.
+
+Ønsker man at hashe \(abc\) i \texttt{SHA256} i Python, gøres følgende.
+\begin{minted}[fontsize=\footnotesize, bgcolor=bg]{python}
+>>> import hashlib
+>>> hashlib.sha256('abc'.encode()).hexdigest()
+'ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad'
+\end{minted}
+
+
 \subsection{Fordelen ved hashing}
 Det at hashing kun går en vej, virker måske lidt nytteløst, da man ikke længere er i stand til at finde ud af hvad man har hashet.
 I stedet bruger man hashing til at gemme kodeord, sådan at hvis nogle kodeord bliver lækket, er de stadig beskyttede.
 Dette kan lade sig gøre, da hashing altid giver det samme hash ved brug af samme input.
 Det vil altså sige at hvis man hasher \(abc\), vil man få det samme output hver gang.
-Da et hash er pseudorandom, vil det ikke sige noget om hvad det tidligere har været - der er som sådan ikke noget mønster i metoden.
+Da et hash er pseudorandom, vil det ikke sige noget om hvad det tidligere har været.
 Det ses i eksempel \ref{eks:hash}.
 
 \begin{eks}[Hashing ved brug af hashfunktionen \texttt{MD5}]
@@ -31,8 +45,6 @@ Måden man anvender dette på, er at hashe et kodeord inden det bliver puttet in
 Når så brugeren forsøger at logge ind, hasher man igen det indtastede kodeord og hvis det stemmer over ens, med det liggende i databasen, kan man formode at brugeren har indtastet det rigtige kodeord.
 \\
 
-Der findes mange forskellige kryptografiske hashfunktioner, blandt de mere kendte er \texttt{MD5}, \texttt{SHA256} og \texttt{SHA512}.\cite{algoritmer}
-Essentielt er de opbygget på samme måde, forskellen i dem er hvor langsomme og dermed sikre de er. Samt hvor mange bit de returnerer.
 For at forstå hvorfor en langsom hashfunktion er god, er det vigtigt at forstå essensen i en hashfunktion.
 Det at den kun kan bruges en vej, gør nemlig at hvis man gerne vil finde ud af den originale tekst til et hash, er man nødt til at prøve sig frem, i IT-verdenen kaldes dette for \emph{brute-force}\footnote{Når man prøver alle kobinationer af en fremgangsmetode, for at finde frem til det rigtige svar.}.
 

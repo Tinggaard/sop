@@ -50,18 +50,41 @@ Skriver man f.eks. \(a \Mod{n}\), udregner man resten efter division, som angive
 \begin{definition}
     For \(m \in \mathbb{Z}\) og \(n \in \mathbb{N}\) gælder:
     \[n \mid m \iff m \Mod{n} = 0\]
-    \[r = n - q m = m \Mod{n}\]\cite[72]{krypto}
+    \[r = n - q m = m \Mod{n}\]%\cite[72]{krypto}
 \end{definition}
 
-\begin{eks}
-    Et par eksempler på brugen af modulo.
-    \begin{center}
-        \setlength{\tabcolsep}{20pt} % General space between cols (6pt standard)
-        \begin{tabular}{l c r}
-            \(43 \Mod{6} = 1\) & \(74 \Mod{10} = 4\) & \(58 \Mod{6} = 4\)
-        \end{tabular}
-    \end{center}
-\end{eks}
+Derpå, flydes nogle vigtige sætninger om regning med modulo.
+\begin{sent}
+    \label{modmod}
+    For \(a, b \in \mathbb{Z}, n, t \in \mathbb{N}\)
+    \begin{align}
+        (a \cdot b) \Mod{n} &= \left(a \Mod{n} \cdot b \Mod{n}\right) \Mod{n}\label{eq:prodmod}\\
+        a^t \Mod{n}         &= (a \Mod{n})^t \Mod{n}\label{eq:potmod}
+    \end{align}
+\end{sent}
+
+\begin{proof}
+    Ifølge sætning \ref{rest}, kan \(a\) og \(b\) omskrives, hvorefter udtrykket reduceres.
+    \begin{align*}
+(a \cdot b) \Mod{n} &= \left((q_1 n + r_1) \cdot (q_2 n + r_2)\right) \Mod{n}\\
+                    &= \left( r_1 r_2 + (q_1 q_2 n + q_1 r_2 + q_2 r_1)n \right) \Mod{n}\\
+                    &= r_1 r_2 \Mod{n}\\
+                    &= \left(a \Mod{n} \cdot b \Mod{n}\right) \Mod{n}
+    \end{align*}
+    Det lange udtryk i parentesen kunne fjernes, da \(n\), var ganget ind på hvert led.
+    \eqref{eq:prodmod} er nu bevist, \eqref{eq:potmod} følger, ved gentagen anvendelse af \eqref{eq:prodmod}.
+\end{proof}
+
+
+% \begin{eks}
+%     Et par eksempler på brugen af modulo.
+%     \begin{center}
+%         \setlength{\tabcolsep}{20pt} % General space between cols (6pt standard)
+%         \begin{tabular}{l c r}
+%             \(43 \Mod{6} = 1\) & \(74 \Mod{10} = 4\) & \(58 \Mod{6} = 4\)
+%         \end{tabular}
+%     \end{center}
+% \end{eks}
 
 
 % sent 4.7 fra bogen (s 73)
@@ -85,11 +108,10 @@ Det kan altså konkluderes at der findes en største fælles divisor.
 \begin{eks}
     Lad \(a = 8\) og \(b = 12\).\\
     \begin{tabular*}{\textwidth}{@{} l l}
-        Det ses at divisorne i \(8\) er: & \(\pm 1, \pm 2, \pm 4, \pm 8\).\\
+        Det ses at divisorne i \(8\) er:      & \(\pm 1, \pm 2, \pm 4, \pm 8\).\\
         Og det ses at divisorne i \(12\) er:  &\(\pm 1, \pm 2, \pm 3, \pm 4, \pm 6, \pm 12\).\\
-        Til fælles har de altså divisorne: & \(\pm 1, \pm 2, \pm 4\).
+        Til fælles har de altså divisorne:    & \(\pm 1, \pm 2, \pm 4\).
     \end{tabular*}
-
     Dermed bliver \((8, 12) = 4\).
 \end{eks}
 
@@ -114,6 +136,7 @@ Sætning \ref{commod} bevises ikke, i stedet vil Euclids algoritme (som bygger p
 %%% euclids alg
 \subsubsection{Euclids algoritme}
 Euclids algoritme er essentielt gentagen anvendelse af sætning \ref{commod}.
+Algoritmen bruges til at udregne største fælles divisor for \(a, b \in \mathbb{N}\).
 \begin{definition}[Euclids algoritme]
     Lad \(a, b \in \mathbb{N}\), hvor \(a \geq b\).
     Hvis \(a \mid b\), så er \((a, b) = b\).
@@ -134,8 +157,6 @@ Euclids algoritme er essentielt gentagen anvendelse af sætning \ref{commod}.
     Den sidste rest, som ikke er 0, er dermed den største fælles divisor.\cite[11]{absalg}
 \end{definition}
 
-Det ses hvordan Euclids algoritme bruges, til at overskue udregningen af største fælles divisor.
-
 \begin{eks}[Anvendelse af Euclids algoritme]
     Lad \(a = 1048\) og \(b = 672\).
     Ved brug af Euclids algoritme, findes da største fællesnævner.
@@ -153,7 +174,7 @@ Det ses hvordan Euclids algoritme bruges, til at overskue udregningen af størst
         \end{tabular}
     \end{center}
 \end{eks}
-Bilag \ref{file:euclid}, viser en implementering af Euclids algoritme i Python og kan køres således
+Appendiks \ref{file:euclid}, viser en implementering af Euclids algoritme i Python og kan køres således
 (kræver at Python er installeret\footnote{\url{https://www.python.org/downloads/}}):
 \begin{minted}[fontsize=\footnotesize, bgcolor=bg]{bash}
 $ python euclid.py a b
@@ -263,7 +284,7 @@ Ellers står de naturligvis i \textit{Kryptografi -- fra viden til videnskab}. \
     \[a^t \Mod{n} = a^{q \cdot \phi(n) + r} \Mod{n}\]
     Først deles summen af potensen op i to dele.
     \[a^t \Mod{n} = (a^{\phi(n)})^q \cdot a^r \Mod{n}\]
-    Ifølge modulo regneregler \cite[73]{krypto}, kan et produkt splittes op som følger.
+    Ifølge sætning \ref{modmod}, kan et produkt splittes op som følger.
     \[a^t \Mod{n} = \Big[ \big( (a^{\phi(n)} \Mod{n})^q \Mod{n} \big) \cdot \big( a^r \Mod{n} \big) \Big] \Mod{n}\] %9b og 9c
     Og da \(a^{\phi(n)} \Mod{n} = 1\) (fordi \((a, n) = 1\)) \cite[90]{krypto}, fås
     \[a^t \Mod{n} = \Big[ \big( 1^q \Mod{n} \big) \cdot \big( a^r \Mod{n} \big) \Big] \Mod{n}\]
@@ -274,11 +295,10 @@ Ellers står de naturligvis i \textit{Kryptografi -- fra viden til videnskab}. \
 En anden vigtig sætning for RSA, er sætningen om inverse elementer. Den lyder som følger:
 
 \begin{sent}
+    \label{invelm}
     For \(a \in Z_n\), for hvor det gælder at \((a, n) = 1\), vil \(a\) have et entydigt inverst element \(\Mod{n}\).\cite[93]{krypto}\\
     Eller sagt på en anden måde:\\
     Der vil være en entydig løsning til ligningen \(a x \Mod{n} = 1\), for \(x \in Z_n\).
 \end{sent}
 
-% \begin{proof}
-%
-% \end{proof}
+Sætning \ref{invelm} har et meget langt bevis, som bygger på tidligere ikke-dokumenterede sætninger. Hvorfor sætningen ikke bevises. Beviset kan dog stadig findes i \cite[15]{vestergaard}.

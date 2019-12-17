@@ -1,16 +1,14 @@
 Sætning 12
 
-Bilag eller litteratur først?
-
-Eulers phi - Som produkt, er det ikke forkert?
+Eulers phi funk - Som produkt af primtal, er det ikke forkert?
 
 Må jeg godt tage og svare på hvordan RSA virker til aller sidst?
 Eller skal det være i sammenhæng med talteorien?
-
-Inverse elementer?!?
 
 \eq eller \equiv
 
 Må jeg sætte nogle forklaringer i forordene? Som f.eks. forklaring af hemmelig/offentlig.
 
 Det er en gammel bog, skal jeg tage hensyn?
+
+Ok at kalde et punkt for "opsumering", inde midt i teksten?

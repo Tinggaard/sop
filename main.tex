@@ -15,6 +15,7 @@
 \usepackage{changepage} % for the adjustwidth environment
 \usepackage{multirow} % Multiple rows in tabular
 \usepackage{enumitem} % space between items in list
+\usepackage[page, titletoc]{appendix} % appendicies
 \usepackage{wrapfig} % small figure
 \usepackage[pdftitle={SOP},pdfauthor={Jens Tinggaard}, hidelinks, bookmarks=true]{hyperref} %References
 \usepackage{cleveref} % referencing list
@@ -33,6 +34,11 @@
 % Set line on header and footer width
 \renewcommand{\headrulewidth}{2pt}
 \renewcommand{\footrulewidth}{1pt}
+
+
+\addto\captionsdanish{\renewcommand\appendixname{Appendiks}} % appekdiks in toc
+\renewcommand{\appendixpagename}{Appendiks} %appekdiks in page
+
 
 \definecolor{bg}{rgb}{0.95,0.95,0.95} % Baggrund af kode.
 
@@ -53,14 +59,14 @@ icon={Paperclip}
 
 
 \newtheoremstyle{breakline}%            name
-  {0.5cm plus 1 pt minus 2 pt}%         Space above, empty = `usual value'
-  {0.5cm plus 1 pt minus 2 pt}%         Space below
-  {}%                                   Body font
-  {}%                                   Indent amount (empty = no indent, \parindent = para indent)
-  {\bfseries}%                          Thm head font
-  {\mbox{}\hspace{0.5cm}\xfill{0.4pt}\vspace{0.3cm}}%Punctuation after thm head
-  {0pt}%                                   Space after thm head: \newline = linebreak
-  {}%                                   Thm head spec
+    {0.5cm plus 1 pt minus 2 pt}%         Space above, empty = `usual value'
+    {0.5cm plus 1 pt minus 2 pt}%         Space below
+    {}%                                   Body font
+    {}%                                   Indent amount (empty = no indent, \parindent = para indent)
+    {\bfseries}%                          Thm head font
+    {\mbox{}\hspace{0.5cm}\xfill{0.4pt}\vspace{0.3cm}}%Punctuation after thm head
+    {0pt}%                                   Space after thm head: \newline = linebreak
+    {}%                                   Thm head spec
 
 \newtheoremstyle{break}%                  name
     {0.5cm plus 1 pt minus 2 pt}%         Space above, empty = `usual value'
@@ -109,6 +115,7 @@ icon={Paperclip}
 % \setlength{\parskip}{1em} % Paragraf afstand
 % Bruges med \par
 
+\numberwithin{equation}{section}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -118,24 +125,17 @@ icon={Paperclip}
 
 \begin{document}
 
-
-\clearpage\maketitle
-\thispagestyle{empty}
-\maketitle
-
-\begin{abstract} %Måske det skal flyttes?
-her står hvad det kommer til at handle om...
-\end{abstract}
-
-Indsæt billede til forside?
-
+\input{sections/forside.tex}
 
 \newpage
 \tableofcontents
+% \listoffigures
+% \listoftables
 
 
 \newpage
 \section*{Introduktion / Forord}
+\addcontentsline{toc}{section}{Introduktion / Forord}
 \input{sections/forord.tex}
 
 
@@ -159,16 +159,15 @@ Indsæt billede til forside?
 \input{sections/rsa.tex}
 
 
-% \newpage
-% \section{Konklusion}
-% \input{sections/konklusion.tex}
+\newpage
+\section{Konklusion}
+\input{sections/konklusion.tex}
 
 
 
 
 
 \newpage
-%\nocite{*}
 \setlength\bibitemsep{10pt}
 \printbibliography[
 heading=bibintoc, %Er med i indholdsfortegnelsen
@@ -176,7 +175,8 @@ title={Litteratur} %Titel
 ]
 
 \newpage
-\section{Bilag}
-\input{sections/bilag.tex}
+\begin{appendices}
+    \input{sections/appendiks.tex}
+\end{appendices}
 
 \end{document}

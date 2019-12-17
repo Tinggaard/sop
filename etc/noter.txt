@@ -52,7 +52,7 @@ Forklar lige hvad RSA går ud på, hvordan med hemmelig offentlig nøgle!
 ##### metode #####
 n = q*p
 phi(n) = (p-1)(q-1)
-0 < e < phi(n)
+e \in z_{\phi(n)}^*
 d := ed (mod phi(n)) = 1
 
 offentlig: n e

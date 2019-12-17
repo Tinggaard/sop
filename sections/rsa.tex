@@ -68,7 +68,7 @@ Alice vil gerne logge på \url{https://www.netproever.dk/}, som Bob (staten) eje
 For at forhindre dette benytter Bobs website sig heldigvis af kryptering, hvilket også indikeres af browseren, hvor der står \texttt{https} oppe i søgebaren samtidig med at der er en hængelås før URLen -- se figur \ref{sikker}.
 \texttt{https} ``HyperText Transfer Protocol Secure'' er en protokol som lader browseren vide, hvordan den skal handle forespørgsler til websitet. \cite{https} Havde der blot stået \texttt{http}, ville forbindelsen ikke være krypteret. Det er altså vigtig at kigge på, inden man logger ind på en hjemmeside, for at undgå identitetstyveri.\\
 
-Det ses nu, hvordan Bob genererer en offentlig og en hemmelig nøgle ud fra protokollen fra sektion \ref{rsaprot}.
+Det ses nu, hvordan Bob genererer en offentlig og en hemmelig nøgle ud fra protokollen fra afsnit \ref{rsaprot}.
 
 \begin{enumerate}%[noitemsep]
     \item \(p = 41\) og \(q = 83\), \(n = 3403\)
@@ -91,7 +91,7 @@ Nu tager Alice så fat i Bobs offentlig nøgle \((43, 3403)\), for at kryptere s
 For hver bid i hendes kodeord, skal hun udregne \(m^{43} \Mod{3403}\).
 Det ses, at allerede ved første bid, skal hun udregne \(1915^{43} \approx 1.35 \cdot 10^{141}\).
 Hvilket overgår de fleste lommeregneres kapacitet.
-Heldigvis kan \(m^{43}\) omskrives, vha. potesnregneregler. Hvorefter det er langt nemmere at udregne modulo
+Heldigvis kan \(m^{43}\) omskrives, vha potensregneregler. Hvorefter det er langt nemmere at udregne modulo.
 \begin{align*}
 m^{43} &= m \cdot m^{42}\\
        &= m \cdot (m^{21})^2\\
@@ -103,7 +103,7 @@ m^{43} &= m \cdot m^{42}\\
        &= m \cdot m^2 \cdot ((m^2)^2)^2 \cdot (((m^4)^2)^2)^2\\
        &= m \cdot m^2 \cdot ((m^2)^2)^2 \cdot ((((m^2)^2)^2)^2)^2\\
 \end{align*}
-Beregningen opdeles på denne måde, sådan at der foretages en modulo operation, for hver potens-led.
+Beregningen udføres nu blot med henhold til sætning \ref{modmod}, sådan at der foretages en modulo operation, for hver potens-led.
 Det ville fylde alt for meget at begynde at vise hvordan det udføres her, derfor overlades det til læseren. Alternativ er der et fint eksempel i. \cite[104]{krypto}\\
 
 Krypteringen udføres, for at få den krypterede besked.
@@ -133,6 +133,32 @@ Det er hermed vist, ved et eksempel, at RSA virker.
 
 
 \subsection{UNI•Login}
+Vi skal kigge lidt på sikkerheden ved en almindelig login-formular og se hvilke faktoere der spiller ind.
+I de sidste mange år, har UNI-login, været de første 4 bogstaver i ens navn, efterfulgt af 4 tal (eller evt. bogstaver).
+Mens koden har bestået af 3 små bogstaver, 2 tal efterfulgt af atter 3 bogstaver.
+Men det skal langt om længe laves om. \cite{unilogin}
+Set fra onlinesikkerhedens synspunkt, var det heller ikke et øjeblik for tidligt, da det som vist i afsnit \ref{kodeord}, er meget let at brute-force sig frem til så korte kodeord.
+Den nye ordning, gør at der bl.a. skal være \emph{2FA}.\footnote{Engelsk for \emph{Two Factor Authentication}, betyder at man ikke blot skal logge ind med et fast kodeord, men også have noget seperat, som f.eks. nøglekortet til NemID, eller en engangskode tilsendt på SMS.}
+Dette er naturligvis med til at øge sikkerheden voldsomt.
+Der er hovedsageligt 4 faktoere, som spiller ind på sikkerheden af en login-formular
+\begin{enumerate}[noitemsep]
+    \item En krypteret forbindelse, til formularen (RSA)
+    \item Om loginnet er sat op til 2-faktor login
+    \item Styrken af brugerens kodeord, herunder længde og kompleksitet
+    \item Om kodeordet bliver hashet, herunder hvilken hashfunktion, samt brug af salt
+\end{enumerate}
 
+
+Udover faktor nummer 3, kan det, som bruger være svært at gøre noget ved nogle af disse foranstaltninger.
+Derfor er det vigtigt at tjekke om siden man besøger er krypteret og så vidt muligt at forsøge at vælge et langt unikt kodeord eller bruge en \emph{password manager}.\footnote{En password manager kan selv generere og holde styr på dine kodeord. Kodeordene er så beskyttet af et master kodeord, som du selv skal huske, da det er ``nøglen'' til alle kodeordene. \href{https://www.lastpass.com/}{LastPass} og \href{https://www.dashlane.com/}{dashlane} er begge password managers.}
 
 \subsection{Hvis vi ikke havde RSA}
+Vores verden ville formentlig gå helt i stå, hvis vi en stod i den uheldige situation, at der blev fremvist en metode til at bryde RSA krypteringen.
+Faktisk er der fremvist beviser for, at kvantecomputere, er langt bedre til at primtalsfaktorisere, end nudagens computere.\cite{quantum}
+Heldigvis formår de samtidig at skabe en ny kryptering, som de ikke selv kan bryde. Det er dog ikke noget, der vil blive taget yderligere op i denne tekst.
+
+RSA er grundlag for al online-sikkerhed i dag, herunder autentificering, anonymisering og som sikkerhedsforanstaltning.
+Hvis vi ikke havde RSA, ville ingen internettraffik længere være sikker, man ville ikke kunne stole på noget man læser online længere, da man ikke kan verificere udgiveren.
+Samtidig ville det være dumt at give sig til kende, da alle på den måde, vil få fat i ens oplysninger i det åbne net.
+
+\emph{RSA er altså uundgåelig foranstaltning, hvis man gerne vil leve i den digitale verden, som vi nu en gang gør.}
