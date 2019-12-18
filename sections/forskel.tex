@@ -6,6 +6,8 @@ Det vil altså sige, at hvis parti A, vil sende en krypteret besked til parti B.
 Det ses ved nogle Konkreteksempeler.
 
 \subsection{Alice \& Bob}
+Til beskrivelse af en fremgangsmetode, bruger man ofte termen ``protokol'', som er en arbejdsplan for et handlingsforløb.
+Hvis der bliver afviget fra protokollen, bør man ikke fortsætte.
 Til fremvisning af protokoller i kryptografien, bruger man ofte \emph{Alice} og \emph{Bob} som pladsholdere for aktører.
 Det skal ses hvordan RSA anvendes i praksis, samt problemer ved anvendelse af metoden.
 
@@ -16,10 +18,10 @@ Det skal ses hvordan RSA anvendes i praksis, samt problemer ved anvendelse af me
     For at holde sin besked til Bob hemmelig, tager Alice, finder hun Bobs offentlige nøgle \(P_B\) (Public Bob), og krypterer sin besked med den.
     Efter dette er gjort, er det kun Bob som kan dekryptere beskeden. Da det kun er ham, som har den hemmelige nøgle \(S_B\) (Secret Bob).
     Nu kan beskeden altså godt sendes over det offentlige rum, uden at Alice skal frygte for at beskeden bliver opsnappet.\\
-    Vil Bob gerne sende et svar tilbage til Alice foregår det naturligvis på samme måde, han krypterer sin besked med \(P_A\) og sender den så.\\
-
+    Vil Bob gerne sende et svar tilbage til Alice foregår det naturligvis på samme måde, han krypterer sin besked med \(P_A\) og sender den så.
+    \par
     Det opskrives som en protokol:
-    \begin{enumerate}%[noitemsep]
+    \begin{enumerate}[label*=(\arabic*)]%[noitemsep]
         \item Alice krypterer sin besked med \(P_B\).
         \item Alice sender den krypterede besked ud i det offentlige rum.
         \item Bob opfanger beskeden og dekrypterer den med \(S_B\).
@@ -40,7 +42,7 @@ Derfor følger man ikke protokollen fra eksempel \ref{genrsa} i praksis, men bru
 Det vil sige at man blot et nødt til at kryptere den symmetriske krypteringsnøgle med den asymmetriske krypteringsnøgle (RSA nøglen). \cite[112]{krypto}\\
 Det opskrives som en ny protokol:
 
-\begin{enumerate}
+\begin{enumerate}[label*=(\arabic*)]
     \item Alice udvælger en tilfældig AES-nøgle og krypterer så sin besked med den, udeldende \(c\).
     \item Alice krypterer den symmetriske krypteringsnøgle med \(P_B\).
     \item Alice sender nu \(c\) afsted til Bob, sammen med den krypterede AES-nøgle.
@@ -141,10 +143,10 @@ Det siges at Alice nu har sat sin \emph{digitale signatur} på beskeden.\\
 Når Bob så modtager beskeden sammen med det krypterede hash, tager han blot og hasher beskeden selv \(H(m)\).
 Og dekrypterer så det tilsendte hash \(y\) med Alices offentlige nøgle \(P_A\).
 Hvis de to hashes stemmer over ens, kan han verificere at beskeden er fra Alice.
-Dette virker, da det kun er Alices offentlige nøgle \(P_A\), som kan bruges til at dekryptere hashet, bruger Bob Eves offentlige nøgle \(P_E\), vil han ikke få samme hash, hvorfor beskeden ikke er fra Eve.\\
-
+Dette virker, da det kun er Alices offentlige nøgle \(P_A\), som kan bruges til at dekryptere hashet, bruger Bob Eves offentlige nøgle \(P_E\), vil han ikke få samme hash, hvorfor beskeden ikke er fra Eve.
+\par
 Protokollen foregår som følger:
-\begin{enumerate}%[noitemsep]
+\begin{enumerate}[label*=(\arabic*)]%[noitemsep]
     \item Alice hasher beskeden \(m\) med en bestemt hashfunktion \(H(m)\).
     \item Alice krypterer hashet med sin private nøgle \(S_A\), som afgiver \(y\).
     \item Alice sender så den originale besked \(m\), samt det krypterede hash \(y\) afsted.
@@ -160,11 +162,8 @@ Fordelen ved dette er at man ikke behøver at kryptere hele beskeden \(m\), som 
     En meget brugt metode til at generere digitale signaturer, er systemet GNU Privacy Guard (gpg)\footnote{\url{https://gnupg.org/}}.
     gpg bruges til at generere nøgler, kryptering af data samt autentificering.
     Når man genererer en nøgle, vælger man først og fremmest størrelsen (mellem 1024 og 4096 bit).
-    Derudover skal man vælge et navn samt en email at 'binde' nøglen til.\\
-
-
-
-
+    Derudover skal man vælge et navn samt en email at 'binde' nøglen til.
+    \par
     Dette kan gøres i gpg ved kommandoen:
     \begin{minted}[fontsize=\footnotesize, bgcolor=bg]{bash}
 $ gpg --full-generate-key
@@ -191,8 +190,8 @@ $ gpg --export -a
         \vspace{-50pt}
     \end{wrapfigure}
 
-    Et eksempel på outputtet af denne kommando, kan ses på figur \ref{fig:key}.\\
-
+    Et eksempel på outputtet af denne kommando, kan ses på figur \ref{fig:key}.
+    \par
     Slutteligt vises det, at man kan signere en fil i gpg.
     Dette gøres med flaget \texttt{clearsign}.
     \begin{minted}[fontsize=\footnotesize, bgcolor=bg]{bash}

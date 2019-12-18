@@ -1,12 +1,18 @@
 # TODO
 * kode til kryptering i Python
-* protokol env
-* Hvad er en protokol?
 * Flyt evt. hashcat til sektion 2
 * haveibeenpwned.com
 * beviser i bilag
+* fjern bilag som ikke er i brug
+* Sammenhæng mellem afsnit, tak!
 
-**Læs nu lige igennem, for sammenhæng**
+* **Læs nu lige igennem, for sammenhæng**
+
+# opgaveformulering
+* Redegør for talteorien bag RSA kryptering. Forklar nødvendigheden af primtal og hvordan RSA metoden fungerer.
+* Gør kort rede for hashing.
+* Analyser forskellen på hashing og kryptografi og hvilken rolle de har i forhold til sikkerhed.
+* Vurder hvorfor RSA er vigtigt i forbindelse med sikkerhed ved logins
 
 ## stikord
 - [x] rainbowtables
@@ -56,7 +62,7 @@ $ detex file.tex | wc -C
     - [x] Noget om hashtabeller?
 
 3. Forskel (5)
-    - [ ] Hvad er en protokol?
+    - [x] Hvad er en protokol?
     - [x] Hvad er kryptografi?
     - [x] En protokol for kryptografi
     - [x] Hvordan man faktisk bruger RSA
@@ -72,4 +78,6 @@ $ detex file.tex | wc -C
     - [x] UNI login som eks re: `[a-z]{3}[0-9]{2}[a-z]{3}`
     - [x] Hvordan verden ville være uden RSA
 
-5. Konklusion (0)
+5. Konklusion (1)
+    - [x] Kort opridsning af de 4 hovedpunkter
+    - [ ] En, ja... konklusion (Skriv lidt mere, tak!)

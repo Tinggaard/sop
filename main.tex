@@ -18,7 +18,7 @@
 % \usepackage{svg} % svg img
 \usepackage[page, titletoc]{appendix} % appendicies
 \usepackage{wrapfig} % small figure
-\usepackage[pdftitle={SOP},pdfauthor={Jens Tinggaard}, hidelinks, bookmarks=true]{hyperref} %References
+\usepackage[pdftitle={SOP},pdfauthor={Jens Tinggaard}, hidelinks, bookmarks=true, bookmarksopen=true]{hyperref} %References
 \usepackage{cleveref} % referencing list
 \usepackage[margin=1in]{geometry} %Margins
 \usepackage{attachfile} % Attach files in sources
@@ -28,6 +28,8 @@
 \usepackage[style=numeric, style=alphabetic]{biblatex} %style=numeric
 \addbibresource{biblography.bib}
 \DeclareNameAlias{default}{family-given}
+
+\emergencystretch=1em  % hbox not too wide
 
 
 \pagestyle{fancy} % Set custom page layout
@@ -129,15 +131,15 @@ icon={Paperclip}
 
 \input{sections/forside.tex}
 
-\newpage
+% \newpage
 \tableofcontents
 % \listoffigures
 % \listoftables
 
 
 \newpage
-\section*{Introduktion / Forord}
-\addcontentsline{toc}{section}{Introduktion / Forord}
+\section*{Forord / Motivation}
+\addcontentsline{toc}{section}{Forord / Motivation}
 \input{sections/forord.tex}
 
 
@@ -162,7 +164,9 @@ icon={Paperclip}
 
 
 \newpage
-\section{Konklusion}
+\section*{Konklusion}
+\addcontentsline{toc}{section}{Konklusion}
+
 \input{sections/konklusion.tex}
 
 

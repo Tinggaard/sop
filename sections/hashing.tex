@@ -8,7 +8,7 @@ Med hashing kan man altså ikke gå baglæns, hvis man kun har et hash af en tek
 
 
 \subsection{Hashfunktioner}
-Der findes en del forskellige hashfunktioner, mange af dem er også implementeret i Python biblioteket\footnote{I programmeringsverdenen er et bibliotek, noget kode, som andre har skrevet og kan implementeres i brugerens egen kode.} ``hashlib''\footnote{\url{https://docs.python.org/3/library/hashlib.html}}.
+Der findes en del forskellige hashfunktioner, mange af dem er også implementeret i Python biblioteket\footnote{I computerterminologi er et bibliotek, noget kode, som andre har skrevet og kan implementeres i brugerens egen kode.} ``hashlib''\footnote{\url{https://docs.python.org/3/library/hashlib.html}}.
 De forskellige hashfunktioner varierer i længden af output og dermed også hastighed.
 Den efterhånden gamle hashfunktion \texttt{MD5}, giver et output på 128-bit, mens nyere funktioner som \texttt{SHA256} og \texttt{SHA384} giver henholdsvis 256 og 384-bit, som navnene antyder.
 Det skal senere ses, hvorfor en hashfunktion med et langt output er bedre.
@@ -39,12 +39,10 @@ Det ses i eksempel \ref{eks:hash}.
     \end{center}
 \end{eks}
 
-\noindent
 %HALLLO
 Måden man anvender dette på, er at hashe et kodeord inden det bliver puttet ind i databasen.
 Når så brugeren forsøger at logge ind, hasher man igen det indtastede kodeord og hvis det stemmer over ens, med det liggende i databasen, kan man formode at brugeren har indtastet det rigtige kodeord.
-\\
-
+\par
 For at forstå hvorfor en langsom hashfunktion er god, er det vigtigt at forstå essensen i en hashfunktion.
 Det at den kun kan bruges en vej, gør nemlig at hvis man gerne vil finde ud af den originale tekst til et hash, er man nødt til at prøve sig frem, i IT-verdenen kaldes dette for \emph{brute-force}\footnote{Når man prøver alle kobinationer af en fremgangsmetode, for at finde frem til det rigtige svar.}.
 
@@ -86,9 +84,8 @@ Samt hvad man gør for at bekæmpe dette.
 
 \subsection{Hashtabeller}
 En anden ting, som hashfunktioner kan bruges til, er at generere hashtabeller.
-Dette vil blot blive kort gennemgået, da det ikke er den del af hashfunktioner, som denne tekst ellers beskæftiger sig med.\\
+Dette vil blot blive kort gennemgået, da det ikke er den del af hashfunktioner, som har betydning for onlinesikkerhed.\\
 En hashtabel kan bruges idet man har en masse (hashbart) data, som skal sættes op i en tabel.
 Når man så skal finde noget af dette data tilbage i tabellen efter at have indsat det, vil man normalt skulle gennemgå alle cellerne i tabellen, for at finde ud af hvor, netop hvor det data man søger er. Det er her hashtabeller kommer ind i billedet.\\
-
 Meget forsimplet, fungerer en hashtabel ved, at man -- inden man insætter dataen i tabellen -- hasher dataen og i stedet for at indsætte det i den næste ledige celle, indsætter man det i en celle, svarende til det hash som dataen genererede.
 Når man så vil tilgå noget data i en tabel, hasher man blot dataen igen, for så at lave et opslag i tabellen i den celle tilsvarende til hashet. På den måde sparer man en masse tid, ved ikke at skulle lave et gennemløb af alle celler i tabellen.\cite{hashtables}

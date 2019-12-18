@@ -1,21 +1,19 @@
-Motivation samt formalia
-
-Først og fremmest, skal det nævnes at krytografi og kryptologi begge er ord for det samme.\\
-Det er også vigtigt at nævne, at komma ``,'' vil blive brugt som liste seperator, mens punktion ``.'' bliver brugt som decimaladskiller.
-
-\subsection*{Kryptografi og hashing}
 Uden nødvendigvis at være klar over det, er vi alle afhængige af kryptografi, det er en helt fundamental ting af vores hverdag.
-Kryptografi er grunden til at man kan handle på nettet, uden at få stjålet sine kreditkortoplysninger.
+
+Kryptografi er grunden til at man kan handle på nettet, uden at få stjålet sine kreditkortoplysninger og
+kryptografi er grundlaget for kryptovalutaer, som bitcoin.\footnote{\url{https://bitcoin.org/}} \\
 Hashing er også en stor del af den online-sikkerhed, som vi alle er så afhængige af.
-Hashing bruges til at ændre i kodeord, sådan at det ikke er så ligetil for en hacker, at bryde ind på en konto.
-Derudover medvirker både kryptografi samt hashing, til lave online autentificering. Det er måske ikke noget man tænker så meget over, men det virker umiddelbart langt nemmere at lave dokumentforfalskning online, da man blot kan ændre et navn eller lignende. Dette sætter kryptologi heldigvis også en stopper for.
-\\
+Hashing bruges til at ændre i kodeord, sådan at det ikke er så ligetil for en hacker, at bryde ind på en konto.\\
+Derudover medvirker både kryptografi samt hashing, til lave online autentificering og digitale signaturer, som bruges til at validere ægteheden af personer og/eller dokumenter.
+Det er måske ikke noget man tænker så meget over, men det virker umiddelbart langt nemmere at lave dokumentforfalskning online, da man blot kan ændre et navn eller lignende. Dette sætter kryptografi heldigvis også en stopper for.
 
 
 
 %%%% sektion skal evt flyttes til senere forklaring
+\subsection*{RSA}
 RSA er en metode, brugt til at kryptere data, døbt efter sine tre stiftere:
 \textit{Ron Rivers}, \textit{Adi Shamir} og \textit{Len Adleman}, tilbage i 1977.\cite{algoritmer}
 Metoden er baseret på antagelsen om, at det er svært at primtalsfaktorisere et stort tal.
 Talene anvendt ligger typisk i intervallet \(2^{1024}\) til \(2^{4096}\).
-Hvilket svarer til tal mellem \(\approx 1.798 \cdot 10^{308}\) og \(\approx 1.044 \cdot 10^{1233}\) i decimaltal. % \cite[21]{frividen}
+Hvilket svarer til tal mellem \(\approx 1.798 \cdot 10^{308}\) og \(\approx 1.044 \cdot 10^{1233}\).\\ % \cite[21]{frividen}
+Det er altså nogle meget store tal, man har med at gøre, når man skal kryptere data.

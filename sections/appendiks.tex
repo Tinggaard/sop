@@ -1,3 +1,32 @@
+\section{Beviser}
+\subsection{Bevis for sætning \ref{invelm}}\label{invelemproof}
+\textit{Beviset bygger på yderligere ikke-beviste sætninger, som lades op til læseren at validere}
+\begin{proof}
+    Antag at \((a, n) = 1\), der findes nu en \textit{linearkombination} af \(a\) og \(n\), således at \(a s + n t = 1\),
+    hvilket omskrives til \(a s = 1 - n t\).
+    Ud fra dette, ses det at \(a s \Mod{n} = 1\).
+    Ifølge sætning \ref{modmod}, kan dette omskrives til \(\left(a \Mod{n} \cdot s \Mod{n}\right) \Mod{n} = 1\).
+    Det vides at \(a < n\), da \(a \in Z_n\), hvorfor \(a \Mod{n} = a\),
+    derfor er \(\left(a s \Mod{n}\right) \Mod{n} = 1\),
+    hvilket medfører at \(x = s \Mod{n}\) er løsning til ligningen \(a x \Mod{n} = 1\).
+    Nu mangler blot entydigheden af beviset.
+    Antag at begge løsningerne \(x_1, x_2 \in Z_n\), er løsninger til ligningen \(a x \Mod{n} = 1\).
+    Det vil altså sige \(a x_1 \Mod{n} = a x_2 \Mod{n}\),
+    ud fra dette kan det konkluderes at \(x_1 \Mod{n} = x_2 \Mod{n}\)
+    og da begge løsninger er mindre end \(n\), haves at \(x_1 = x_2\).
+    Hvorved entydigheden er vist.
+
+    Sætningen vises også den anden vej:
+    Antag at \(x\) er løsning til ligningen \(a x \Mod{n} = 1\),
+    dette medfører at der findes et tal \(q\), så \(a x = q \cdot n + 1\).
+    Ud fra dette findes en linearkombination af \(a\) og \(n\) som giver 1:
+    \(x \cdot a + (-q) \cdot n = 1\).
+    Ud fra en anden ikke-bevist sætning, medfører dette at \((a, n) = 1\)
+
+\end{proof}
+
+
+\newpage
 \section{Python kode}
 \subsection{euclid.py}
 \label{file:euclid}
@@ -27,7 +56,3 @@ Eulers phi-funktion, skrevet i Python.}
 % date={D: 20191210111111+01'00'}
 ]{src/phi_func.py}
 \inputminted[python3, linenos, breaklines, frame=lines, fontsize=\footnotesize]{python}{src/phi_func.py}
-
-
-\section{Beviser}
-Her er et bevis...

@@ -1,11 +1,9 @@
-RSA bruges som sagt til så godt som alting der foregår online.......
-
 Først vil det kort blive gennemgået, hvordan RSA virker, på matematisk niveau. Hvorefter der vil være et Konkreteksempel.
 
 \subsection{Matematisk protokol for RSA}\label{rsaprot}
 Der følges igen i protokol, til fremstilling af den offentlige og den hemmelige nøgle.
 
-\begin{enumerate} %[noitemsep]
+\begin{enumerate}[label*=(\arabic*)] %[noitemsep]
     \item Udvælg 2 primtal \(p\) og \(q\), de skal gerne være omkring de 100 cifre hver og sæt så \(n = p \cdot q\)
     \item Udregn \(\phi(n)\), som er \((p - 1) (q - 1)\), da \(p\) og \(q\) er primtal.
     \item Vælg et tal \(e \in Z_{phi(n)}^*\), altså sådan at \(0 < e < \phi(n)\) og \((e, \phi(n)) = 1\)
@@ -19,12 +17,16 @@ Når dette er gjort, er vi klar til at sende hemmelige beskeder.
     \item Den hemmelige nøgle er \(d\).
 \end{itemize}
 
-Bemærk at \(p\) og \(q\) udelukkende er med til at generere \(n\) og \(\phi(n)\) og faktisk er \(\phi(n)\) også kun brug til at generere \(e\) og \(d\).
+Bemærk at \(p\) og \(q\) udelukkende er med til at generere \(n\) og \(\phi(n)\) og faktisk er \(\phi(n)\) også kun brug til at generere \(e\) og \(d\).\\
+For at kunne bryde krypteringen, skal man kende \(d\) og \(d\) kan faktisk genereres ud fra den offentlige nøgle.
+\emph{RSA bygger altså på antagelsen om, at det tager lang tid at primtalsfaktorisere \(n\)}
+\par
 
 Den besked \(m\) vi ønsker at sende, skal nu opfylde \(m < n\). Ellers må den opdeles i mindre bidder.
 
-Beskeden \(m\), som skal sendes, krypteres ved at udregne \(c = m^e \Mod{n}\). \(c\) er nu den krypterde besked.\\
-For at dekryptere \(c\), udregner man \(m = c^d \Mod{n}\)\\
+Beskeden \(m\), som skal sendes, krypteres ved at udregne \(c = m^e \Mod{n}\). \(c\) er nu den krypterde besked.
+
+For at dekryptere \(c\), udregner man \(m = c^d \Mod{n}\)
 
 \subsubsection{Bevis for RSA}
 Alt dette lader sig gøre, på baggrund af regnereglerne for modulo, ved brug af primtal.
@@ -66,12 +68,12 @@ Alice vil gerne logge på \url{https://www.netproever.dk/}, som Bob (staten) eje
 \end{wrapfigure}
 
 For at forhindre dette benytter Bobs website sig heldigvis af kryptering, hvilket også indikeres af browseren, hvor der står \texttt{https} oppe i søgebaren samtidig med at der er en hængelås før URLen -- se figur \ref{sikker}.
-\texttt{https} ``HyperText Transfer Protocol Secure'' er en protokol som lader browseren vide, hvordan den skal handle forespørgsler til websitet. \cite{https} Havde der blot stået \texttt{http}, ville forbindelsen ikke være krypteret. Det er altså vigtig at kigge på, inden man logger ind på en hjemmeside, for at undgå identitetstyveri.\\
-
+\texttt{https} ``HyperText Transfer Protocol Secure'' er en protokol som lader browseren vide, hvordan den skal handle forespørgsler til websitet. \cite{https} Havde der blot stået \texttt{http}, ville forbindelsen ikke være krypteret. Det er altså vigtig at kigge på, inden man logger ind på en hjemmeside, for at undgå identitetstyveri.
+\par
 Det ses nu, hvordan Bob genererer en offentlig og en hemmelig nøgle ud fra protokollen fra afsnit \ref{rsaprot}.
 
-\begin{enumerate}%[noitemsep]
-    \item \(p = 41\) og \(q = 83\), \(n = 3403\)
+\begin{enumerate}[label*=(\arabic*)]%[noitemsep],leftmargin=1.5cm,series=example
+    \item \(p = 41\) og \(q = 83\), \(n = 41 \cdot 83 = 3403\)
     \item \(\phi(n) = (41 - 1) (83 - 1) = 40 \cdot 82 = 3280\)
     \item \(e\) kan være mange værdier, men sættes i dette tilfælde til \(e = 43\)
     \item \(d\) beregnes til at være 1907
@@ -104,8 +106,8 @@ m^{43} &= m \cdot m^{42}\\
        &= m \cdot m^2 \cdot ((m^2)^2)^2 \cdot ((((m^2)^2)^2)^2)^2\\
 \end{align*}
 Beregningen udføres nu blot med henhold til sætning \ref{modmod}, sådan at der foretages en modulo operation, for hver potens-led.
-Det ville fylde alt for meget at begynde at vise hvordan det udføres her, derfor overlades det til læseren. Alternativ er der et fint eksempel i. \cite[104]{krypto}\\
-
+Det ville fylde alt for meget at begynde at vise hvordan det udføres her, derfor overlades det til læseren. Alternativ er der et fint eksempel i. \cite[104]{krypto}
+\par
 Krypteringen udføres, for at få den krypterede besked.
 \begin{align*}
     1915^{43} \Mod{3403} &= 2454\\
@@ -125,7 +127,7 @@ Dekrypteringen foregår som sagt ved at løfte \(c^d \Mod{n}\).
     944^{1907} \Mod{3403}  &= 1600\\
     469^{1907} \Mod{3403}  &= 1513\\
     174^{1907} \Mod{3403}  &= 0018\\
-    2637^{1907} \Mod{3403} &= 1901\\
+    2637^{1907} \Mod{3403} &= 1901
 \end{align*}
 
 Det er hermed vist, ved et eksempel, at RSA virker.
@@ -141,6 +143,7 @@ Set fra onlinesikkerhedens synspunkt, var det heller ikke et øjeblik for tidlig
 Den nye ordning, gør at der bl.a. skal være \emph{2FA}.\footnote{Engelsk for \emph{Two Factor Authentication}, betyder at man ikke blot skal logge ind med et fast kodeord, men også have noget seperat, som f.eks. nøglekortet til NemID, eller en engangskode tilsendt på SMS.}
 Dette er naturligvis med til at øge sikkerheden voldsomt.
 Der er hovedsageligt 4 faktoere, som spiller ind på sikkerheden af en login-formular
+
 \begin{enumerate}[noitemsep]
     \item En krypteret forbindelse, til formularen (RSA)
     \item Om loginnet er sat op til 2-faktor login
@@ -159,6 +162,6 @@ Heldigvis formår de samtidig at skabe en ny kryptering, som de ikke selv kan br
 
 RSA er grundlag for al online-sikkerhed i dag, herunder autentificering, anonymisering og som sikkerhedsforanstaltning.
 Hvis vi ikke havde RSA, ville ingen internettraffik længere være sikker, man ville ikke kunne stole på noget man læser online længere, da man ikke kan verificere udgiveren.
-Samtidig ville det være dumt at give sig til kende, da alle på den måde, vil få fat i ens oplysninger i det åbne net.
+Samtidig ville det være dumt at give sig til kende, da alle på den måde, vil få fat i ens oplysninger på det åbne net.
 
-\emph{RSA er altså uundgåelig foranstaltning, hvis man gerne vil leve i den digitale verden, som vi nu en gang gør.}
+Vi bør altså være glade for at RSA er opfundet, til at holde os sikre på nettet. Ikke kun i forbindelse med logins, men i den generelle færden på internettet.

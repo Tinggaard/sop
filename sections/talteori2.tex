@@ -6,10 +6,10 @@
 
 Talteorien beskæftiger sig med alle de hele tal \(\mathbb{Z}\).
 Vi skal i løbet af dette afsnit kigge på hvordan talteori ligger til grunde for, at RSA virker i praksis.
-\\
-Det er ikke alle definitioner og sætninger der bliver bevist, da det ville tage for lang tid.
-Alle beviser kan naturligvis findes i \textit{Kryptografi -- fra viden til videnskab}. \cite{krypto}\\
 
+Det er ikke alle definitioner og sætninger der bliver bevist, da det ville tage for lang tid.
+Alle beviser kan naturligvis findes i \textit{Kryptografi -- fra viden til videnskab}. \cite{krypto}
+\par
 Først vil nogle basale begreber i talteorien blive gennemgået, hvorefter vi skal kigge på de sætninger, der ligger til grunde for RSA.
 
 %%% rester og divisor
@@ -257,7 +257,7 @@ Det er ikke et bevis som vil blive gennemgået her.
 Det viser sig, at ved beregning med primtal, er meget nemt.
 
 \begin{eks}
-    Lad \(p\) og \(q\) være primtal. Det haves da at.\\
+    Lad \(p\) og \(q\) være primtal. Det haves da at.
     \begin{align}
         \phi(p)   &= p - 1\\
         \phi(p^2) &= (p - 1)^2\\
@@ -274,7 +274,7 @@ Det viser sig, at ved beregning med primtal, er meget nemt.
 Vi skal nu kigge på de sætninger, som bliver direkte anvendt i RSA metoden.
 Mange af disse sætninger, bygger på sætninger, som ikke er bevist og måske endda ikke nævnt, da de alle bygger på hinanden.
 Der henvises dog til bilagene, hvor nogle af sætningerne står.
-Ellers står de naturligvis i \textit{Kryptografi -- fra viden til videnskab}. \cite{krypto}\\
+Ellers står de naturligvis i \textit{Kryptografi -- fra viden til videnskab}. \cite{krypto}
 
 \begin{sent}
     \label{eulerssent}
@@ -305,4 +305,4 @@ En anden vigtig sætning for RSA, er sætningen om inverse elementer. Den lyder 
     Der vil være en entydig løsning til ligningen \(a x \Mod{n} = 1\), for \(x \in Z_n\).
 \end{sent}
 
-Sætning \ref{invelm} har et meget langt bevis, som bygger på tidligere ikke-dokumenterede sætninger. Hvorfor sætningen ikke bevises. Beviset kan dog stadig findes i \cite[15]{vestergaard}.
+Sætning \ref{invelm} har et langt bevis, som bygger på tidligere ikke-dokumenterede sætninger, hvorfor sætningen ikke bevises her. Det kan dog stadig findes i appendiks \ref{invelemproof}.
