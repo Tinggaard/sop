@@ -17,8 +17,6 @@ Hvad skal der stå på forsiden?
 
 Er der nok referencer?
 
-Er det en "tekst", "rapport" oder was?
+
 
 Referencer i motivationen?
-
-Er der programmering nok?
