@@ -1,3 +1,4 @@
+# Eulers phi-funktion i Python
 import sys
 from prime_factor import prime_factors
 
