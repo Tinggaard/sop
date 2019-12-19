@@ -92,7 +92,7 @@ $ hashcat -a 3 <hashfil> ?l?l?l?l?l?l?d?d?d?d
     \subsubsection{Salt}
     Som modsvar til rainbow tables, bruger man \emph{salt} sammen med lagringen af kodeord på en server. \cite{version2}
     Måden man anvender salt på er, at efter brugeren har lavet et kodeord, genererer man et salt -- en tilfældig tekststreng.
-    Dette salt konkatenerer\footnate{Når man sammenkæder to tekststrenge til én.} man blot med det originale kodeord, inden man hasher det.
+    Dette salt konkatenerer\footnote{Når man sammenkæder to tekststrenge til én.} man blot med det originale kodeord, inden man hasher det.
     Dermed vil hash-digestet ikke være identisk med et andet digest af det samme kodeord, da de ikke er hashet med samme værdi.
     I stedet for blot at gemme et hashet kodeord på serveren, gemmer man nu både det hashede kodeord, samt saltet som er blevet brugt til at generere det.
     Når en bruger så forsøger at logge ind, kigger man på kodeordet, konkatenerer saltet og hasher det så.
@@ -213,7 +213,7 @@ $ gpg --clearsign <fil>
     Det vil altså sige, at når man skal have en hjemmeside op at køre, går man til en certifikatudbyder og får sin offentlige nøgle verificeret.
     Når en bruger så ønsker at tilgå hjemmesiden, sender hjemmesiden blot sin offentlige nøgle tilbage.
     Browseren laver så et tjek med de kendte certifikatudbydere, for at verificere ægteheden af hjemmesidens offentlige nøgle.
-    Denne protokol for brug af certifikater, bruges for at modvirke angreb som ´´man in the middle''.
+    Denne protokol for brug af certifikater, bruges for at modvirke angreb som ``man in the middle''.
     Samtidig med at den er langt hurtigere end processen beskrevet i afsnit \ref{auth}
 
 
@@ -222,4 +222,4 @@ $ gpg --clearsign <fil>
 
 \subsection{Delkonklusion}
 Det forstås altså, at kryptografi og hashing begge er meget vigtige for den digitale sikkerhed i dag.
-Begge metoder har sine fordele og det blev vist hvordan man kan bruge de to på én gang, til at lave online autentifikation.
+Begge metoder har sine fordele og det blev vist hvordan man kan bruge de begge metoder på én gang, til at lave online autentifikation.

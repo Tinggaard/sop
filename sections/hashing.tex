@@ -1,6 +1,6 @@
 Hashing er en metode, brugt til at omdanne data til en tekststreng, med en fikseret længde.
 Den nye tekststreng vil være \emph{pseudorandom}\footnote{Fra engelsk: Fremstå tilfældigt, men i virkeligheden være forudsætlig.} % -- den vil fremstå tilfældigt, men faktisk være regelmæssig, baseret på inputtet.
-Hashing er ikke ´´hemmelig'', forstået ved, at alle kan hashe data og få det samme output (ved samme input naturligvis).
+Hashing er ikke ``hemmelig'', forstået ved, at alle kan hashe data og få det samme output (ved samme input naturligvis).
 Outputtet efter en hashfunktion, omtales som et \emph{hash} (eller \emph{digest} på engelsk).
 \\
 Derudover er hashing en envejsfunktion, hvilket betyder, at man altså ikke gå baglæns, hvis man kun har et digest af noget data.\cite{algoritmer}
@@ -71,10 +71,12 @@ Det at den kun kan bruges en vej, gør nemlig at hvis man gerne vil finde ud af 
         \end{tabular}
     \end{center}
 
-    \noindent
     Det kan altså konkluderes at det er klogt at vælge et kodeord på mere end 8 tegn.
-    Samt at en god hashfunktion tager lang tid, hvorved det forstås at funktioner som \texttt{SHA256} og \texttt{SHA512} er at foretrække over \texttt{MD5}.
+    Samt at en god hashfunktion tager lang tid, hvorved det forstås at funktioner som \texttt{SHA256} og \texttt{SHA512} er at foretrække over \texttt{MD5}.\\
+    Derudover har en hashfunktion med et større output, minde kollisionssandsynlighed\footnote{Når 2 forskellige inputs, giver samme hash-digest.} hvilket også er ønsket, for ikke at kunne danne ens hashes, ud fra forskellige inputs.
 \end{eks}
+
+
 
 Det skal senere ses, hvordan man kan brute-force endnu længere hashes, uden at det tager helt så lang tid.
 Samt hvad man gør for at bekæmpe dette.
@@ -85,4 +87,4 @@ Dette vil blot blive kort gennemgået, da det ikke er den del af hashfunktioner,
 En hashtabel kan bruges idet man har en masse (hashbart) data, som skal sættes op i en tabel.
 Når man så skal finde noget af dette data tilbage i tabellen efter at have indsat det, vil man normalt skulle gennemgå alle cellerne i tabellen, for at finde ud af hvor, netop hvor det data man søger er. Det er her hashtabeller kommer ind i billedet.\\
 Meget forsimplet, fungerer en hashtabel ved, at man -- inden man insætter dataet i tabellen -- hasher dataet og i stedet for at indsætte det i den næste ledige celle, indsætter man det i en celle, svarende til det hash som dataet genererede.
-Når man så vil tilgå noget data i tabellen, hasher man blot dataet igen, for så at lave et opslag i tabellen i den celle tilsvarende til hashet. På den måde sparer man en masse tid, ved ikke at skulle lave et gennemløb af alle celler i tabellen.\cite{hashtables}
+Når man så vil tilgå noget data i tabel, hasher man blot dataet igen, for så at lave et opslag i tabellen i den celle tilsvarende til hashet. På den måde sparer man en masse tid, ved ikke at skulle lave et gennemløb af alle celler i tabellen.\cite{hashtables}

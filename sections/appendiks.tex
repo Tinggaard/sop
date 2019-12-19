@@ -6,12 +6,12 @@
     hvilket omskrives til \(a s = 1 - n t\).
     Ud fra dette, ses det at \(a s \Mod{n} = 1\).
     Ifølge sætning \ref{modmod}, kan dette omskrives til \(\left(a \Mod{n} \cdot s \Mod{n}\right) \Mod{n} = 1\).
-    Det vides at \(a < n\), da \(a \in Z_n\), hvorfor \(a \Mod{n} = a\),
+    Det vides at \(a < n\), da \(a \in \mathbb{Z}_n\), hvorfor \(a \Mod{n} = a\),
     derfor er \(\left(a s \Mod{n}\right) \Mod{n} = 1\),
     hvilket medfører at \(x = s \Mod{n}\) er løsning til ligningen \(a x \Mod{n} = 1\).
-    
+
     Nu mangler blot entydigheden af beviset.
-    Antag at begge løsningerne \(x_1, x_2 \in Z_n\), er løsninger til ligningen \(a x \Mod{n} = 1\).
+    Antag at begge løsningerne \(x_1, x_2 \in \mathbb{Z}_n\), er løsninger til ligningen \(a x \Mod{n} = 1\).
     Det vil altså sige \(a x_1 \Mod{n} = a x_2 \Mod{n}\),
     ud fra dette kan det konkluderes at \(x_1 \Mod{n} = x_2 \Mod{n}\)
     og da begge løsninger er mindre end \(n\), haves at \(x_1 = x_2\).
@@ -19,12 +19,48 @@
 
     Sætningen bevises også den anden vej:
     Antag at \(x\) er løsning til ligningen \(a x \Mod{n} = 1\),
-    dette medfører at der findes et tal \(q\), så \(a x = q \cdot n + 1\).
+    dette medfører at der findes et tal \(q\), så \(a x = q n + 1\).
     Ud fra dette findes en linearkombination af \(a\) og \(n\) som giver 1:
     \(x \cdot a + (-q) \cdot n = 1\).
-    Ud fra en anden ikke-bevist sætning, medfører dette at \((a, n) = 1\)
+    Ud fra en anden ikke-bevist sætning, medfører dette at \((a, n) = 1\)\cite[93]{krypto}
 
 \end{proof}
+
+
+\subsection{Bevis for RSA ved \texorpdfstring{\((m, n) \neq 1\)}{(m, n) ≠ 1}}\label{proofrsa}
+\textit{Beviset bygger på yderligere ikke-beviste sætninger, som lades op til læseren at validere}
+\begin{proof}
+    Da \(n\) er et produkt af to primtal, vil det ene af dem være en divisor i \(m\),
+    ellers kan \(n\) og \(m\) ikke have en fælles divisor større end 1.
+    Det antages at \(p\) går op i \(m\) og at \(q\) ikke gør.
+    Dette medfører at \((q, m) = 1\).
+    Det er nu nok at vise at \(m^{ed} \Mod{p} = m \Mod{p}\)
+    og \(m^{ed} \Mod{q} = m \Mod{q}\),
+    for da haves at \(m^{e d} \Mod{n} = m \Mod{n} = m\) ifølge en ikke-bevist sætning.
+    Da \(p | m\) fås.
+
+    \[m^{e d} \Mod{p} = \left( m \Mod{p} \right)^{e d} \Mod{p} = 0^{e d} \Mod{p} = 0 = m \Mod{p}\]
+
+    Sætning \ref{modmod} er anvendt ved 2. lighedstegn
+    Idet \((q, m) = 1\), kan der benyttes endnu en ikke-bevist sætning.
+    Som siger at \(m^{q - 1} \Mod{p} = 1\),
+    da \(e d \Mod{\phi(n)} = 1\), findes der et helt tal \(k\),
+    som opfylder \(e d = k \cdot \phi(n) + 1\)
+    Omskrevet giver det at
+
+    \[m^{e d} = m^{k \cdot \phi(n) + 1} = m \cdot m^{k \cdot \phi(n)} = m \cdot m^{k \cdot (p - 1) (q - 1)} = m \cdot (m^{p - 1})^{k \cdot (q - 1)}\]
+
+    Sætning \ref{modmod} benyttes igen, hvorved det fås at:
+
+    \begin{align*}
+        m^{e d} &= \Big[ m \Mod{q} \cdot \big( m^{q - 1} \Mod{q} \big)^{k \cdot (p - 1)} \Mod{q} \Big] \Mod{q}\\
+                &= \Big[ m \Mod{q} \cdot 1^{k \cdot (p - 1)} \Mod{q} \Big] \Mod{q}\\
+                &= m \Mod{q}
+    \end{align*}
+    Hvorved det er bevist.\cite[19]{vestergaard}
+\end{proof}
+
+
 
 
 \newpage

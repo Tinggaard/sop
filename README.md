@@ -1,21 +1,12 @@
 # TODO
-* **Læs nu lige igennem, for sammenhæng**
 * **flere referencer!**
-* kode til kryptering i Python
-* Flyt evt. hashcat til sektion 2
 * haveibeenpwned.com
-* beviser i bilag
-* fjern bilag som ikke er i brug
-* Sammenhæng mellem afsnit, tak!
-* nummer på definitioner
-* kollision af hashfunktioner
-* dobbelt Z til phi
-* \\equiv ved inv mod
-* fag på forside
+* bevis på s 93, til punkt 4.1.1
+* mere om protokoller
 
 ## inden aflevering
 * skriv resume
-* formatering ved sideskift ovs
+* formatering ved sideskift osv
 
 # opgaveformulering
 * Redegør for talteorien bag RSA kryptering. Forklar nødvendigheden af primtal og hvordan RSA metoden fungerer.

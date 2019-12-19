@@ -47,7 +47,7 @@ Det sidste lighedstegn bevises.
         Sammenlignes dette med antallet af tal i alt, mellem 1 og \(n\) -- antaget at \(p\) og \(q\) begge er på omkring de 100 cifre -- haves at.
         \[\frac{p + q - 1}{p \cdot q} \approx \frac{2 \cdot 10^{100}}{10^{200}} = 2 \cdot 10^{-100}\]
         Sandsynligheden for at \((m, n) \neq 1\), er altså minimal.\\
-        Ønskes beviset for at ligheden er sand for \((m, n) \neq 1\), henvises der til s. 19 i \textit{RSA-kryptosystemet} af Erik Vestergaard. \cite[19]{vestergaard}
+        Ønskes beviset for at ligheden er sand for \((m, n) \neq 1\), henvises der til Appendiks \ref{proofrsa}
 \end{proof}
 
 
@@ -111,6 +111,11 @@ Tallene anvendt er naturligvis blot til eksempel -- i virkeligheden er de som sa
     Det ville fylde alt for meget at vise her, hvorfor det overlades til læseren. Alternativt er der et fint eksempel i. \cite[104]{krypto}
     \par
     Krypteringen udføres, for at få den krypterede besked.
+    Dette kan også gøres i Python med kommandoen \texttt{pow()}\footnote{\url{https://docs.python.org/3/library/functions.html\#pow}}
+    \begin{minted}[fontsize=\footnotesize, bgcolor=bg]{python}
+>>>pow(base, exp[, mod])
+    \end{minted}
+
     \begin{align*}
         1915^{43} \Mod{3403} &= 2454\\
         1600^{43} \Mod{3403} &= 944\\

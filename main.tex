@@ -1,6 +1,7 @@
 \documentclass[a4paper, 12pt]{article}
 \usepackage[danish]{babel} % Language
 \usepackage[utf8]{inputenc} % Encoding
+\usepackage[T1]{fontenc} % accents
 \usepackage{graphicx} % Graphics
 \usepackage{minted} % Code inclusion
 \usepackage{amsfonts} % Other letters/signs
@@ -81,17 +82,35 @@ icon={Paperclip}
     {\newline}%                           Space after thm head: \newline = linebreak
     {}%                                   Thm head spec
 
+% \newtheoremstyle{nobreak}%                  name
+%     {0.5cm plus 1 pt minus 2 pt}%         Space above, empty = `usual value'
+%     {0.5cm plus 1 pt minus 2 pt}%         Space below
+%     {}%                                   Body font
+%     {}%                                   Indent amount (empty = no indent, \parindent = para indent)
+%     {\bfseries}%                          Thm head font
+%     {\vspace{0.3cm}}%                     Punctuation after thm head
+%     {0pt}%                                Space after thm head: \newline = linebreak
+%     {}%                                   Thm head spec
+%
+
 
 % Definitions kommando 'definition'
-\mdtheorem{definition}{Definition}[section]
+\mdtheorem{definition}{Definition}%[section]
 
 % Eksempel kommando 'eks'
 \theoremstyle{break}
-\newtheorem{eks}[definition]{Eksempel}
+\newtheorem{eks}{Eksempel}[section]
+
+
+% % Eksempel kommando 'eks'
+% \theoremstyle{nobreak}
+% \newtheorem{prot}{Protokol}
+
+
 
 % Sætning kommando 'sent'
 \theoremstyle{breakline}
-\newtheorem{sentence}[definition]{Sætning}
+\newtheorem{sentence}[eks]{Sætning}
 \newenvironment{sent}
     {\begin{sentence}\mbox{}\begin{adjustwidth}{1em}{1em}}
     {\end{adjustwidth}\par\noindent\hrulefill\end{sentence}}
@@ -131,6 +150,18 @@ icon={Paperclip}
 
 \thispagestyle{empty}
 
+
+% {
+% \large
+% \textbf{Fag:}
+% Matematik A og Programmering B
+%
+% % \textbf{Navn:}
+% }
+%
+%
+% \vspace{1cm}
+
 \begin{center}
     \LARGE
     \textbf{Opgaveformulering}
@@ -142,7 +173,7 @@ icon={Paperclip}
     \item Redegør for talteorien bag RSA kryptering. Forklar nødvendigheden af primtal og hvordan RSA metoden fungerer.
     \item Gør kort rede for hashing.
     \item Analyser forskellen på hashing og kryptografi og hvilken rolle de har i forhold til sikkerhed.
-    \item Vurder hvorfor RSA er vigtigt i forbindelse med sikkerhed ved logins
+    \item Vurder hvorfor RSA er vigtigt i forbindelse med sikkerhed ved logins.
 \end{itemize}
 }
 
@@ -158,8 +189,8 @@ icon={Paperclip}
 
 
 \newpage
-\section*{Forord / Motivation}
-\addcontentsline{toc}{section}{Forord / Motivation}
+\section*{Indledning / Motivation}
+\addcontentsline{toc}{section}{Indledning / Motivation}
 \input{sections/forord.tex}
 
 
