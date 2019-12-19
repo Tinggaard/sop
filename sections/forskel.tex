@@ -1,24 +1,25 @@
-Nu da de grundlæggende træk i hashing er blevet vist, skal vi kigge på, hvordan et public-key kryptografi, som RSA virker.\\
-Pointen med et public-key krypto-system er, at et parti har både en offentlig og en hemmelig nøgle.
+Nu da de grundlæggende træk i hashing er blevet vist, skal vi kigge på, hvordan et public-key kryptografisystem, som RSA virker.\\
+Pointen med et public-key kryptosystem er, at et parti har både en offentlig og en hemmelig nøgle.
 Som navnene antyder, er den offentlige nøgle tilgængelige for alle, mens den private, ikke deles med nogen.
-De to nøgler er hinandens modsætninger, så at sige, krypterer man noget med den offentlige nøgle, kan det kun dekrypteres med den tilsvarende private nøgle og vice versa.
+De to nøgler er hinandens modsætninger, så at sige.
+Krypterer man noget med den offentlige nøgle, kan det kun dekrypteres med den tilsvarende private nøgle og vice versa.
 Det vil altså sige, at hvis parti A, vil sende en krypteret besked til parti B. Tager A blot og krypterer beskeden med Bs offentlige nøgle, hvorefter det kun er Bs hemmelige nøgle, som kan dekryptere beskeden.\\
-Det ses ved nogle Konkreteksempeler.
+Det ses ved nogle konkreteksempeler.
 
 \subsection{Alice \& Bob}
 Til beskrivelse af en fremgangsmetode, bruger man ofte termen ``protokol'', som er en arbejdsplan for et handlingsforløb.
-Hvis der bliver afviget fra protokollen, bør man ikke fortsætte.
-Til fremvisning af protokoller i kryptografien, bruger man ofte \emph{Alice} og \emph{Bob} som pladsholdere for aktører.
+Hvis der bliver afviget fra protokollen, fortsætter man ikke.
+Til fremvisning af protokoller i kryptografien, bruger man ofte \emph{Alice} og \emph{Bob} som pladsholdere for aktørere.
 Det skal ses hvordan RSA anvendes i praksis, samt problemer ved anvendelse af metoden.
 
-\begin{eks}[Generel protokol for RSA]
+\begin{eks}[Generel protokol for kryptografi]
     \label{genrsa}
     Bob er en server, som Alice gerne vil kontakte.
     Al kommunikation mellem de to parter, foregår i offentligt rum, så alle og enhver kan læse beskederne sendt mellem dem.
-    For at holde sin besked til Bob hemmelig, tager Alice, finder hun Bobs offentlige nøgle \(P_B\) (Public Bob), og krypterer sin besked med den.
+    For at holde sin besked til Bob hemmelig, tager Alice Bobs offentlige nøgle \(P_B\) (Public Bob), og krypterer sin besked med den.
     Efter dette er gjort, er det kun Bob som kan dekryptere beskeden. Da det kun er ham, som har den hemmelige nøgle \(S_B\) (Secret Bob).
     Nu kan beskeden altså godt sendes over det offentlige rum, uden at Alice skal frygte for at beskeden bliver opsnappet.\\
-    Vil Bob gerne sende et svar tilbage til Alice foregår det naturligvis på samme måde, han krypterer sin besked med \(P_A\) og sender den så.
+    Vil Bob gerne sende et svar tilbage til Alice foregår det naturligvis på samme måde, han krypterer sin besked med \(P_A\) hvorefter det kun er Alice, som kan dekryptere den med \(S_A\).
     \par
     Det opskrives som en protokol:
     \begin{enumerate}[label*=(\arabic*)]%[noitemsep]
@@ -28,7 +29,7 @@ Det skal ses hvordan RSA anvendes i praksis, samt problemer ved anvendelse af me
     \end{enumerate}
 \end{eks}
 
-Der er dog visse problemer ved denne form for samtale, da en tredjepart i det offentlige rum \emph{Eve}, kunne udgive sig for at være Bob.
+Der er dog visse problemer ved denne form for samtale, da en tredjepart i det offentlige rum \emph{Eve} (eavesdropper\footnote{Fra engelsk: En person, der smuglytter.}), kunne udgive sig for at være Bob.
 Sådan at når Alice tror hun krypterer sin besked med \(P_B\), krypterer hun den faktisk med \(P_E\).
 Når beskeden så bliver sendt ud i det offentlige rum, vil Eve kunne læse den, fordi kun hun har den hemmelige nøgle \(S_E\).
 Er Eve smart, tager hun så -- efter at have aflæst beskeden -- og krypterer den igen med \(P_B\) og sender den så videre, sådan at Bob læser den.
@@ -37,16 +38,16 @@ Denne slags angreb kaldes for \emph{man in the middle}. \cite{ytmitm}
 
 
 \subsection{RSA i praksis}
-Skal man kryptere en længere besked, et billede, eller måske en hel hjemmeside, bliver det hurtigt en møjsommelig affære.
+Skal man kryptere en længere besked, et billede, eller måske en hel hjemmeside, bliver det hurtigt en møjsommelig affære, da det at kryptere en lang besked, kræver mange ressourcer.
 Derfor følger man ikke protokollen fra eksempel \ref{genrsa} i praksis, men bruger i stedet en symmetrisk krypterings algoritme (som f.eks. \texttt{AES} Advanced Encryption Standard), som er kendetegnet ved, at den bruger samme nøgle til kryptering og dekryptering og samtidig ikke er på så mange bit (128 bit), som en asymmetrisk krypteringsnøgle (som RSA). \cite{algoritmer}
 Det vil sige at man blot et nødt til at kryptere den symmetriske krypteringsnøgle med den asymmetriske krypteringsnøgle (RSA nøglen). \cite[112]{krypto}\\
 Det opskrives som en ny protokol:
 
 \begin{enumerate}[label*=(\arabic*)]
-    \item Alice udvælger en tilfældig AES-nøgle og krypterer så sin besked med den, udeldende \(c\).
+    \item Alice udvælger en tilfældig \texttt{AES}-nøgle og krypterer så sin besked med den, udledende \(c\).
     \item Alice krypterer den symmetriske krypteringsnøgle med \(P_B\).
-    \item Alice sender nu \(c\) afsted til Bob, sammen med den krypterede AES-nøgle.
-    \item Bob dekrypterer AES-nøglen, med \(S_B\) og krypterer derefter \(c\), med den nu fundne AES-nøgle.
+    \item Alice sender nu \(c\) afsted til Bob, sammen med den krypterede \texttt{AES}-nøgle.
+    \item Bob dekrypterer \texttt{AES}-nøglen, med \(S_B\) og dekrypterer derefter \(c\), med den nu fundne \texttt{AES}-nøgle.
 \end{enumerate}
 
 
@@ -59,7 +60,7 @@ Hvorved det vises, hvorfor det er vigtigt at bruge et godt kodeord, samt -- som 
 
 
     \subsubsection{Hashcat}
-    Hashcat er formentlig et af de allermest brugte værktøjer, til at brute-force hashes.\footnote{\url{https://hashcat.net/hashcat/}}
+    Hashcat\footnote{\url{https://hashcat.net/hashcat/}} er formentlig et af de allermest brugte værktøjer, til at brute-force hashes.
     Hashcat er et kommandolinjeværktøj, som udelukkende er bygget til at hashe tekststrenge og sammenligne dem med et (eller flere) hashes.
     Fordelen ved hashcat er, at man som angriber, kan opsætte mere specifikke regler for, hvordan tekststrengen som man hasher, skal se ud.
     Det står nærmere beskrevet i dokumentationen.\footnote{\url{https://hashcat.net/wiki/doku.php?id=mask_attack}}
@@ -70,38 +71,39 @@ $ hashcat -a 3 <hashfil> ?l?l?l?l?l?l?d?d?d?d
     \end{minted}
     Det ses da, at i modsætning til eksempel \ref{brutefc}, vil antallet af hashes, som skal beregnes blot være
     \[26^6 + 10^4 = 308,925,776 \approx 3.089 \cdot 10^8\]
-    Da \(?l\) specificerer et lille bogstav mellem a-z og ikke a-å, er der blot 26 muligheder og ikke 29.
-    Uanset er det et meget mindre tal, end \(4.572 \cdot 10^{14}\). Hvorved det er vist, at man gør klogt i at vælge længere kodeord, eller kodeord med både små bogstaver, store bogstaver, tegn og tal i.
+    Da \texttt{?l} specificerer et lille bogstav mellem a-z og ikke a-å, er der blot 26 muligheder og ikke 29.
+    Uanset er det et meget mindre tal, end \(4.572 \cdot 10^{14}\). Hvorved det er vist, at man gør klogt i at vælge enten et langt kodeord, eller kodeord med både små bogstaver, store bogstaver, tegn og tal i. Eller i bedste fald, begge.
 
     \subsubsection{Rainbow tables}
     Der er naturligvis også andre metoder end brute-force, til at forsøge at tilbageskabe kodeord ud fra et hash.
     Et \emph{rainbow table} er en tabel, hvori der ligger nogle forudberegnede hashes, samt de originale kodeord dertil.\cite{rainbow}
-    Dette gør at man, uden at være nødt til at brute-force alle \(29^n\) muligheder, kan finde finde frem til en brugers kodeord.
+    Dette gør at man, uden at være nødt til at brute-force alle \(68^n\) muligheder, kan finde finde frem til en brugers kodeord.
 
 
     Et rainbow table indeholder naturligvis ikke alle hashes -- det ville være en uendelig opgave at liste dem alle.
     Det er altså kun de hashes -- og dermed også kodeord, som er mest anvendte, der ligger i et rainbow table.
-    Det er af samme grund, at man ikke blot skal bruge koden \texttt{password}, da den helt sikkert ligger i et rainbow table.
-    Det betyder ikke at hvis man blote vælger 8 tilfældige bogstaver som kodeord, at de ikke er i et rainbow table et sted.
-    Der findes efter hånden rainbow tables som er meget komplekse\footnote{\url{https://project-rainbowcrack.com/table.htm}}.
+    Af samme grund, skal man ikke blot skal bruge koden \texttt{password}, da den helt sikkert ligger i et rainbow table.
+    Det betyder ikke at man er i sikkerhed, ved blot at vælge 8 tilfældige tegn, da de formentlig også er i et rainbow table et sted.
+    % Det betyder ikke at hvis man blote vælger 8 tilfældige bogstaver som kodeord, at de ikke er i et rainbow table et sted.
+    Der findes efter håndenrainbow tables som er meget store\footnote{\url{https://project-rainbowcrack.com/table.htm}}, op til flere GB.
     I realiteten er rainbow tables noget mere komplekst bygget op, men dette forklarer essensen i dem.
 
 
     \subsubsection{Salt}
     Som modsvar til rainbow tables, bruger man \emph{salt} sammen med lagringen af kodeord på en server. \cite{version2}
     Måden man anvender salt på er, at efter brugeren har lavet et kodeord, genererer man et salt -- en tilfældig tekststreng.
-    Denne tekststreng putter man blot bag det originale kodeord, inden man hasher det.
-    Dermed vil hashet ikke være identisk med et andet hash af det samme kodeord, da de ikke er hashet med samme værdi.
+    Dette salt konkatenerer\footnate{Når man sammenkæder to tekststrenge til én.} man blot med det originale kodeord, inden man hasher det.
+    Dermed vil hash-digestet ikke være identisk med et andet digest af det samme kodeord, da de ikke er hashet med samme værdi.
     I stedet for blot at gemme et hashet kodeord på serveren, gemmer man nu både det hashede kodeord, samt saltet som er blevet brugt til at generere det.
-    Når en bruger så forsøger at logge ind, kigger man på kodeordet, lægger saltet til og hasher det så.
+    Når en bruger så forsøger at logge ind, kigger man på kodeordet, konkatenerer saltet og hasher det så.
     Stemmer de to hashes over ens, er det det rigtige kodeord man har fået fat i.\\
-    Kigger man fra hackerens side, vil man se at for rainbow tables ikke længere er brugbare, da man ikke længere blot kan lave et opslag af et kodeord, fordi det er blevet hashet med dette salt efter.
+    Kigger man fra hackerens side, vil man se at rainbow tables ikke længere er brugbare, da man ikke længere blot kan lave et opslag af et kodeord, fordi det er blevet hashet med dette salt efter.
     Det vil altså sige, at man ikke længere blot kan forsøge at knække alle kodeordene i en database på én gang.
-    I stedet vil man være nødt til, først at lave et gæt på et kodeord, så tage et salt og lægge oveni og så hashe det.
+    I stedet vil man være nødt til, først at lave et gæt på et kodeord, konkatenere saltet og så hashe det.
 
     \begin{eks}[Kodeord og salt]
         \label{eks:salt}
-        Antag at Alice og Bob oprette hver deres konto på \texttt{example.com}.
+        Antag at Alice og Bob opretter hver deres konto på \texttt{example.com}.
         Da de begge er ukendte i viden om sikkerhed ved kodeord, vælger de begge kodeordet \texttt{kodeord123}.
         Sitet de opretter sig på, har heldigvis styr på sikkerheden, da de bruger salt, til at hashe deres kodeord.\\
         Når Alice opretter sig, får hun tildelt et salt af værdien \texttt{*j2!\#6wdGQ}.\\
@@ -135,15 +137,15 @@ $ hashcat -a 3 <hashfil> ?l?l?l?l?l?l?d?d?d?d
 
 
 \subsection{Online autentificering}\label{auth}
-Skal man autentificere sig online, er der heldigvis lavet en protokol, som gør at man kan validere gyldigheden af en besked.\cite{dtu}
+Skal man autentificere sig online, er der heldigvis lavet en protokol, som gør at man kan validere gyldigheden af en besked.\cite[12]{dtu}
 Protokollen anvender både hashing samt RSA til at verificere ægteheden af et dokument eller lignende.\\
-Vil Bob gerne sikre sig at beskeden stammer fra Alice, kræver det at Alice følger protokollen:
+Vil Bob gerne sikre sig at en besked stammer fra Alice, kræver det at Alice følger protokollen:
 Udover at sende beskeden, bruger hun en hashfunktion på beskeden \(H(m)\), signerer det så med sin private nøgle \(S_A\) og sender så dette krypterede hash \(y\) afsted, sammen med den originale besked.
 Det siges at Alice nu har sat sin \emph{digitale signatur} på beskeden.\\
 Når Bob så modtager beskeden sammen med det krypterede hash, tager han blot og hasher beskeden selv \(H(m)\).
 Og dekrypterer så det tilsendte hash \(y\) med Alices offentlige nøgle \(P_A\).
 Hvis de to hashes stemmer over ens, kan han verificere at beskeden er fra Alice.
-Dette virker, da det kun er Alices offentlige nøgle \(P_A\), som kan bruges til at dekryptere hashet, bruger Bob Eves offentlige nøgle \(P_E\), vil han ikke få samme hash, hvorfor beskeden ikke er fra Eve.
+Dette virker, da det kun er Alices offentlige nøgle \(P_A\), som kan bruges til at dekryptere \(y\), bruger Bob i stedet Eves offentlige nøgle \(P_E\), vil han ikke få samme hash, hvorfor beskeden ikke er fra Eve.
 \par
 Protokollen foregår som følger:
 \begin{enumerate}[label*=(\arabic*)]%[noitemsep]
@@ -171,7 +173,7 @@ $ gpg --full-generate-key
 
 
     Efter nøglen er blevet genereret, ligger den som en binær fil, som altså kun er læsbar af computeren.
-    For at konvertere den til, vi kan forstå, køres kommandoen:
+    For at konvertere den til noget vi kan forstå, køres kommandoen:
 
 
     \begin{minted}[fontsize=\footnotesize, bgcolor=bg]{bash}
@@ -195,7 +197,7 @@ $ gpg --export -a
     Slutteligt vises det, at man kan signere en fil i gpg.
     Dette gøres med flaget \texttt{clearsign}.
     \begin{minted}[fontsize=\footnotesize, bgcolor=bg]{bash}
-$ gpg --clearsign fil
+$ gpg --clearsign <fil>
     \end{minted}
 
     gpg er altså en stor del af kryptografi, hvis man selv ønsker at kryptere sine data.
@@ -211,7 +213,7 @@ $ gpg --clearsign fil
     Det vil altså sige, at når man skal have en hjemmeside op at køre, går man til en certifikatudbyder og får sin offentlige nøgle verificeret.
     Når en bruger så ønsker at tilgå hjemmesiden, sender hjemmesiden blot sin offentlige nøgle tilbage.
     Browseren laver så et tjek med de kendte certifikatudbydere, for at verificere ægteheden af hjemmesidens offentlige nøgle.
-    Denne metoden er protokol eksisterer, for at undgå man in the middle angreb.
+    Denne protokol for brug af certifikater, bruges for at modvirke angreb som ´´man in the middle''.
     Samtidig med at den er langt hurtigere end processen beskrevet i afsnit \ref{auth}
 
 

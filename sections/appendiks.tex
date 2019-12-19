@@ -1,4 +1,4 @@
-\section{Beviser}
+\section{Beviser} \label{proofs}
 \subsection{Bevis for sætning \ref{invelm}}\label{invelemproof}
 \textit{Beviset bygger på yderligere ikke-beviste sætninger, som lades op til læseren at validere}
 \begin{proof}
@@ -9,6 +9,7 @@
     Det vides at \(a < n\), da \(a \in Z_n\), hvorfor \(a \Mod{n} = a\),
     derfor er \(\left(a s \Mod{n}\right) \Mod{n} = 1\),
     hvilket medfører at \(x = s \Mod{n}\) er løsning til ligningen \(a x \Mod{n} = 1\).
+    
     Nu mangler blot entydigheden af beviset.
     Antag at begge løsningerne \(x_1, x_2 \in Z_n\), er løsninger til ligningen \(a x \Mod{n} = 1\).
     Det vil altså sige \(a x_1 \Mod{n} = a x_2 \Mod{n}\),
@@ -16,7 +17,7 @@
     og da begge løsninger er mindre end \(n\), haves at \(x_1 = x_2\).
     Hvorved entydigheden er vist.
 
-    Sætningen vises også den anden vej:
+    Sætningen bevises også den anden vej:
     Antag at \(x\) er løsning til ligningen \(a x \Mod{n} = 1\),
     dette medfører at der findes et tal \(q\), så \(a x = q \cdot n + 1\).
     Ud fra dette findes en linearkombination af \(a\) og \(n\) som giver 1:
@@ -31,28 +32,26 @@
 \subsection{euclid.py}
 \label{file:euclid}
 Filen ligger også vedhæftet i denne pdf, åbn den ved at dobbeltklikke på ikonet.
-\attachfile[description={
-En implementering af Euclids algoritme i Python.}
-% date={D: 20191210111111+01'00'}
-]{src/euclid.py}
+\attachfile[description={En implementering af Euclids algoritme i Python.}]{src/euclid.py}
 \inputminted[python3, linenos, breaklines, frame=lines, fontsize=\footnotesize]{python}{src/euclid.py}
 
 
 \subsection{prime\_factor.py}
 \label{file:prime_factor}
 Filen ligger også vedhæftet i denne pdf, åbn den ved at dobbeltklikke på ikonet.
-\attachfile[description={
-Et script til at lave primtalsfaktorisering.}
-% date={D: 20191210111111+01'00'}
-]{src/prime_factor.py}
+\attachfile[description={Et script til at lave primtalsfaktorisering.}]{src/prime_factor.py}
 \inputminted[python3, linenos, breaklines, frame=lines, fontsize=\footnotesize]{python}{src/prime_factor.py}
 
 
 \subsection{phi\_func.py}
 \label{file:phi_func}
 Filen ligger også vedhæftet i denne pdf, åbn den ved at dobbeltklikke på ikonet.
-\attachfile[description={
-Eulers phi-funktion, skrevet i Python.}
-% date={D: 20191210111111+01'00'}
-]{src/phi_func.py}
+\attachfile[description={Eulers phi-funktion, skrevet i Python.}]{src/phi_func.py}
 \inputminted[python3, linenos, breaklines, frame=lines, fontsize=\footnotesize]{python}{src/phi_func.py}
+
+
+\subsection{eulers\_sent.py}
+\label{file:eulers_sent}
+Filen ligger også vedhæftet i denne pdf, åbn den ved at dobbeltklikke på ikonet.
+\attachfile[description={Et script til at udregne inverse elementer.}]{src/eulers_sent.py}
+\inputminted[python3, linenos, breaklines, frame=lines, fontsize=\footnotesize]{python}{src/eulers_sent.py}

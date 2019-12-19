@@ -28,7 +28,7 @@ if __name__ == '__main__':
     except IndexError:
         print('Angiv venlist 2 heltal')
         print('Brug:')
-        print('$ python euclids_sent.py a n')
+        print('$ python eulers_sent.py a n')
         sys.exit(1)
 
     except ValueError:

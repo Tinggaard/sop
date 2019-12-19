@@ -11,6 +11,11 @@
 * kollision af hashfunktioner
 * dobbelt Z til phi
 * \\equiv ved inv mod
+* fag på forside
+
+## inden aflevering
+* skriv resume
+* formatering ved sideskift ovs
 
 # opgaveformulering
 * Redegør for talteorien bag RSA kryptering. Forklar nødvendigheden af primtal og hvordan RSA metoden fungerer.
