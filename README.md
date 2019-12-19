@@ -1,12 +1,7 @@
 # TODO
-* **flere referencer!**
-* haveibeenpwned.com
-* bevis på s 93, til punkt 4.1.1
-* mere om protokoller
-
-## inden aflevering
-* skriv resume
-* formatering ved sideskift osv
+* **opgaveformulering i Introduktion**
+* **skriv resumé**
+* **gennemlæs konklusion (evt. mere om hashing ved RSA)**
 
 # opgaveformulering
 * Redegør for talteorien bag RSA kryptering. Forklar nødvendigheden af primtal og hvordan RSA metoden fungerer.
@@ -27,20 +22,9 @@
 - [x] password managers
 
 
-## links
-
-pow til Python: https://docs.python.org/3/library/functions.html#pow
-
-re: https://docs.python.org/3.8/library/re.html#regular-expression-syntax
-
-
 # tegn
 ```
 $ pdftotext main.pdf -enc UTF-8 - | wc -m
-```
-Eller
-```
-$ detex file.tex | wc -C
 ```
 
 
@@ -48,7 +32,7 @@ $ detex file.tex | wc -C
 
 0. Intro (1)
     - [x] Kryptografi / kryptologi
-    - [ ] Hvad er RSA og hvad bygger det på?
+    - [x] Hvad er RSA og hvad bygger det på?
 
 1. Talteori (6)
     - [x] Kort intro til mod og primtal (måske for lang)
@@ -69,10 +53,10 @@ $ detex file.tex | wc -C
     - [x] Derefter et eksempel på hashing og kodeord, herunder rainbowtables, salt og hashcat
     - [x] Brute-force (hvor er det defineret?)
     - [x] Så hvordan man bruger begge dele i hverdagen, til verificering, gpg, samt certifikater
-    - [ ] En opsumering?
+    - [x] En opsumering?
 
 4. RSA (4)
-    - [ ] Hvor bruger man det?
+    - [x] Hvor bruger man det?
     - [x] Matematikken bag RSA, samt beviset herfor.
     - [x] Eksempel på RSA, herunder https
     - [x] UNI login som eks re: `[a-z]{3}[0-9]{2}[a-z]{3}`
@@ -80,4 +64,4 @@ $ detex file.tex | wc -C
 
 5. Konklusion (1)
     - [x] Kort opridsning af de 4 hovedpunkter
-    - [ ] En, ja... konklusion (Skriv lidt mere, tak!)
+    - [x] En, ja... konklusion

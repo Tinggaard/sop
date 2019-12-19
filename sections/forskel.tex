@@ -3,7 +3,7 @@ Pointen med et public-key kryptosystem er, at et parti har både en offentlig og
 Som navnene antyder, er den offentlige nøgle tilgængelige for alle, mens den private, ikke deles med nogen.
 De to nøgler er hinandens modsætninger, så at sige.
 Krypterer man noget med den offentlige nøgle, kan det kun dekrypteres med den tilsvarende private nøgle og vice versa.
-Det vil altså sige, at hvis parti A, vil sende en krypteret besked til parti B. Tager A blot og krypterer beskeden med Bs offentlige nøgle, hvorefter det kun er Bs hemmelige nøgle, som kan dekryptere beskeden.\\
+Det vil altså sige, at hvis parti A, vil sende en krypteret besked til parti B. Tager A blot og krypterer beskeden med Bs offentlige nøgle, hvorefter det kun er Bs hemmelige nøgle, som kan dekryptere beskeden.\cite[22]{au}\\
 Det ses ved nogle konkreteksempeler.
 
 \subsection{Alice \& Bob}
@@ -56,7 +56,8 @@ Det opskrives som en ny protokol:
 \subsection{Kodeord}\label{kodeord}
 Hashing er som tidligere fortalt, anvendt til at 'hemmeliggøre' kodeord.
 Det skal ses hvordan man kan forsøge at finde frem til den originale besked, på trods af hashets envejs-egenskab.
-Hvorved det vises, hvorfor det er vigtigt at bruge et godt kodeord, samt -- som udvikler -- at bruge en god hashfunktion til at gemme disse.
+Hvorved det vises, hvorfor det er vigtigt at bruge et godt kodeord, samt -- som udvikler -- at bruge en god hashfunktion til at gemme disse.\\
+Hjemmesiden \texttt{\href{https://haveibeenpwned.com/Passwords}{haveibeenpwned.com}}, kan fortælle om hashet af et kodeord er fundet i ved et database-læk og om man derfor bør skifte kodeordet ud.
 
 
     \subsubsection{Hashcat}
@@ -72,7 +73,7 @@ $ hashcat -a 3 <hashfil> ?l?l?l?l?l?l?d?d?d?d
     Det ses da, at i modsætning til eksempel \ref{brutefc}, vil antallet af hashes, som skal beregnes blot være
     \[26^6 + 10^4 = 308,925,776 \approx 3.089 \cdot 10^8\]
     Da \texttt{?l} specificerer et lille bogstav mellem a-z og ikke a-å, er der blot 26 muligheder og ikke 29.
-    Uanset er det et meget mindre tal, end \(4.572 \cdot 10^{14}\). Hvorved det er vist, at man gør klogt i at vælge enten et langt kodeord, eller kodeord med både små bogstaver, store bogstaver, tegn og tal i. Eller i bedste fald, begge.
+    Uanset er det et meget mindre tal, end \(4.572 \cdot 10^{14}\). Hvorved det er vist, at man gør klogt i at vælge enten et langt kodeord, eller kodeord med både små bogstaver, store bogstaver, tegn og tal i. Eller i bedste fald, begge.\cite{hashcat}
 
     \subsubsection{Rainbow tables}
     Der er naturligvis også andre metoder end brute-force, til at forsøge at tilbageskabe kodeord ud fra et hash.
@@ -203,7 +204,7 @@ $ gpg --clearsign <fil>
     gpg er altså en stor del af kryptografi, hvis man selv ønsker at kryptere sine data.
     Det kan f.eks. være idet man udgiver noget vigtigt offentligt.
     Så vil læserne gerne validere hvem udgiveren er -- det kan gøres i gpg.\\
-    På downloadsiden til hashcat\footnote{\url{https://hashcat.net/hashcat/}}, kan man -- udover at downloade kildekoden til hashcat, downloade en signatur af kilekoden, ud fra hvilken, man kan vadidere at dowloadet er ægte.
+    På downloadsiden til hashcat\footnote{\url{https://hashcat.net/hashcat/}}, kan man -- udover at downloade kildekoden til hashcat, downloade en digital signatur af kildekoden, ud fra hvilken, man kan vadidere at dowloadet er ægte.
 
 
     \subsubsection{Certifikater}

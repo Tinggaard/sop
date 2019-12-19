@@ -191,7 +191,7 @@ Primtal viser sig at være interessante, i beskæftigelsen med talteori og divis
     Primtal er heltal, større end \(1\), som kun går op i sig selv og \(1\).
 \end{definition}
 
-Der findes algoritmer, sam kan vurdere med rimelig stor sandsynlighed, om et gevent tal er et primtal.
+Der findes algoritmer, som kan vurdere med rimelig stor sandsynlighed, om et gevent tal er et primtal.\cite[21]{vestergaard}
 Derudover er der lavet lange lister over kendte primtal.\footnote{\url{https://primes.utm.edu/lists/small/millions/}}
 
 
@@ -258,7 +258,6 @@ Det er ikke et bevis som vil blive gennemgået her.
     % \[\phi(n) = \prod_{p \mid n}(p - 1)\]
     \[\Updownarrow\]
     \[\phi(n) = (p_1 - 1) \cdot (p_2 - 1) \cdot \hdots \cdot (p_r - 1)\]
-    Det ses da, at \(r = \phi(n)\)
 \end{sent}
 
 Det viser sig, at hvis \(n\) er et primtal, eller et produkt heraf, er udregningen nem.
@@ -320,7 +319,7 @@ En anden vigtig sætning for RSA, er sætningen om inverse elementer. Den lyder 
 
 Sætning \ref{invelm} har et langt bevis, som bygger på tidligere ikke-dokumenterede sætninger, hvorfor sætningen ikke bevises her. Det kan dog stadig findes i appendiks \ref{invelemproof}.
 
-Appendiks \ref{file:eulers_sent}, kan udregne inverse elementer:
+Python koden i appendiks \ref{file:eulers_sent}, kan udregne inverse elementer:
 \begin{minted}[fontsize=\footnotesize, bgcolor=bg]{bash}
 $ python eulers_sent.py a n
 \end{minted}
