@@ -242,10 +242,8 @@ TSWLatexianTemp*
 *.spl
 
 
-### Curstom filters
+### Custom filters
 
-# output pdf file
-main.pdf
 
 # minted
 *.mintedcmd
