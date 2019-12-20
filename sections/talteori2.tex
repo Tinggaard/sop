@@ -5,7 +5,7 @@
 
 
 Talteorien beskæftiger sig med alle de hele tal \(\mathbb{Z}\).
-Vi skal i løbet af dette afsnit kigge på den talteori, som ligge til grunde for at RSA virker i praksis.
+Vi skal i løbet af dette afsnit kigge på den talteori, som ligger til grunde for at RSA virker i praksis.
 % Vi skal i løbet af dette afsnit kigge på hvordan talteori ligger til grunde for, at RSA virker i praksis.
 
 Det er ikke alle definitioner og sætninger der bliver bevist, da det ville tage for lang tid.
@@ -54,7 +54,8 @@ Skriver man f.eks. \(a \Mod{n}\), udregner man resten efter division, som angive
     \[r = n - q m = m \Mod{n}\]%\cite[72]{krypto}
 \end{definition}
 
-Derpå, flydes nogle vigtige sætninger om regning med modulo.
+Derpå, fyldes nogle vigtige sætninger om regning med modulo.
+\vfill
 \begin{sent}
     \label{modmod}
     For \(a, b \in \mathbb{Z}, n, t \in \mathbb{N}\)
@@ -72,7 +73,7 @@ Derpå, flydes nogle vigtige sætninger om regning med modulo.
                     &= r_1 r_2 \Mod{n}\\
                     &= \left(a \Mod{n} \cdot b \Mod{n}\right) \Mod{n}
     \end{align*}
-    Det lange udtryk i parentesen, ved 2. lignedstegn kunne fjernes, da \(n\), var ganget ind på hvert led.
+    Det lange udtryk i parentesen, ved 2. lighedstegn kunne fjernes, da \(n\), var ganget ind på hvert led.
     \eqref{eq:prodmod} er nu bevist, \eqref{eq:potmod} følger, ved gentagen anvendelse af \eqref{eq:prodmod}.
 \end{proof}
 
@@ -110,9 +111,9 @@ Hvorfor der altså også vil være en største fælles divisor.
 \begin{eks}
     Lad \(a = 8\) og \(b = 12\).\\
     \begin{tabular*}{\textwidth}{@{} l l}
-        Det ses at divisorne i \(8\) er:      & \(\pm 1, \pm 2, \pm 4, \pm 8\).\\
-        Og det ses at divisorne i \(12\) er:  &\(\pm 1, \pm 2, \pm 3, \pm 4, \pm 6, \pm 12\).\\
-        Til fælles har de altså divisorne:    & \(\pm 1, \pm 2, \pm 4\).
+        Det ses at divisorerne i \(8\) er:      & \(\pm 1, \pm 2, \pm 4, \pm 8\).\\
+        Og det ses at divisorerne i \(12\) er:  &\(\pm 1, \pm 2, \pm 3, \pm 4, \pm 6, \pm 12\).\\
+        Til fælles har de altså divisorerne:    & \(\pm 1, \pm 2, \pm 4\).
     \end{tabular*}
     Dermed bliver \((8, 12) = 4\).
 \end{eks}
@@ -124,7 +125,7 @@ Hvorfor der altså også vil være en største fælles divisor.
     Hvis \((a, b) = 1\), siges \(a\) og \(b\) at være indbyrdes primiske.
 \end{definition}
 
-Som vist, kan være bøvlet at udregne fælles divisorer for to tal, derfor kommer nu en sætning, til at mindske vanskeligheden lidt.
+Som vist, kan det være bøvlet at udregne fælles divisorer for to tal, derfor kommer nu en sætning, til at mindske vanskeligheden lidt.
 
 \begin{sent}
     \label{commod}
@@ -191,7 +192,7 @@ Primtal viser sig at være interessante, i beskæftigelsen med talteori og divis
     Primtal er heltal, større end \(1\), som kun går op i sig selv og \(1\).
 \end{definition}
 
-Der findes algoritmer, som kan vurdere med rimelig stor sandsynlighed, om et gevent tal er et primtal.\cite[21]{vestergaard}
+Der findes algoritmer, som kan vurdere med rimelig stor sikkerhed, om et gevent tal er et primtal.\cite[21]{vestergaard}
 Derudover er der lavet lange lister over kendte primtal.\footnote{\url{https://primes.utm.edu/lists/small/millions/}}
 
 

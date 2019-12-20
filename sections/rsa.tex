@@ -143,14 +143,14 @@ Tallene anvendt er naturligvis blot til eksempel -- i virkeligheden er de som sa
 
 
 \subsection{UNI•Login}
-Vi skal kigge lidt på sikkerheden ved en almindelig login-formular og se hvilke faktoere der spiller ind.
+Vi skal kigge lidt på sikkerheden ved en almindelig login-formular og se hvilke faktorer der spiller ind.
 I de sidste mange år, har et UNI-login brugernavn, været de første 4 bogstaver i ens navn, efterfulgt af 4 tal (eller evt. bogstaver).
 Mens koden har bestået af 3 små bogstaver, 2 tal efterfulgt af atter 3 bogstaver.
 Men det skal langt om længe laves om. \cite{unilogin}
 Set fra onlinesikkerhedens synspunkt, var det heller ikke et øjeblik for tidligt, da det som vist i afsnit \ref{kodeord}, er meget let at brute-force sig frem til så korte kodeord.
 Den nye ordning, gør at der bl.a. skal være \emph{2FA}.\footnote{Engelsk for \emph{Two Factor Authentication}, betyder at man ikke blot skal logge ind med et fast kodeord, men også have noget seperat, som f.eks. nøglekortet til NemID, eller en engangskode tilsendt på SMS.}
 Dette er naturligvis med til at øge sikkerheden voldsomt, da der er en variabel med inde over loginnet og ikke længere kun et fast brugernavn + kodeord.
-Der er hovedsageligt 4 faktoere, som spiller ind på sikkerheden af en login-formular.
+Der er hovedsageligt 4 faktorer, som spiller ind på sikkerheden af en login-formular.
 
 \begin{enumerate}[noitemsep]
     \item En krypteret forbindelse, til formularen (RSA)

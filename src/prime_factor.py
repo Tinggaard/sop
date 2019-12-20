@@ -45,5 +45,5 @@ if __name__ == '__main__':
 
     primes = prime_factors(n)
 
-    print('Primtalsfaktoerne i {} er:'.format(n))
+    print('Primtalsfaktorerne i {} er:'.format(n))
     print(primes)

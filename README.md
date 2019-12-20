@@ -1,8 +1,3 @@
-# TODO
-* **opgaveformulering i Introduktion**
-* **skriv resumé**
-* **gennemlæs konklusion (evt. mere om hashing ved RSA)**
-
 # opgaveformulering
 * Redegør for talteorien bag RSA kryptering. Forklar nødvendigheden af primtal og hvordan RSA metoden fungerer.
 * Gør kort rede for hashing.
