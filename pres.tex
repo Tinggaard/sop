@@ -1,12 +1,9 @@
-\documentclass[10pt, aspectratio=169, usepdftitle=false, draft]{beamer}
+\documentclass[10pt, aspectratio=169, usepdftitle=false]{beamer}
 
 \usetheme[progressbar=frametitle]{metropolis}
 \usepackage{appendixnumberbeamer} % Probably not needed
-
 \usepackage[danish]{babel}
-
 \usepackage{hyperref} %References
-
 \hypersetup{
     pdftitle={SOP 2019 --- Præsentation},
     pdfauthor={Jens Tinggaard}
@@ -20,6 +17,10 @@
 
 \usepackage{xspace} % Or this?
 
+% \let\textttorig\texttt
+% \renewcommand<>{\texttt}[1]{%
+%   \only#2{\textttorig{#1}}%
+% }
 \title{Studieområdeprojekt 2019}
 \subtitle{Sikkerhed bag login-formular på en hjemmeside}
 \date{27. januar 2020}
@@ -48,7 +49,7 @@
 \begin{frame}{Konklusion på projektet}
     \begin{itemize}
         \large
-        \item Hvorfor RSA er så vigtig - hvor bruges det?
+        \item Hvorfor er RSA så vigtig - hvor bruges det?
         \item Hvad RSA bygger på.
         \item Metoder som RSA og hashing bliver sjælendt brugt alene.
     \end{itemize}
@@ -56,33 +57,54 @@
 %--- Next Frame ---%
 
 \begin{frame}{Relevante metoder i fagene}
-    Matematik:
-    \begin{enumerate}
-        \item Talteori
-        \item Beviser
-        \item Vurdering \& Sammenligninger
-    \end{enumerate}\pause
-    Programmering:
-    \begin{enumerate}
-        \item Prototkoller
-        \item Skitsering af id\'eer
-        \item Dokumentationslæsning
-    \end{enumerate}
+    \begin{columns}[T,onlytextwidth]
+        \column{0.5\textwidth}
+            \alert{Matematik:}
+            \begin{enumerate}
+                \item Talteori.
+                \item Beviser. %\(\qed\)
+                \item Vurdering \& Sammenligninger.
+            \end{enumerate}
+        \column{0.5\textwidth}
+            \alert{Programmering:}
+            \begin{enumerate}
+                \item Prototkoller.
+                \item Skitsering af id\'eer.
+                \item Dokumentationslæsning.
+            \end{enumerate}
+    \end{columns}
 \end{frame}
 %--- Next Frame ---%
 
+
 \begin{frame}{Empiri}
-    Empiri
+    \alert{Empiri brugt til udarbejdelse af projektet.}
+    \begin{itemize}
+        \item Litteratur.
+        \item Dokumentation af programmer som \texttt{hashcat} og \texttt{gpg}.
+        \item Standarder og protokoller til håndtering af disse.
+        \item Virkelighedsdata som UNI-login.
+    \end{itemize}
 \end{frame}
 %--- Next Frame ---%
 
 \begin{frame}{Sammenspil mellem fagene}
-    Sammenspil mellem fagene
+    \alert{Sammenspil mellem fagene}
+    \begin{itemize}
+        \item Logisk tankegang.
+        \item Protokol \(\rightarrow\) matematisk fremgangsmåde.
+        \item Anvendt matematik \(\rightarrow\) programmering.
+    \end{itemize}
 \end{frame}
 %--- Next Frame ---%
 
 \begin{frame}{Kildekritik}
-    Kildekritik
+    \alert{Hvordan jeg har forholdt mig kildekritisk.}
+    \begin{itemize}
+        \item Bøger.
+        \item Udgivet materiale.
+        \item Pålidelig dokumentation.
+    \end{itemize}
 \end{frame}
 %--- Next Frame ---%
 

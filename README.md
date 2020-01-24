@@ -3,8 +3,7 @@ SOP eksamen i 3.g op kryptografi og talteori af Jens Tinggaard
 
 Kildekoden til mit SOP dokument, samt en lille samling af scripts brugt i forbindelse med udarbejdelsen af projektet.
 
-***
-
+## Download
 Projektet kan findes [her](https://github.com/Tinggaard/sop/releases).
 Derudover er min beamerpræsentation - brugt til eksamen - også i dette repo.
 
