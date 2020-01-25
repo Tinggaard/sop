@@ -76,6 +76,5 @@ Et af bedømmelseskriterierne er evnen til at udvælge de vigtigste konklusioner
     - Det ville formentlig være svært at finde to fag der passer bedre på emnet, end lige netop de jeg har valgt...
 - Hvilke metoder har du valgt - kunne man have valgt andre?
     - Se metode afsnit
-    - Jeg kunne
 - Beskriv den empiri du har arbejdet med.
 - Hvilke studiemetoder har du valgt at arbejde med og hvorfor?
