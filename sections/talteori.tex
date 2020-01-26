@@ -1,11 +1,19 @@
+%%% Kort intro til mod og primtal
+%%% Noget om største fælles divisor og indbyrdes primisk
+%%% Dernæst eulers funktion
+%%% Så til de sætninger som er vigtige...
+
+
 Talteorien beskæftiger sig med alle de hele tal \(\mathbb{Z}\).
-Vi skal i løbet af dette afsnit kigge på hvordan talteori ligger til grunde for, at RSA virker i praksis.
-\\
+Vi skal i løbet af dette afsnit kigge på den talteori, som ligger til grunde for at RSA virker i praksis.
+% Vi skal i løbet af dette afsnit kigge på hvordan talteori ligger til grunde for, at RSA virker i praksis.
+
 Det er ikke alle definitioner og sætninger der bliver bevist, da det ville tage for lang tid.
-Alle beviser kan naturligvis findes i \textit{Kryptografi -- fra viden til videnskab}. \cite{krypto}
+Alle beviser kan dog findes i \textit{Kryptografi -- fra viden til videnskab}. \cite{krypto}
+\par
+Først vil nogle basale begreber i talteorien blive gennemgået, hvorefter vi skal kigge på de sætninger, der ligger til grunde for RSA.
 
-
-
+%%% rester og divisor
 \subsection{Division med rest og divisor}
 I stedet for at regne brøker som rationelle mængder \(\mathbb{Q}\) eller decimaltal, skal vi beskæftige os med hvordan man regner med rester.
 Det vil altså sige at vi udelukkende vil beskæftige os med heltal \(\mathbb{Z}\).
@@ -24,58 +32,17 @@ Vi definerer at \(a\) går op i \(b\), hvis der ingen rest er, efter division. E
     mens \(q\) kaldes for \textit{kvotienten}.\cite[70]{krypto}
 \end{definition}
 
-Er der i stedet en rest efter division, vil man kunne skrive tallet som \(a \nmid b\), som betyder at \(a\) ikke går op i \(b\).
+Er der i stedet en rest efter division, vil man kunne skrive det som \(a \nmid b\), som betyder at \(a\) ikke går op i \(b\).
 % Det at arbejde med rester er også noget vi skal beskæftige os meget med.
 
 \begin{sent}
     \label{rest}
-    Givet tallet \(a > 0\) og tallet \(b\), findes der specifikke tal \(q\) og \(r\), som opfylder \(b = q \cdot a + r\), hvor \(0 \leq r < q\). \(r\) betegnes som \textit{resten}.
+    Givet tallet \(a > 0\) og tallet \(b\), findes der specifikke tal \(q\) og \(r\), som opfylder \(b = q \cdot a + r\), hvor \(0 \leq r < q\). % \(r\) betegnes som \textit{resten}.
 \end{sent}
 
-Det ses ved nogle eksempler
-
-\begin{eks}
-    Lad \(a = 48\) og \(b = 8\), det ses da at \(q = 6\) og \(r = 0\), da \(48 = 6 \cdot 8 + 0\) og da \(r = 0\), medfører det at \(a \mid b\).\\
-
-    Lad \(a = 17\) og \(b = 4\), det ses da at \(q = 4\) og \(r = 1\), da \(17 = 4 \cdot 4 + 1\) og da \(r \neq 0\), medfører det at \(17 \nmid 4\).\\
-
-    Man kan også udregne resten ud fra et decimaltal.
-    Trykker man \(17 \div 4\) ind på lommeregneren får man \(4.25\), man ganger så decimal delen med \(b\), vil man få resten efter divisionen.
-    I dette tilfælde får man \(r = 0.25 \cdot 4 = 1\).
-\end{eks}
 
 
-
-
-\begin{sent}
-    Givet tallene \(a, b, c \in \mathbb{Z}\), hvor \(a, c \neq 0\), vil \(a \mid b\) medføre at \(a c \mid b c\).
-\end{sent}
-
-\begin{proof}
-    Beviset tager selvfølgelig udgangspunkt i definition \ref{heldiv}.
-    Da \(a \mid b \implies b = q \cdot a\), vil man ved at gange \(c\) ind, på begge sider, blot få \(b c = q \cdot a c\).
-    Og da \(c\) indgår på begge sider af lighedstegnet, kan dette fjernes fra udtrkket, hvorved man er tilbage ved \(b = q \cdot a\).
-\end{proof}
-
-
-
-
-
-\begin{sent}
-    Givet tallene \(a, b, c \in \mathbb{Z}\), hvor \(a, c \neq 0\), vil \(a \mid b \land b \mid c\) medføre at \(a \mid c\).
-\end{sent}
-
-\begin{proof}
-    \(a \mid b\) skrives som \(b = q_1 \cdot a\), mens \(b \mid c\) skrives som \(c = q_2 \cdot b\). Ved at substituere \(b\) med udtyrkket fra \(a \mid b\), haves \(a = q_1 \cdot q_2 \cdot c\). \(a \mid c\) er altså sand hvis kvotienten er \(q_1 \cdot q_2\).
-\end{proof}
-
-
-\begin{eks}
-    Her skal gerne være lidt eksempler for at spice det lidt op...
-\end{eks}
-
-
-
+%%% mod
 \subsubsection{Modulo}
 Når man laver division med heltal, vil man ofte kigge på resten efter division.
 Derfor er der naturligvis lavet en matematisk operator til at udregne rest efter division -- den kaldes for \emph{modulo}.
@@ -84,32 +51,58 @@ Skriver man f.eks. \(a \Mod{n}\), udregner man resten efter division, som angive
 \begin{definition}
     For \(m \in \mathbb{Z}\) og \(n \in \mathbb{N}\) gælder:
     \[n \mid m \iff m \Mod{n} = 0\]
-    \[r = n - q m = m \Mod{n}\]\cite[72]{krypto}
+    \[r = n - q m = m \Mod{n}\]%\cite[72]{krypto}
 \end{definition}
 
-\begin{eks}
-    Et par eksempler på brugen af modulo.
-    \begin{center}
-        \setlength{\tabcolsep}{20pt} % General space between cols (6pt standard)
-        \begin{tabular}{l c r}
-            \(43 \Mod{6} = 1\) & \(74 \Mod{10} = 4\) & \(58 \Mod{6} = 4\)
-        \end{tabular}
-    \end{center}
-\end{eks}
+Derpå, fyldes nogle vigtige sætninger om regning med modulo.
+\vfill
+\begin{sent}
+    \label{modmod}
+    For \(a, b \in \mathbb{Z}, n, t \in \mathbb{N}\)
+    \begin{align}
+        (a \cdot b) \Mod{n} &= \left(a \Mod{n} \cdot b \Mod{n}\right) \Mod{n}\label{eq:prodmod}\\
+        a^t \Mod{n}         &= (a \Mod{n})^t \Mod{n}\label{eq:potmod}
+    \end{align}
+\end{sent}
+
+\begin{proof}
+    Ifølge sætning \ref{rest}, kan \(a\) og \(b\) omskrives, hvorefter udtrykket reduceres.
+    \begin{align*}
+(a \cdot b) \Mod{n} &= \left((q_1 n + r_1) \cdot (q_2 n + r_2)\right) \Mod{n}\\
+                    &= \left( r_1 r_2 + (q_1 q_2 n + q_1 r_2 + q_2 r_1)n \right) \Mod{n}\\
+                    &= r_1 r_2 \Mod{n}\\
+                    &= \left(a \Mod{n} \cdot b \Mod{n}\right) \Mod{n}
+    \end{align*}
+    Det lange udtryk i parentesen, ved 2. lighedstegn kunne fjernes, da \(n\), var ganget ind på hvert led.
+    \eqref{eq:prodmod} er nu bevist, \eqref{eq:potmod} følger, ved gentagen anvendelse af \eqref{eq:prodmod}.
+\end{proof}
+
+
+% \begin{eks}
+%     Et par eksempler på brugen af modulo.
+%     \begin{center}
+%         \setlength{\tabcolsep}{20pt} % General space between cols (6pt standard)
+%         \begin{tabular}{l c r}
+%             \(43 \Mod{6} = 1\) & \(74 \Mod{10} = 4\) & \(58 \Mod{6} = 4\)
+%         \end{tabular}
+%     \end{center}
+% \end{eks}
 
 
 % sent 4.7 fra bogen (s 73)
 
 
+%%% fælles divisor
 \subsection{Fælles divisor}
-En fællesvidisor bruges til at sige noget om sammenhængen mellem to tal.
+En fælles divisor bruges til at sige noget om sammenhængen mellem to tal.
 
 \begin{definition}
     For tallene \(a, b, d \in \mathbb{Z}\), betegnes \(d\) som en \emph{fælles divisor}, hvis \(d \mid a \land d \mid b\).
 \end{definition}
 
 \(a\) og \(b\) vil have et endeligt antal fælles divisorer, da et tal højere end enten \(a\) eller \(b\) naturligvis ikke er en fælles divisor (medmindre \(a\) og \(b\) begge er \(0\)).
-Det kan altså konkluderes at der findes en største fælles divisor.
+Hvorfor der altså også vil være en største fælles divisor.
+% Det kan altså konkluderes at der findes en største fælles divisor.
 
 \begin{definition}[Største fælles divisor]
     Den største fælles divisor for tallene \(a\) og \(b\), betegnes som \((a, b)\).
@@ -118,11 +111,10 @@ Det kan altså konkluderes at der findes en største fælles divisor.
 \begin{eks}
     Lad \(a = 8\) og \(b = 12\).\\
     \begin{tabular*}{\textwidth}{@{} l l}
-        Det ses at divisorne i \(8\) er:      & \(\pm 1, \pm 2, \pm 4, \pm 8\).\\
-        Og det ses at divisorne i \(12\) er:  & \(\pm 1, \pm 2, \pm 3, \pm 4, \pm 6, \pm 12\).\\
-        Til fælles har de altså divisorne:    & \(\pm 1, \pm 2, \pm 4\).
+        Det ses at divisorerne i \(8\) er:      & \(\pm 1, \pm 2, \pm 4, \pm 8\).\\
+        Og det ses at divisorerne i \(12\) er:  &\(\pm 1, \pm 2, \pm 3, \pm 4, \pm 6, \pm 12\).\\
+        Til fælles har de altså divisorerne:    & \(\pm 1, \pm 2, \pm 4\).
     \end{tabular*}
-
     Dermed bliver \((8, 12) = 4\).
 \end{eks}
 
@@ -133,17 +125,21 @@ Det kan altså konkluderes at der findes en største fælles divisor.
     Hvis \((a, b) = 1\), siges \(a\) og \(b\) at være indbyrdes primiske.
 \end{definition}
 
-Som vist, kan være bøvlet at udregne fælles divisorer for 2 tal, derfor kommer nu en sætning, til at mindske vanskeligheden lidt.
+Som vist, kan det være bøvlet at udregne fælles divisorer for to tal, derfor kommer nu en sætning, til at mindske vanskeligheden lidt.
 
 \begin{sent}
     \label{commod}
     \((a, b) = (a, b \Mod{a})\)
 \end{sent}
 
-Sætning \ref{commod} bevises ikke, i stedet vil Euclids algoritme (som bygger på sætningen) vises.
+Sætning \ref{commod} bevises ikke, i stedet vil Euclids algoritme (som bygger på sætningen) blive vist.
 
+
+
+%%% euclids alg
 \subsubsection{Euclids algoritme}
 Euclids algoritme er essentielt gentagen anvendelse af sætning \ref{commod}.
+Algoritmen bruges til at udregne største fælles divisor for \(a, b \in \mathbb{N}\).
 \begin{definition}[Euclids algoritme]
     Lad \(a, b \in \mathbb{N}\), hvor \(a \geq b\).
     Hvis \(a \mid b\), så er \((a, b) = b\).
@@ -157,7 +153,6 @@ Euclids algoritme er essentielt gentagen anvendelse af sætning \ref{commod}.
     \end{align*}
     Denne proces slutter, idet der findes en rest på 0.
     Det vil ske efter et endeligt antal gennemløb \(t\).
-
     \begin{align*}
         r_{t-2} &= r_{t-1}  q_t      + r_t   & 0 &\leq r_t < r_{t-1}\\
         r_{t-1} &= r_t      q_{t+1}  + 0
@@ -165,39 +160,41 @@ Euclids algoritme er essentielt gentagen anvendelse af sætning \ref{commod}.
     Den sidste rest, som ikke er 0, er dermed den største fælles divisor.\cite[11]{absalg}
 \end{definition}
 
-Det ses hvordan Euclids algoritme bruges, til at overskue udregningen af største fælles divisor.
-
 \begin{eks}[Anvendelse af Euclids algoritme]
     Lad \(a = 1048\) og \(b = 672\).
-    Ved brug af Euclids algoritme, findes da største fællesnævner.
+    Ved brug af Euclids algoritme, findes da største fælles divisor.
     \begin{center}
         \setlength{\tabcolsep}{5pt} % General space between cols (6pt standard)
         \begin{tabular}{r l c r l c r}
             \((1048, 672)\) & \(= (376, 672)\) & idet & \(1048\) & \(= 1 \cdot 672\) & \(+\) & \(376\)\\
-                            & \(= (376, 296)\) & --   & \(672\)  & \(= 1 \cdot 376\) & \(+\) & \(296\)\\
-                            & \(= (80, 296)\)  & --   & \(376\)  & \(= 1 \cdot 296\) & \(+\) & \(80\)\\
-                            & \(= (80, 56)\)   & --   & \(296\)  & \(= 3 \cdot 80\)  & \(+\) & \(56\)\\
-                            & \(= (24, 56)\)   & --   & \(80\)   & \(= 1 \cdot 56\)  & \(+\) & \(24\)\\
-                            & \(= (24, 8)\)    & --   & \(56\)   & \(= 2 \cdot 24\)  & \(+\) & \(8\)\\
-                            & \(= (0, 8)\)     & --   & \(24\)   & \(= 3 \cdot 8\)   & \(+\) & \(0\)\\
+                            & \(= (376, 296)\) & --   & \(672\) & \(= 1 \cdot 376\)  & \(+\) & \(296\)\\
+                            & \(= (80, 296)\)  & --   & \(376\) & \(= 1 \cdot 296\)  & \(+\) & \(80\)\\
+                            & \(= (80, 56)\)   & --   & \(296\) & \(= 3 \cdot 80\)   & \(+\) & \(56\)\\
+                            & \(= (24, 56)\)   & --   & \(80\)  & \(= 1 \cdot 56\)   & \(+\) & \(24\)\\
+                            & \(= (24, 8)\)    & --   & \(56\)  & \(= 2 \cdot 24\)   & \(+\) & \(8\)\\
+                            & \(= (0, 8)\)     & --   & \(24\)  & \(= 3 \cdot 8\)    & \(+\) & \(0\)\\
                             & \(= 8\) & & & & &
         \end{tabular}
     \end{center}
 \end{eks}
-Bilag \ref{file:euclid}, viser en implementering af Euclids algoritme i Python og kan køres således
+Appendiks \ref{file:euclid}, viser en implementering af Euclids algoritme i Python og kan køres således
 (kræver at Python er installeret\footnote{\url{https://www.python.org/downloads/}}):
 \begin{minted}[fontsize=\footnotesize, bgcolor=bg]{bash}
 $ python euclid.py a b
 \end{minted}
 
 
-
+%%% primtal
 \subsection{Primtal}
-Primtal viser sig at være interessante, i beskæftigelsen med talteori og deivisoere.
+Primtal viser sig at være interessante, i beskæftigelsen med talteori og divisorer.
 
 \begin{definition}[Primtal]
     Primtal er heltal, større end \(1\), som kun går op i sig selv og \(1\).
 \end{definition}
+
+Der findes algoritmer, som kan vurdere med rimelig stor sikkerhed, om et gevent tal er et primtal.\cite[21]{vestergaard}
+Derudover er der lavet lange lister over kendte primtal.\footnote{\url{https://primes.utm.edu/lists/small/millions/}}
+
 
 % Vi skal først kigge på en sætning om primtal og division.
 %
@@ -206,8 +203,9 @@ Primtal viser sig at være interessante, i beskæftigelsen med talteori og deivi
 % \end{sent}
 
 
-Vi skal se på et sætning kendt som``Algebraens fundamentalsætning''
+
 \begin{sent}% [Algebraens fundamentalsætning]
+    \emph{Denne sætning er også kendt som `Algebraens fundamentalsætning''}\\
     Alle positive heltal, kan skrives som et produkt af primtal.
     Denne faktorisering er unik, hvis man ser bort fra rækkefølgen af primtallene.
     \label{algbfund}
@@ -220,13 +218,18 @@ Vi skal se på et sætning kendt som``Algebraens fundamentalsætning''
     Denne process fortsætter, frem til alle produkter er primtal.
 \end{proof}
 
+Appendiks \ref{file:prime_factor}, kan udregne primtalsfaktorerne for et gevent tal \(n\):
+\begin{minted}[fontsize=\footnotesize, bgcolor=bg]{bash}
+$ python prime_factor.py n
+\end{minted}
+
 Det ses da, at der findes uendeligt mange primtal, som følge af sætning \ref{algbfund}.
 Samt at man for at tjekke om et tal \(n\) er et primtal, ikke behøver at tjekke for divisoere større end \(\sqrt{n}\).
 
 
-% kort om hvordan med primtal, potens, samt produkt.
-\subsection{Eulers \texorpdfstring{\(\phi\)}{Lg}-funktion}
-Euler fremskrev også en funktion, der ud fra et gevent tal \(n\), kan bestemme mængden af tal, som er indbyrdes primiske med \(n\).
+%%% eulers phi funktion
+\subsection{Eulers \texorpdfstring{\(\phi\)}{phi}-funktion}
+Euler har fremskrevet en funktion, der ud fra et givet tal \(n\), kan bestemme mængden af tal, som er indbyrdes primiske med \(n\).
 Først betragtes mængden \(\mathbb{Z}_n\). Som er angivet ud fra \(n \in \mathbb{N}\).
 \[\mathbb{Z}_n = \{0, 1, 2, 3, \hdots, n-1 \}\]
 
@@ -250,51 +253,74 @@ Det er bevist at Eulers \(\phi\)-funktion kan defineres ud fra alle primfaktorer
 Det er ikke et bevis som vil blive gennemgået her.
 
 \begin{sent}
-    Givet \(p_1, p_2 \hdots p_r\), som er alle primtalsfaktoerne i \(n\).
+    Givet \(p_1, p_2 \hdots p_r\), som er alle primtalsfaktorerne i \(n\).
     \[\phi(n) = n \cdot \left(1-\frac{1}{p_1}\right) \cdot \left(1-\frac{1}{p_2}\right) \cdot \hdots \cdot \left(1-\frac{1}{p_r}\right)\]
     % \[\Updownarrow\]
     % \[\phi(n) = \prod_{p \mid n}(p - 1)\]
     \[\Updownarrow\]
     \[\phi(n) = (p_1 - 1) \cdot (p_2 - 1) \cdot \hdots \cdot (p_r - 1)\]
-    Det ses da, at \(r = \phi(n)\)
 \end{sent}
 
-Det viser sig, at ved beregning med primtal, er meget nemt.
+Det viser sig, at hvis \(n\) er et primtal, eller et produkt heraf, er udregningen nem.
 
 \begin{eks}
-    Lad \(p\) og \(q\) være primtal. Det haves da at.\\
+    Lad \(p\) og \(q\) være primtal. Det haves da at.
     \begin{align}
         \phi(p)   &= p - 1\\
-        \phi(p^2) &= (p - 1)^2\\
+        %\phi(p^2) &= (p - 1)^2\\
         %\phi(p^2) &= p (p - 1)\\
         \phi(p q) &= (p - 1)(q - 1)
     \end{align}
     Dette vil vise sig nyttigt ved senere brug.
 \end{eks}
 
+Appendiks \ref{file:phi_func}, er en implementering af Eulers \(\phi\)-funktion:
+\begin{minted}[fontsize=\footnotesize, bgcolor=bg]{bash}
+$ python phi_func.py n
+\end{minted}
 
 
 
-\vspace{100pt}
 
-
+%%% RSA
+\subsection{Sætninger bag RSA}
+Vi skal nu kigge på de sætninger, som bliver direkte anvendt i RSA metoden.
+Mange af disse sætninger, bygger på sætninger, som ikke er bevist og måske endda ikke nævnt, da de alle bygger på hinanden.
+Der henvises dog til appendiks \ref{proofs}, hvor udvalgte sætninger bevises.
+Alternativt står beviserne naturligvis i \textit{Kryptografi -- fra viden til videnskab}. \cite{krypto}
 
 \begin{sent}
+    \label{eulerssent}
     For \(a \in \mathbb{Z}\) og \(n, t \in \mathbb{N}\) hvor \((a, n) = 1\), gælder det at:
     \[a^t \Mod{n} = a^{t \Mod{\phi(n)}} \Mod{n}\]
 \end{sent}
 
-
 \begin{proof}
     \(t\) angives på formen \(t = q \cdot \phi(n) + r\), hvorved \(r = t \Mod{\phi(n)}\).
-    Det bevises nu at \(a^t = a^r\).
+    Det bevises nu at \(a^t \Mod{n} = a^r \Mod{n}\).
     \[a^t \Mod{n} = a^{q \cdot \phi(n) + r} \Mod{n}\]
     Først deles summen af potensen op i to dele.
     \[a^t \Mod{n} = (a^{\phi(n)})^q \cdot a^r \Mod{n}\]
-    Modulo af et produkt, kan opdeles ifølge regneregel %link
+    Ifølge sætning \ref{modmod}, kan et produkt splittes op som følger.
     \[a^t \Mod{n} = \Big[ \big( (a^{\phi(n)} \Mod{n})^q \Mod{n} \big) \cdot \big( a^r \Mod{n} \big) \Big] \Mod{n}\] %9b og 9c
-    Og da \(a^{\phi(n)} \Mod{n} = 1\), fås
+    Og da \(a^{\phi(n)} \Mod{n} = 1\) (fordi \((a, n) = 1\)) \cite[90]{krypto}, fås
     \[a^t \Mod{n} = \Big[ \big( 1^q \Mod{n} \big) \cdot \big( a^r \Mod{n} \big) \Big] \Mod{n}\]
     Da \(1^q \Mod{n} = 1\), kan dette blot udelades, hvorved det ses at.
-    \[a^t = a^r\]
+    \[a^t \Mod{n} = a^r \Mod{n}\]
 \end{proof}
+
+En anden vigtig sætning for RSA, er sætningen om inverse elementer. Den lyder som følger:
+
+\begin{sent}
+    \label{invelm}
+    For \(a \in \mathbb{Z}_n\), for hvor det gælder at \((a, n) = 1\), vil \(a\) have et entydigt inverst element \(\Mod{n}\).\cite[93]{krypto}\\
+    Eller sagt på en anden måde:\\
+    Der vil være en entydig løsning til ligningen \(a x \Mod{n} = 1\), for \(x \in \mathbb{Z}_n\).
+\end{sent}
+
+Sætning \ref{invelm} har et langt bevis, som bygger på tidligere ikke-dokumenterede sætninger, hvorfor sætningen ikke bevises her. Det kan dog stadig findes i appendiks \ref{invelemproof}.
+
+Python koden i appendiks \ref{file:eulers_sent}, kan udregne inverse elementer:
+\begin{minted}[fontsize=\footnotesize, bgcolor=bg]{bash}
+$ python eulers_sent.py a n
+\end{minted}
