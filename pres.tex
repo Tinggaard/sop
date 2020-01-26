@@ -3,10 +3,14 @@
 \usetheme[progressbar=frametitle]{metropolis}
 \usepackage{appendixnumberbeamer} % Probably not needed
 \usepackage[danish]{babel}
+
+\useoutertheme{infolines}
+\setbeamertemplate{headline}{}
+
 \usepackage{hyperref} %References
 \hypersetup{
     pdftitle={SOP 2019 --- Præsentation},
-    pdfauthor={Jens Tingd}
+    pdfauthor={Jens Tinggaard}
 }
 
 \usepackage{booktabs} % what is this?
@@ -17,10 +21,7 @@
 
 \usepackage{xspace} % Or this?
 
-% \let\textttorig\texttt
-% \renewcommand<>{\texttt}[1]{%
-%   \only#2{\textttorig{#1}}%
-% }
+
 \title{Studieområdeprojekt 2019}
 \subtitle{Sikkerhed bag login-formular på en hjemmeside}
 \date{27. januar 2020}
@@ -36,22 +37,23 @@
 
 
 \begin{frame}{Opgaveformulering}
-\begin{itemize}
     \large
-    \item Redegør for talteorien bag RSA kryptering. Forklar nødvendigheden af primtal og hvordan RSA metoden fungerer.
-    \item Gør kort rede for hashing.
-    \item Analyser forskellen på hashing og kryptografi og hvilken rolle de har i forhold til sikkerhed.
-    \item Vurder hvorfor RSA er vigtigt i forbindelse med sikkerhed ved logins.
-\end{itemize}
+    \begin{itemize}
+        \item Redegør for talteorien bag RSA kryptering. Forklar nødvendigheden af primtal og hvordan RSA metoden fungerer.
+        \item Gør kort rede for hashing.
+        \item Analyser forskellen på hashing og kryptografi og hvilken rolle de har i forhold til sikkerhed.
+        \item Vurder hvorfor RSA er vigtigt i forbindelse med sikkerhed ved logins.
+    \end{itemize}
 \end{frame}
 %--- Next Frame ---%
 
 \begin{frame}{Konklusion på projektet}
+    \large
     \begin{itemize}
-        \large
-        \item Hvorfor er RSA så vigtig - hvor bruges det?
-        \item Hvad RSA bygger på.
+        \item Svært at primtalsfaktorisere et stort tal.
+        \item Bruges over alt --- virkelig.
         \item Metoder som RSA og hashing bliver sjældent brugt alene.
+        \item Sikkerhedsfaktoere ved login.
     \end{itemize}
 \end{frame}
 %--- Next Frame ---%
@@ -60,6 +62,7 @@
 %--- Next Frame ---%
 
 \begin{frame}{Relevante metoder i fagene}
+    \large
     \begin{columns}[T,onlytextwidth]
         \column{0.5\textwidth}
             \alert{Matematik:}
@@ -72,7 +75,7 @@
         \column{0.5\textwidth}
             \alert{Programmering:}
             \begin{enumerate}
-                \item Prototkoller.
+                \item Protokoller.
                 \item Visualisering af id\'eer.
                 \item Dokumentationslæsning.
             \end{enumerate}
@@ -82,6 +85,7 @@
 
 
 \begin{frame}{Empiri}
+    \large
     \alert{Empiri brugt til udarbejdelse af projektet.}
     \begin{itemize}
         \item Dokumentation af programmer som \texttt{hashcat} og \texttt{gpg}.
@@ -92,6 +96,7 @@
 %--- Next Frame ---%
 
 \begin{frame}{Sammenspil mellem fagene}
+    \large
     \alert{Tværfaglige metoder.}
     \begin{itemize}
         \item Logisk tankegang.
@@ -100,15 +105,5 @@
     \end{itemize}
 \end{frame}
 %--- Next Frame ---%
-
-% \begin{frame}{Kildekritik}
-%     \alert{Hvordan jeg har forholdt mig kildekritisk.}
-%     \begin{itemize}
-%         \item Bøger.
-%         \item Udgivet materiale.
-%         \item Pålidelig dokumentation.
-%     \end{itemize}
-% \end{frame}
-% %--- Next Frame ---%
 
 \end{document}

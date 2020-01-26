@@ -1,4 +1,7 @@
 # Noter til fremlæggelse
+## TODO:
+- [ ] lidt mere om konklusion evt. delkonklusioner.
+
 ## Hvad skal jeg snakke om
 - Mit emne
 - En kort konklusion på emnet
@@ -9,6 +12,7 @@
 ## Detaljeret
 **Kort intro:**
 Jeg har skrevet en opgave som handler om onlinesikkerhed, herunder RSA-metoden og andre sikkerhedsforanstaltninger som blandt andet hashing og online verificering.
+Derudover skal det lige siges, at jeg altså ikke har nogle illustrationer med i løbet af præsentationen, da det er meget svært at finde relevalt stof, inden for et så teoretisk emne.
 
 **Konklusion:**
 Opgaven konkluderes ved en opsumering af hovedpunkterne fra opgaveformuleringen. Derefter konkluderer jeg på at RSA er en helt essentiel del af vores hverdag, stort set uanset hvad vi laver, samt at hashing også er meget vigtig i den digitale hverdag vi lever i. Alt dette bygger på teorien om at det er svært at primtalsfaktorisere et tilpas stort tal, hvis denne teori på den eller eller anden måde brydes, vil hele verden være i en svær knibe.
@@ -42,16 +46,13 @@ Opgaven konkluderes ved en opsumering af hovedpunkterne fra opgaveformuleringen.
 
 
 
-
-
-
 ## Overvej
 - Hvordan er der samspil mellem fagene
 - Er der en rød tråd?
 - Det er svært at omskrive matematik, da det er meget fakta.
 - Empiri (programmering, UNI-login osv.)
 - Kildekritik
-- Lidt kodeudtræk?
+- Mangel på billeder
 
 ## Metoder
 - Prg
