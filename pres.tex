@@ -1,11 +1,9 @@
 \documentclass[10pt, aspectratio=169, usepdftitle=false]{beamer}
 
 \usetheme[progressbar=frametitle]{metropolis}
-\usepackage{appendixnumberbeamer} % Probably not needed
 \usepackage[danish]{babel}
-
 \useoutertheme{infolines}
-\setbeamertemplate{headline}{}
+\setbeamertemplate{headline}{} % remove header
 
 \usepackage{hyperref} %References
 \hypersetup{
@@ -13,22 +11,13 @@
     pdfauthor={Jens Tinggaard}
 }
 
-\usepackage{booktabs} % what is this?
-\usepackage[scale=2]{ccicons} % and this?
-
-\usepackage{pgfplots} % Do i need this?
-\usepgfplotslibrary{dateplot}
-
-\usepackage{xspace} % Or this?
-
-
+% meta info
 \title{Studieområdeprojekt 2019}
 \subtitle{Sikkerhed bag login-formular på en hjemmeside}
 \date{27. januar 2020}
 \author{Jens Tinggaard}
 \institute{Odense Tekniske Gymnasium}
 \titlegraphic{\hfill\includegraphics[height=1.5cm]{img/otg_logo.png}}
-
 
 
 \begin{document}
